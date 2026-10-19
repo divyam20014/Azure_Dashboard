@@ -1,0 +1,602 @@
+ID,Work Item Type,Title,State,Assigned To,Priority,Severity,Area Path,Iteration Path,Created Date,Changed Date,Closed Date,Created By,Tags,Team Project,Environment
+10000,Bug,Search results fails,Development in Progress,Chen Placeholder,4,4 - Low,Mobile\iOS,Release 3\Sprint 8,2024-01-27,2024-02-19,,Uma Placeholder,,Contoso Demo,QA
+10001,User Story,Profile form crashes,New,Gita Sample,4,4 - Critical,API\Search,Release 3\Sprint 6,2024-10-12,2024-11-17,,Bea Example,regression,Contoso Demo,Staging
+10002,Bug,Profile form is misaligned,Re-open,Rosa Mockford,,2 - Critical,Web\Login,Release 3\Sprint 6,2024-09-10,2024-10-07,,Dara Demo,,Contoso Demo,Staging
+10003,Bug,Login page is slow,Re-open,Vik Demo,4,1 - Low,API\Payments,Release 3\Sprint 5,2024-04-26,2024-05-04,,Hugo Example,regression,Contoso Demo,UAT
+10003,Bug,Dashboard widget is slow,New,Mateo Sample,2,1 - Medium,API\Payments,Release 3\Sprint 6,2024-10-03,2024-11-04,,Femi Mockford,regression,Contoso Demo,UAT
+10005,User Story,Search results crashes,Active,Mateo Sample,3,4 - High,API\Search,Release 3\Sprint 6,2024-09-02,2024-09-29,,Bea Example,regression,Contoso Demo,UAT
+10006,Bug,Invoice export shows wrong total,Resolved,Vik Demo,2,2 - Medium,Web\Login,Release 3\Sprint 5,2024-08-27,2024-09-02,,Aarav Sample,,Contoso Demo,Staging
+,Task,Profile form times out,Closed,Jonas Demo,3,4 - Critical,Reporting,Release 3\Sprint 12,2024-03-17,2024-04-09,2024-04-09,Nia Example,,Contoso Demo,QA
+10008,User Story,Settings screen is misaligned,Development in Progress,Hugo Example,3,3 - Critical,Mobile\Android,Release 3\Sprint 6,2024-06-11,2024-07-01,,Sven Sample,,Contoso Demo,QA
+10009,Task,Search results is slow,Closed,Mateo Sample,1,4 - Medium,Reporting,Release 3\Sprint 9,2024-03-31,2024-04-25,2024-04-25,Mateo Sample,,Contoso Demo,UAT
+10010,Bug,Profile form crashes,Closed,Aarav Sample,4,2 - High,API\Payments,Release 3\Sprint 7,2024-08-23,2024-08-25,2024-08-25,Aarav Sample,,Contoso Demo,Staging
+10011,Bug,Invoice export times out,New,Yara Mockford,3,3 - High,API\Payments,Release 3\Sprint 4,31/31/2024,2024-02-16,,Vik Demo,,Contoso Demo,Staging
+10012,Bug,Checkout button crashes,Closed,Ines Placeholder,3,4 - Medium,API\Search,Release 3\Sprint 4,2024-08-12,2024-09-04,2024-09-04,Quinn Testwell,,Contoso Demo,Staging
+10013,Task,Invoice export returns 500,Closed,Tara Example,4,1 - Medium,Mobile\iOS,Release 3\Sprint 9,2024-06-05,2024-07-05,2024-07-05,Aarav Sample,,Contoso Demo,QA
+,,,,,,,,,,,,,,,
+10014,User Story,Dashboard widget times out,Re-open,Lena Mockford,3,4 - Critical,Web\Login,Release 3\Sprint 10,2024-03-09,2024-03-24,,Yara Mockford,,Contoso Demo,QA
+10015,User Story,Payment API fails,Development in Progress,Wen Testwell,3,3 - Low,API\Search,Release 3\Sprint 10,2024-08-23,2024-09-26,,Kiri Testwell,,Contoso Demo,QA
+10016,Bug,Search results crashes,Closed,Quinn Testwell,2,1 - Critical,API\Search,Release 3\Sprint 12,2024-06-27,2024-07-06,2024-07-06,Jonas Demo,,Contoso Demo,QA
+10017,Bug,Profile form is slow,New,Hugo Example,2,4 - Low,Web\Checkout,Release 3\Sprint 11,2024-09-09,2024-09-19,,Elif Testwell,,Contoso Demo,QA
+10018,Bug,Payment API shows wrong total,Blocked,Aarav Sample,3,1 - Medium,Web\Login,Release 3\Sprint 4,2024-08-29,2024-09-16,,Uma Placeholder,,Contoso Demo,QA
+10019,Task,Checkout button shows wrong total,Re-open,Sven Sample,3,3 - Medium,Web\Login,Release 3\Sprint 1,2024-02-23,2024-03-03,,Mateo Sample,,Contoso Demo,UAT
+10020,Bug,Invoice export ignores filter,Development in Progress,Priya Demo,3,4 - High,Web\Login,Release 3\Sprint 10,2024-04-25,2024-05-30,,Nia Example,regression,Contoso Demo,QA
+10021,Task,Search results returns 500,Closed,Dara Demo,2,3 - High,Web\Login,Release 3\Sprint 1,2024-09-18,2024-10-13,2024-10-13,Aarav Sample,,Contoso Demo,Staging
+10022,Bug,Profile form returns 500,Closed,Omar Placeholder,2,3 - Critical,Mobile\iOS,Release 3\Sprint 4,2024-05-12,2024-06-14,2024-06-14,Yara Mockford,,Contoso Demo,UAT
+10023,Bug,Search results ignores filter,On Hold,Femi Mockford,3,2 - Low,Mobile\Android,Release 3\Sprint 2,2024-06-17,2024-07-20,,Quinn Testwell,,Contoso Demo,UAT
+10024,User Story,Search results is slow,Closed,Uma Placeholder,3,2 - Medium,Web\Login,Release 3\Sprint 2,2024-07-18,2024-07-25,2024-07-25,Bea Example,,Contoso Demo,QA
+10025,Task,Login page fails,Closed,Rosa Mockford,4,2 - High,Reporting,Release 3\Sprint 4,2024-05-23,2024-06-17,2024-06-17,Sven Sample,regression,Contoso Demo,UAT
+10026,User Story,Payment API is slow,Development in Progress,Ines Placeholder,1,1 - Low,Mobile\iOS,Release 3\Sprint 6,2024-04-05,2024-04-16,,Vik Demo,,Contoso Demo,UAT
+10027,Bug,Settings screen is slow,New,Ines Placeholder,3,1 - Critical,API\Search,Release 3\Sprint 2,2024-05-06,2024-05-25,,Vik Demo,,Contoso Demo,Staging
+10028,Bug,Payment API shows wrong total,Ready for QA,Bea Example,3,3 - High,Web\Checkout,Release 3\Sprint 11,2024-03-13,2024-03-15,,Bea Example,,Contoso Demo,UAT
+10029,Bug,Checkout button times out,Active,Quinn Testwell,3,1 - Medium,API\Payments,Release 3\Sprint 11,2024-08-20,2024-08-30,,Wen Testwell,,Contoso Demo,QA
+10030,Task,Profile form is slow,Closed,Tara Example,3,4 - High,Mobile\iOS,Release 3\Sprint 9,2024-09-14,2024-10-19,2024-10-19,Jonas Demo,,Contoso Demo,QA
+10031,Bug,Invoice export times out,Re-open,Ines Placeholder,3,2 - Medium,Mobile\Android,Release 3\Sprint 7,2024-05-29,2024-06-11,,Dara Demo,regression,Contoso Demo,Staging
+10032,User Story,Profile form shows wrong total,On Hold,Jonas Demo,3,3 - Critical,API\Payments,Release 3\Sprint 11,2024-02-19,2024-03-17,,Aarav Sample,,Contoso Demo,QA
+10033,User Story,Checkout button returns 500,Closed,Vik Demo,2,1 - Medium,Mobile\iOS,Release 3\Sprint 6,2024-02-08,2024-03-06,2024-03-06,Dara Demo,,Contoso Demo,QA
+10034,User Story,Invoice export returns 500,Development in Progress,Omar Placeholder,4,4 - High,Mobile\iOS,Release 3\Sprint 2,2024-08-10,2024-09-15,,Kiri Testwell,regression,Contoso Demo,UAT
+10035,Bug,Dashboard widget returns 500,New,Tara Example,3,3 - Medium,Web\Login,Release 3\Sprint 12,2024-08-21,2024-09-19,,Tara Example,,Contoso Demo,UAT
+10036,Bug,Invoice export returns 500,Closed,Elif Testwell,,1 - High,API\Payments,Release 3\Sprint 7,2024-08-09,2024-08-29,2024-08-29,Mateo Sample,,Contoso Demo,QA
+10037,Bug,Profile form is misaligned,Development in Progress,Mateo Sample,3,2 - Medium,Mobile\Android,Release 3\Sprint 9,2024-02-14,2024-03-03,,Kiri Testwell,,Contoso Demo,Staging
+10038,Task,Profile form fails,Ready for QA,Rosa Mockford,2,2 - Critical,Mobile\Android,Release 3\Sprint 1,2024-09-24,2024-10-31,,Jonas Demo,,Contoso Demo,QA
+10039,Task,Settings screen times out,Active,Kiri Testwell,4,3 - Low,API\Payments,Release 3\Sprint 4,2024-05-31,2024-06-12,,Nia Example,,Contoso Demo,Staging
+10040,Bug,Dashboard widget is slow,Ready for QA,Wen Testwell,2,3 - Medium,Mobile\Android,Release 3\Sprint 3,2024-06-01,2024-06-07,,Nia Example,,Contoso Demo,UAT
+10041,Bug,Checkout button is slow,Resolved,Wen Testwell,3,3 - Low,Web\Login,Release 3\Sprint 10,2024-07-29,2024-08-09,,Aarav Sample,,Contoso Demo,QA
+10042,Bug,Login page crashes,Closed,Jonas Demo,4,3 - Low,Mobile\iOS,Release 3\Sprint 2,2024-05-25,2024-06-22,2024-06-22,Tara Example,regression,Contoso Demo,UAT
+10043,User Story,Profile form times out,Closed,Gita Sample,2,4 - High,Web\Login,Release 3\Sprint 11,2024-02-20,2024-03-26,2024-03-26,Dara Demo,,Contoso Demo,QA
+10044,Bug,Dashboard widget fails,Re-open,Nia Example,3,2 - Medium,Web\Checkout,Release 3\Sprint 9,2024-03-26,2024-04-19,,Femi Mockford,,Contoso Demo,QA
+10045,Bug,Payment API returns 500,New,Sven Sample,3,2 - Low,Web\Login,Release 3\Sprint 12,2024-09-28,2024-10-03,,Jonas Demo,regression,Contoso Demo,QA
+10046,Bug,Login page ignores filter,Active,Yara Mockford,2,4 - High,Mobile\Android,Release 3\Sprint 4,2024-10-12,2024-10-25,,Jonas Demo,regression,Contoso Demo,Staging
+10047,Task,Invoice export times out,New,Omar Placeholder,4,3 - Critical,API\Search,Release 3\Sprint 1,2024-05-30,2024-06-22,,Quinn Testwell,,Contoso Demo,UAT
+10048,Bug,Search results crashes,Development in Progress,Bea Example,1,1 - High,API\Payments,Release 3\Sprint 1,2024-02-03,2024-03-13,,Yara Mockford,regression,Contoso Demo,UAT
+10049,Bug,Login page ignores filter,Closed,Vik Demo,3,3 - Critical,Reporting,Release 3\Sprint 10,2024-02-05,2024-02-16,2024-02-16,Gita Sample,regression,Contoso Demo,UAT
+10050,Bug,Dashboard widget is slow,Closed,Gita Sample,2,2 - Critical,API\Search,Release 3\Sprint 7,2024-10-16,2024-10-19,2024-10-19,Femi Mockford,,Contoso Demo,UAT
+10051,Bug,Settings screen ignores filter,New,Uma Placeholder,3,3 - High,Mobile\iOS,Release 3\Sprint 6,2024-05-29,2024-06-29,,Omar Placeholder,regression,Contoso Demo,Staging
+10052,User Story,Profile form crashes,Development in Progress,Uma Placeholder,3,1 - High,API\Search,Release 3\Sprint 5,2024-03-29,2024-04-27,,Lena Mockford,,Contoso Demo,Staging
+10053,Bug,Login page shows wrong total,Development in Progress,Mateo Sample,3,4 - Low,Reporting,Release 3\Sprint 1,2024-10-15,2024-10-23,,Omar Placeholder,,Contoso Demo,Staging
+10054,User Story,Payment API is slow,Ready for QA,Dara Demo,1,4 - Medium,API\Payments,Release 3\Sprint 5,2024-05-16,2024-06-05,,Nia Example,,Contoso Demo,Staging
+10055,Task,Dashboard widget fails,Closed,Uma Placeholder,4,2 - High,API\Payments,Release 3\Sprint 2,2024-04-29,2024-05-03,2024-05-03,Jonas Demo,,Contoso Demo,Staging
+10056,Bug,Profile form ignores filter,Development in Progress,Jonas Demo,4,1 - Critical,API\Payments,Release 3\Sprint 3,2024-04-25,2024-05-16,,Omar Placeholder,,Contoso Demo,Staging
+10057,Bug,Checkout button is slow,Closed,Wen Testwell,1,3 - High,Web\Login,Release 3\Sprint 11,2024-03-28,2024-04-21,2024-04-21,Omar Placeholder,,Contoso Demo,UAT
+10058,User Story,Login page is slow,New,Uma Placeholder,2,1 - Medium,Mobile\iOS,Release 3\Sprint 4,2024-06-28,2024-07-14,,Aarav Sample,,Contoso Demo,Staging
+10059,Bug,Settings screen times out,Ready for QA,Priya Demo,3,2 - Critical,API\Search,Release 3\Sprint 2,2024-07-26,2024-08-09,,Yara Mockford,,Contoso Demo,Staging
+10060,Bug,Profile form is slow,Closed,Omar Placeholder,3,3 - Low,API\Search,Release 3\Sprint 5,2024-02-25,2024-03-07,2024-03-07,Mateo Sample,,Contoso Demo,Staging
+10061,Bug,Payment API ignores filter,On Hold,Uma Placeholder,1,3 - Critical,Web\Login,Release 3\Sprint 6,2024-03-09,2024-03-29,,Sven Sample,,Contoso Demo,QA
+10062,Bug,Profile form ignores filter,Closed,Tara Example,,2 - High,Mobile\iOS,Release 3\Sprint 2,2024-09-02,2024-10-05,2024-10-05,Gita Sample,regression,Contoso Demo,Staging
+10063,Bug,Invoice export shows wrong total,Closed,Jonas Demo,2,1 - Medium,API\Search,Release 3\Sprint 12,2024-02-03,2024-03-01,2024-03-01,Kiri Testwell,regression,Contoso Demo,QA
+10064,Bug,Dashboard widget is misaligned,Resolved,Mateo Sample,3,3 - Medium,API\Search,Release 3\Sprint 10,2024-08-11,2024-08-18,,Quinn Testwell,,Contoso Demo,QA
+10065,User Story,Dashboard widget ignores filter,Development in Progress,Chen Placeholder,3,4 - Low,Web\Checkout,Release 3\Sprint 6,2024-02-09,2024-02-13,,Uma Placeholder,,Contoso Demo,UAT
+10066,User Story,Dashboard widget fails,Ready for QA,Sven Sample,1,3 - Critical,API\Search,Release 3\Sprint 3,2024-08-25,2024-08-27,,Lena Mockford,,Contoso Demo,Staging
+10067,Task,Dashboard widget ignores filter,Closed,Quinn Testwell,2,4 - High,API\Search,Release 3\Sprint 4,2024-07-15,2024-08-02,2024-08-02,Chen Placeholder,,Contoso Demo,Staging
+10068,User Story,Search results shows wrong total,Development in Progress,Lena Mockford,2,4 - Low,Mobile\Android,Release 3\Sprint 10,2024-04-20,2024-05-16,,Quinn Testwell,regression,Contoso Demo,Staging
+10069,Bug,Payment API fails,Development in Progress,Vik Demo,4,2 - Low,API\Search,Release 3\Sprint 8,2024-07-05,2024-08-11,,Sven Sample,,Contoso Demo,Staging
+10070,Bug,Settings screen ignores filter,Resolved,Priya Demo,1,4 - High,Web\Login,Release 3\Sprint 9,2024-05-15,2024-06-10,,Tara Example,,Contoso Demo,QA
+10071,Bug,Invoice export times out,New,Hugo Example,2,4 - Low,Web\Checkout,Release 3\Sprint 1,2024-06-15,2024-06-25,,Omar Placeholder,,Contoso Demo,Staging
+10072,User Story,Search results shows wrong total,Active,Bea Example,1,3 - Critical,Reporting,Release 3\Sprint 9,2024-06-30,2024-07-13,,Mateo Sample,,Contoso Demo,QA
+10073,Bug,Dashboard widget shows wrong total,Ready for QA,Nia Example,3,1 - Low,Web\Checkout,Release 3\Sprint 1,2024-06-16,2024-07-13,,Sven Sample,,Contoso Demo,Staging
+10074,Bug,Checkout button returns 500,Development in Progress,Omar Placeholder,2,2 - Critical,Web\Checkout,Release 3\Sprint 4,2024-10-17,2024-11-03,,Uma Placeholder,,Contoso Demo,QA
+10075,Bug,Profile form is misaligned,Closed,Elif Testwell,3,4 - Medium,Web\Login,Release 3\Sprint 6,2024-04-01,2024-05-10,2024-05-10,Sven Sample,,Contoso Demo,UAT
+10076,Task,Payment API times out,Resolved,Bea Example,3,3 - Low,Reporting,Release 3\Sprint 6,2024-03-18,2024-03-25,,Gita Sample,,Contoso Demo,Staging
+10077,Bug,Dashboard widget is slow,New,Rosa Mockford,2,3 - Low,Mobile\Android,Release 3\Sprint 12,2024-01-17,2024-02-01,,Ines Placeholder,,Contoso Demo,QA
+10078,Task,Dashboard widget is slow,New,Dara Demo,2,4 - Critical,API\Search,Release 3\Sprint 11,2024-08-19,2024-09-04,,Jonas Demo,,Contoso Demo,QA
+10079,Task,Settings screen times out,Blocked,Priya Demo,2,4 - Low,Web\Login,Release 3\Sprint 11,2024-07-11,2024-08-08,,Quinn Testwell,,Contoso Demo,UAT
+10080,Bug,Dashboard widget is slow,Closed,Nia Example,4,1 - Low,API\Search,Release 3\Sprint 11,2024-04-23,2024-05-07,2024-05-07,Ines Placeholder,regression,Contoso Demo,UAT
+10081,User Story,Profile form crashes,New,Hugo Example,1,4 - High,Reporting,Release 3\Sprint 12,2024-05-23,2024-06-01,,Elif Testwell,,Contoso Demo,UAT
+10082,Task,Profile form shows wrong total,New,Yara Mockford,1,1 - High,Mobile\iOS,Release 3\Sprint 7,2024-06-09,2024-07-14,,Mateo Sample,,Contoso Demo,QA
+10083,Task,Profile form is slow,Closed,Elif Testwell,2,4 - Medium,Reporting,Release 3\Sprint 12,2024-06-15,2024-07-16,2024-07-16,Quinn Testwell,,Contoso Demo,UAT
+10084,User Story,Search results returns 500,Development in Progress,Wen Testwell,3,1 - Medium,Mobile\Android,Release 3\Sprint 5,2024-03-21,2024-04-02,,Mateo Sample,regression,Contoso Demo,Staging
+10085,Bug,Invoice export fails,Closed,Lena Mockford,2,2 - High,API\Payments,Release 3\Sprint 12,2024-05-12,2024-06-10,2024-06-10,Hugo Example,regression,Contoso Demo,UAT
+10086,User Story,Search results crashes,Closed,Aarav Sample,4,1 - Medium,API\Search,Release 3\Sprint 8,2024-02-26,2024-03-14,2024-03-14,Jonas Demo,,Contoso Demo,Staging
+10087,Bug,Invoice export is slow,Ready for QA,Mateo Sample,2,1 - Critical,Reporting,Release 3\Sprint 9,2024-03-26,2024-04-30,,Kiri Testwell,,Contoso Demo,Staging
+10088,Bug,Settings screen crashes,Closed,Quinn Testwell,2,1 - Low,Web\Checkout,Release 3\Sprint 4,2024-05-24,2024-06-19,2024-06-19,Nia Example,,Contoso Demo,Staging
+10089,Bug,Invoice export ignores filter,Closed,Nia Example,3,2 - High,Mobile\iOS,Release 3\Sprint 10,2024-08-31,2024-09-24,2024-09-24,Vik Demo,,Contoso Demo,UAT
+10090,Bug,Invoice export fails,Closed,Lena Mockford,4,2 - High,Mobile\Android,Release 3\Sprint 11,2024-09-29,2024-11-01,2024-11-01,Quinn Testwell,,Contoso Demo,QA
+10091,Bug,Payment API is slow,New,Sven Sample,1,3 - Medium,Mobile\iOS,Release 3\Sprint 4,2024-04-06,2024-05-07,,Rosa Mockford,,Contoso Demo,UAT
+10092,Bug,Login page crashes,Closed,Quinn Testwell,3,2 - Low,Web\Login,Release 3\Sprint 6,2024-09-01,2024-09-15,2024-09-15,Rosa Mockford,regression,Contoso Demo,UAT
+10093,User Story,Login page fails,Blocked,Femi Mockford,3,3 - Low,Mobile\iOS,Release 3\Sprint 12,2024-07-28,2024-08-31,,Kiri Testwell,,Contoso Demo,Staging
+10094,Task,Login page is misaligned,New,Sven Sample,2,2 - Critical,Web\Login,Release 3\Sprint 12,2024-02-06,2024-02-11,,Bea Example,regression,Contoso Demo,UAT
+10095,Bug,Dashboard widget crashes,Closed,Chen Placeholder,2,1 - Critical,API\Search,Release 3\Sprint 3,2024-04-30,2024-05-27,2024-05-27,Quinn Testwell,,Contoso Demo,QA
+10096,Bug,Login page is slow,Closed,Aarav Sample,4,3 - Critical,Mobile\Android,Release 3\Sprint 11,2024-04-07,2024-04-30,2024-04-30,Jonas Demo,,Contoso Demo,UAT
+10097,Bug,Checkout button fails,New,Ines Placeholder,3,2 - High,Web\Login,Release 3\Sprint 12,2024-05-20,2024-06-17,,Priya Demo,,Contoso Demo,Staging
+10098,User Story,Login page returns 500,Ready for QA,Quinn Testwell,4,1 - Low,API\Payments,Release 3\Sprint 2,2024-05-31,2024-06-25,,Priya Demo,regression,Contoso Demo,QA
+10099,Task,Payment API crashes,Closed,Bea Example,1,4 - Low,API\Search,Release 3\Sprint 12,2024-06-03,2024-07-07,2024-07-07,Priya Demo,,Contoso Demo,QA
+10100,User Story,Invoice export returns 500,Resolved,Yara Mockford,3,1 - Low,API\Payments,Release 3\Sprint 9,2024-04-03,2024-05-03,,Femi Mockford,,Contoso Demo,QA
+10101,Task,Settings screen is misaligned,New,Chen Placeholder,3,3 - Critical,Mobile\iOS,Release 3\Sprint 7,2024-08-08,2024-09-02,,Mateo Sample,,Contoso Demo,UAT
+10102,Bug,Settings screen times out,New,Chen Placeholder,2,2 - High,Web\Login,Release 3\Sprint 10,2024-10-21,2024-11-25,,Quinn Testwell,,Contoso Demo,QA
+10103,Bug,Invoice export returns 500,Ready for QA,Jonas Demo,4,3 - Medium,API\Search,Release 3\Sprint 9,2024-09-27,2024-11-05,,Femi Mockford,regression,Contoso Demo,Staging
+10104,User Story,Profile form times out,Development in Progress,Dara Demo,2,3 - High,API\Search,Release 3\Sprint 6,2024-04-07,2024-04-28,,Chen Placeholder,,Contoso Demo,UAT
+10105,Bug,Profile form fails,Development in Progress,Tara Example,1,2 - Critical,Web\Checkout,Release 3\Sprint 11,2024-04-19,2024-05-04,,Femi Mockford,,Contoso Demo,QA
+10106,Bug,Dashboard widget times out,Blocked,,2,3 - Medium,Mobile\Android,Release 3\Sprint 10,2024-08-07,2024-09-03,,Kiri Testwell,,Contoso Demo,Staging
+10107,User Story,Login page times out,New,Ines Placeholder,2,3 - Critical,API\Payments,Release 3\Sprint 5,2024-04-06,2024-04-08,,Jonas Demo,regression,Contoso Demo,UAT
+10108,User Story,Payment API returns 500,Development in Progress,Kiri Testwell,2,4 - Medium,API\Search,Release 3\Sprint 8,2024-05-23,2024-05-29,,Yara Mockford,regression,Contoso Demo,UAT
+10109,User Story,Payment API shows wrong total,Closed,Chen Placeholder,2,1 - Low,Web\Login,Release 3\Sprint 6,2024-02-02,2024-02-20,2024-02-20,Dara Demo,,Contoso Demo,UAT
+10110,Bug,Checkout button fails,Development in Progress,Chen Placeholder,3,2 - High,Web\Login,Release 3\Sprint 4,2024-01-27,2024-02-03,,Aarav Sample,,Contoso Demo,QA
+10111,Task,Profile form crashes,On Hold,Chen Placeholder,3,4 - High,Mobile\Android,Release 3\Sprint 6,2024-01-10,2024-02-07,,Omar Placeholder,,Contoso Demo,UAT
+10112,User Story,Login page is slow,Ready for QA,Uma Placeholder,3,3 - Critical,Reporting,Release 3\Sprint 8,2024-09-18,2024-10-23,,Elif Testwell,regression,Contoso Demo,Staging
+10113,Bug,Search results shows wrong total,Re-open,Elif Testwell,1,2 - High,Web\Checkout,Release 3\Sprint 10,2024-04-28,2024-05-14,,Wen Testwell,,Contoso Demo,QA
+10114,Bug,Invoice export is misaligned,Closed,Chen Placeholder,3,4 - Low,API\Payments,Release 3\Sprint 12,2024-09-06,2024-09-06,2024-09-06,Priya Demo,regression,Contoso Demo,UAT
+10115,Task,Dashboard widget is slow,Closed,Yara Mockford,2,1 - Low,API\Payments,Release 3\Sprint 1,2024-04-29,2024-06-01,2024-06-01,Yara Mockford,,Contoso Demo,UAT
+10116,Bug,Payment API shows wrong total,Closed,Femi Mockford,3,3 - Low,API\Search,Release 3\Sprint 9,2024-09-16,2024-10-18,2024-10-18,Hugo Example,regression,Contoso Demo,QA
+10117,Task,Login page shows wrong total,Closed,Vik Demo,3,3 - Critical,Mobile\iOS,Release 3\Sprint 1,2024-02-06,2024-03-09,2024-03-09,Chen Placeholder,,Contoso Demo,UAT
+10118,Bug,Dashboard widget fails,Active,Femi Mockford,3,2 - Medium,Reporting,Release 3\Sprint 6,2024-08-12,2024-08-17,,Priya Demo,,Contoso Demo,QA
+10119,Task,Settings screen returns 500,Active,Dara Demo,3,3 - Low,Reporting,Release 3\Sprint 8,2024-06-14,2024-07-12,,Kiri Testwell,regression,Contoso Demo,UAT
+10120,Bug,Invoice export ignores filter,New,Wen Testwell,2,3 - Critical,Mobile\iOS,Release 3\Sprint 1,2024-02-16,2024-03-05,,Uma Placeholder,,Contoso Demo,QA
+10121,Bug,Dashboard widget ignores filter,Development in Progress,Priya Demo,2,1 - Medium,Web\Checkout,Release 3\Sprint 12,2024-06-13,2024-07-04,,Quinn Testwell,regression,Contoso Demo,QA
+10122,Bug,Checkout button ignores filter,Closed,Wen Testwell,3,4 - High,Mobile\Android,Release 3\Sprint 6,2024-07-14,2024-08-13,2024-08-13,Quinn Testwell,,Contoso Demo,Staging
+10123,Bug,Settings screen crashes,Blocked,,2,1 - Low,Mobile\Android,Release 3\Sprint 5,2024-09-19,2024-10-21,,Omar Placeholder,regression,Contoso Demo,Staging
+10124,Task,Payment API ignores filter,Closed,Rosa Mockford,3,4 - Low,Mobile\iOS,Release 3\Sprint 8,2024-03-03,2024-03-30,2024-03-30,Wen Testwell,,Contoso Demo,QA
+10125,Task,Payment API times out,Re-open,Elif Testwell,1,2 - Low,API\Payments,Release 3\Sprint 2,2024-08-02,2024-08-09,,Yara Mockford,,Contoso Demo,Staging
+10126,Bug,Invoice export returns 500,New,Dara Demo,4,1 - High,Web\Login,Release 3\Sprint 5,2024-02-24,2024-03-19,,Yara Mockford,,Contoso Demo,QA
+10127,User Story,Payment API returns 500,Closed,Femi Mockford,3,4 - Low,API\Search,Release 3\Sprint 8,2024-08-12,2024-08-12,2024-08-12,Wen Testwell,,Contoso Demo,Staging
+10128,Bug,Invoice export is misaligned,Ready for QA,Rosa Mockford,3,2 - Low,Mobile\Android,Release 3\Sprint 10,2024-08-20,2024-09-15,,Elif Testwell,,Contoso Demo,Staging
+10129,Task,Settings screen shows wrong total,Development in Progress,Mateo Sample,1,1 - Medium,Web\Login,Release 3\Sprint 6,2024-07-12,2024-08-12,,Kiri Testwell,,Contoso Demo,QA
+10130,Bug,Checkout button fails,Ready for QA,,3,4 - Low,Reporting,Release 3\Sprint 9,2024-06-23,2024-07-31,,Yara Mockford,,Contoso Demo,Staging
+10131,User Story,Payment API shows wrong total,Closed,Jonas Demo,2,4 - High,Web\Checkout,Release 3\Sprint 9,2024-04-24,2024-05-12,2024-05-12,Rosa Mockford,,Contoso Demo,Staging
+10132,Bug,Login page is slow,Resolved,Mateo Sample,2,4 - Critical,API\Payments,Release 3\Sprint 1,2024-07-24,2024-08-18,,Aarav Sample,,Contoso Demo,UAT
+10133,Bug,Settings screen fails,Closed,Ines Placeholder,1,3 - Medium,API\Payments,Release 3\Sprint 9,2024-06-10,2024-07-09,2024-07-09,Aarav Sample,regression,Contoso Demo,QA
+10134,Bug,Settings screen fails,New,Elif Testwell,3,2 - Medium,Web\Checkout,Release 3\Sprint 4,2024-01-26,2024-02-13,,Chen Placeholder,regression,Contoso Demo,UAT
+10135,Bug,Login page ignores filter,Closed,Hugo Example,1,4 - High,API\Payments,Release 3\Sprint 1,2024-05-05,2024-05-22,2024-05-22,Rosa Mockford,regression,Contoso Demo,Staging
+10136,User Story,Checkout button crashes,Blocked,Priya Demo,1,4 - Medium,API\Payments,Release 3\Sprint 6,2024-07-11,2024-08-19,,Kiri Testwell,,Contoso Demo,UAT
+10137,Bug,Dashboard widget ignores filter,Active,Elif Testwell,4,2 - High,API\Search,Release 3\Sprint 6,2024-10-13,2024-11-21,,Femi Mockford,,Contoso Demo,UAT
+10138,Bug,Invoice export ignores filter,Blocked,Rosa Mockford,4,3 - Medium,Web\Checkout,Release 3\Sprint 9,2024-07-23,2024-08-16,,Elif Testwell,regression,Contoso Demo,QA
+10139,Bug,Settings screen fails,Blocked,Elif Testwell,3,1 - Medium,Web\Login,Release 3\Sprint 12,2024-04-18,2024-04-28,,Yara Mockford,regression,Contoso Demo,QA
+10140,User Story,Profile form fails,New,Jonas Demo,2,2 - Low,Mobile\iOS,Release 3\Sprint 3,2024-08-26,2024-09-03,,Nia Example,,Contoso Demo,UAT
+10141,Task,Dashboard widget shows wrong total,Closed,Nia Example,2,4 - Medium,API\Payments,Release 3\Sprint 5,2024-02-03,2024-02-27,2024-02-27,Lena Mockford,,Contoso Demo,QA
+10142,Bug,Dashboard widget returns 500,Re-open,Sven Sample,4,2 - Medium,Mobile\Android,Release 3\Sprint 3,2024-09-06,2024-09-09,,Tara Example,regression,Contoso Demo,QA
+10143,Bug,Checkout button fails,Ready for QA,Rosa Mockford,2,3 - Low,API\Search,Release 3\Sprint 10,2024-10-08,2024-11-08,,Elif Testwell,regression,Contoso Demo,UAT
+10144,Task,Checkout button fails,Closed,Bea Example,4,3 - Low,Mobile\iOS,Release 3\Sprint 12,2024-10-03,2024-10-03,2024-10-03,Chen Placeholder,,Contoso Demo,QA
+10145,Task,Search results returns 500,Closed,Elif Testwell,4,3 - Medium,Web\Login,Release 3\Sprint 5,2024-09-12,2024-09-15,2024-09-15,Omar Placeholder,,Contoso Demo,QA
+10146,Bug,Settings screen fails,Closed,Quinn Testwell,3,3 - Low,Web\Login,Release 3\Sprint 12,2024-05-12,2024-05-19,2024-05-19,Quinn Testwell,,Contoso Demo,Staging
+10147,Bug,Payment API fails,Active,Sven Sample,3,1 - High,Mobile\iOS,Release 3\Sprint 4,2024-02-04,2024-02-10,,Femi Mockford,,Contoso Demo,QA
+10148,Bug,Search results times out,Blocked,Chen Placeholder,3,1 - Low,Mobile\Android,Release 3\Sprint 9,2024-01-17,2024-01-28,,Wen Testwell,regression,Contoso Demo,UAT
+10149,Bug,Profile form is misaligned,Re-open,Elif Testwell,2,2 - High,Reporting,Release 3\Sprint 10,2024-03-22,2024-03-28,,Omar Placeholder,,Contoso Demo,QA
+10150,Bug,Payment API ignores filter,Development in Progress,,,4 - High,API\Payments,Release 3\Sprint 11,2024-07-20,2024-08-06,,Rosa Mockford,regression,Contoso Demo,QA
+10151,Task,Dashboard widget crashes,Active,Nia Example,3,2 - Low,Reporting,Release 3\Sprint 11,2024-09-01,2024-09-05,,Hugo Example,regression,Contoso Demo,QA
+10152,Bug,Invoice export returns 500,Closed,Jonas Demo,2,4 - Medium,Mobile\iOS,Release 3\Sprint 3,2024-05-21,2024-06-09,2024-06-09,Priya Demo,,Contoso Demo,UAT
+10153,Task,Dashboard widget ignores filter,Ready for QA,Uma Placeholder,3,1 - Critical,Web\Checkout,Release 3\Sprint 3,2024-07-30,2024-08-27,,Elif Testwell,,Contoso Demo,Staging
+10154,Task,Profile form is misaligned,Resolved,Jonas Demo,3,2 - High,Web\Checkout,Release 3\Sprint 3,2024-09-28,2024-11-03,,Elif Testwell,regression,Contoso Demo,Staging
+10155,User Story,Checkout button is misaligned,Ready for QA,Priya Demo,2,1 - Medium,Mobile\iOS,Release 3\Sprint 5,2024-07-22,2024-08-07,,Yara Mockford,,Contoso Demo,Staging
+10156,Bug,Payment API crashes,Development in Progress,Sven Sample,2,1 - High,Mobile\iOS,Release 3\Sprint 2,2024-02-12,2024-03-11,,Elif Testwell,,Contoso Demo,Staging
+10157,Bug,Checkout button is misaligned,Development in Progress,Tara Example,3,1 - High,API\Search,Release 3\Sprint 12,2024-03-15,2024-04-15,,Gita Sample,,Contoso Demo,QA
+10158,User Story,Profile form returns 500,Active,Yara Mockford,3,4 - Critical,Mobile\iOS,Release 3\Sprint 7,2024-01-31,2024-03-05,,Mateo Sample,,Contoso Demo,Staging
+10159,User Story,Profile form ignores filter,Closed,Vik Demo,3,1 - Low,Mobile\Android,Release 3\Sprint 1,2024-03-18,2024-04-15,2024-04-15,Quinn Testwell,,Contoso Demo,Staging
+10160,User Story,Invoice export shows wrong total,Re-open,,2,3 - Medium,Mobile\Android,Release 3\Sprint 1,2024-01-15,2024-02-06,,Omar Placeholder,regression,Contoso Demo,UAT
+10161,Bug,Settings screen ignores filter,Closed,Ines Placeholder,2,1 - Low,Web\Login,Release 3\Sprint 1,2024-03-21,2024-04-25,2024-04-25,Dara Demo,regression,Contoso Demo,Staging
+10162,Bug,Invoice export times out,New,Bea Example,1,1 - Low,Mobile\Android,Release 3\Sprint 10,2024-06-18,2024-07-10,,Priya Demo,regression,Contoso Demo,QA
+10163,User Story,Dashboard widget is misaligned,Closed,Rosa Mockford,3,4 - Critical,API\Payments,Release 3\Sprint 2,2024-09-10,2024-10-03,2024-10-03,Aarav Sample,regression,Contoso Demo,QA
+10164,Bug,Invoice export shows wrong total,Resolved,Tara Example,3,3 - High,API\Payments,Release 3\Sprint 6,2024-03-20,2024-04-10,,Lena Mockford,,Contoso Demo,Staging
+10165,Bug,Dashboard widget times out,New,Quinn Testwell,3,3 - Medium,API\Search,Release 3\Sprint 2,2024-06-26,2024-07-05,,Aarav Sample,,Contoso Demo,QA
+10166,Task,Profile form fails,Blocked,Tara Example,2,1 - Medium,Mobile\iOS,Release 3\Sprint 9,2024-08-12,2024-08-21,,Gita Sample,regression,Contoso Demo,UAT
+10167,Bug,Search results returns 500,Development in Progress,Priya Demo,1,4 - Medium,Mobile\Android,Release 3\Sprint 6,2024-04-26,2024-06-04,,Rosa Mockford,regression,Contoso Demo,Staging
+10168,Bug,Search results times out,Closed,Yara Mockford,4,1 - Medium,Mobile\Android,Release 3\Sprint 4,2024-05-18,2024-05-26,2024-05-26,Omar Placeholder,regression,Contoso Demo,QA
+10169,Bug,Search results times out,New,Priya Demo,3,1 - Critical,Mobile\iOS,Release 3\Sprint 6,2024-08-16,2024-08-26,,Elif Testwell,regression,Contoso Demo,Staging
+10170,Bug,Profile form ignores filter,Closed,Uma Placeholder,3,1 - High,Web\Checkout,Release 3\Sprint 8,2024-05-30,2024-06-13,2024-06-13,Mateo Sample,regression,Contoso Demo,QA
+10171,Task,Settings screen fails,Ready for QA,Dara Demo,,4 - Medium,Mobile\Android,Release 3\Sprint 5,2024-09-17,2024-10-24,,Uma Placeholder,,Contoso Demo,QA
+10172,Bug,Settings screen returns 500,Closed,Kiri Testwell,1,4 - Critical,Mobile\Android,Release 3\Sprint 4,2024-06-28,2024-08-03,2024-08-03,Hugo Example,,Contoso Demo,QA
+10173,User Story,Search results is slow,Development in Progress,Dara Demo,4,3 - Low,API\Search,Release 3\Sprint 7,2024-06-04,2024-06-08,,Kiri Testwell,,Contoso Demo,QA
+10174,Bug,Checkout button crashes,Ready for QA,Gita Sample,2,1 - Critical,API\Payments,Release 3\Sprint 11,2024-02-09,2024-02-26,,Sven Sample,,Contoso Demo,Staging
+10175,Bug,Login page is slow,Re-open,Gita Sample,3,4 - Low,Mobile\iOS,Release 3\Sprint 3,2024-02-16,2024-02-26,,Femi Mockford,,Contoso Demo,UAT
+10176,Bug,Invoice export shows wrong total,Closed,Ines Placeholder,3,2 - High,Web\Login,Release 3\Sprint 9,2024-02-03,2024-03-04,2024-03-04,Yara Mockford,regression,Contoso Demo,UAT
+10177,Task,Checkout button is misaligned,Active,,3,2 - High,Web\Login,Release 3\Sprint 9,2024-09-15,2024-09-21,,Jonas Demo,,Contoso Demo,Staging
+10178,Bug,Invoice export is misaligned,Closed,Quinn Testwell,2,1 - Low,Mobile\iOS,Release 3\Sprint 1,2024-08-22,2024-08-29,2024-08-29,Elif Testwell,,Contoso Demo,QA
+10179,User Story,Login page returns 500,Active,Dara Demo,3,2 - High,API\Payments,Release 3\Sprint 8,2024-01-04,2024-01-18,,Ines Placeholder,regression,Contoso Demo,Staging
+10180,Bug,Payment API shows wrong total,Closed,Nia Example,2,3 - Low,Mobile\iOS,Release 3\Sprint 1,2024-04-06,2024-05-03,2024-05-03,Quinn Testwell,,Contoso Demo,QA
+10181,Bug,Settings screen is slow,Re-open,Femi Mockford,2,4 - Low,Web\Checkout,Release 3\Sprint 4,2024-02-10,2024-02-11,,Chen Placeholder,,Contoso Demo,UAT
+10182,Bug,Login page returns 500,New,Quinn Testwell,3,1 - Low,API\Payments,Release 3\Sprint 9,2024-04-29,2024-05-18,,Mateo Sample,,Contoso Demo,QA
+10183,Bug,Profile form times out,Ready for QA,Femi Mockford,2,3 - Low,Web\Login,Release 3\Sprint 3,2024-04-23,2024-05-27,,Quinn Testwell,,Contoso Demo,UAT
+10184,Bug,Dashboard widget is misaligned,Closed,Aarav Sample,3,2 - Critical,Mobile\iOS,Release 3\Sprint 4,2024-05-25,2024-06-03,2024-06-03,Wen Testwell,,Contoso Demo,QA
+10185,User Story,Login page returns 500,Blocked,Omar Placeholder,3,2 - Critical,Mobile\iOS,Release 3\Sprint 11,2024-01-21,2024-02-10,,Bea Example,regression,Contoso Demo,Staging
+10186,Task,Checkout button crashes,Active,Aarav Sample,4,2 - Medium,Web\Checkout,Release 3\Sprint 11,2024-03-16,2024-03-19,,Chen Placeholder,,Contoso Demo,UAT
+10187,Bug,Login page ignores filter,New,Ines Placeholder,3,2 - Medium,Mobile\Android,Release 3\Sprint 7,2024-08-07,2024-08-18,,Dara Demo,regression,Contoso Demo,UAT
+10188,Task,Dashboard widget crashes,Active,Uma Placeholder,3,2 - Critical,Mobile\Android,Release 3\Sprint 4,2024-06-24,2024-07-31,,Elif Testwell,,Contoso Demo,QA
+10189,Bug,Search results fails,Closed,Femi Mockford,3,1 - Medium,Reporting,Release 3\Sprint 3,2024-01-29,2024-01-31,2024-01-31,Uma Placeholder,,Contoso Demo,UAT
+10190,Bug,Checkout button ignores filter,Ready for QA,Chen Placeholder,2,3 - Medium,Web\Login,Release 3\Sprint 4,2024-06-16,2024-06-27,,Ines Placeholder,,Contoso Demo,UAT
+10191,Task,Invoice export returns 500,Blocked,Hugo Example,2,1 - High,Web\Checkout,Release 3\Sprint 7,2024-01-29,2024-02-16,,Bea Example,,Contoso Demo,QA
+10192,Bug,Search results ignores filter,Ready for QA,Bea Example,2,1 - Low,Web\Login,Release 3\Sprint 2,2024-05-18,2024-05-28,,Nia Example,regression,Contoso Demo,Staging
+10193,Task,Login page shows wrong total,Closed,Kiri Testwell,2,3 - Critical,API\Search,Release 3\Sprint 2,2024-09-16,2024-10-13,2024-10-13,Lena Mockford,,Contoso Demo,QA
+10194,Task,Checkout button is slow,Closed,Nia Example,4,3 - Low,Web\Checkout,Release 3\Sprint 11,2024-08-22,2024-09-16,2024-09-16,Wen Testwell,,Contoso Demo,Staging
+10195,Bug,Invoice export is slow,Closed,Aarav Sample,2,2 - Low,API\Payments,Release 3\Sprint 2,2024-08-13,2024-09-03,2024-09-03,Uma Placeholder,,Contoso Demo,Staging
+10196,User Story,Checkout button times out,Re-open,Aarav Sample,3,4 - Critical,API\Search,Release 3\Sprint 8,2024-03-03,2024-04-05,,Jonas Demo,,Contoso Demo,Staging
+10197,Task,Login page times out,On Hold,Wen Testwell,1,1 - Low,Reporting,Release 3\Sprint 9,2024-03-27,2024-04-19,,Yara Mockford,regression,Contoso Demo,Staging
+10198,Bug,Login page returns 500,Development in Progress,Jonas Demo,3,2 - Critical,API\Search,Release 3\Sprint 12,2024-07-09,2024-08-16,,Vik Demo,regression,Contoso Demo,UAT
+10199,Bug,Invoice export is misaligned,Active,Rosa Mockford,3,1 - High,Web\Login,Release 3\Sprint 7,2024-03-08,2024-04-12,,Jonas Demo,,Contoso Demo,Staging
+10200,Bug,Checkout button shows wrong total,Closed,Femi Mockford,2,3 - Medium,API\Search,Release 3\Sprint 3,2024-02-19,2024-03-15,2024-03-15,Gita Sample,,Contoso Demo,UAT
+10201,User Story,Dashboard widget is misaligned,Re-open,Mateo Sample,2,1 - Low,Mobile\iOS,Release 3\Sprint 4,2024-06-02,2024-06-13,,Sven Sample,,Contoso Demo,UAT
+10202,Bug,Invoice export is slow,Closed,Rosa Mockford,3,2 - Critical,API\Payments,Release 3\Sprint 10,2024-01-28,2024-02-08,2024-02-08,Ines Placeholder,regression,Contoso Demo,QA
+10203,Bug,Payment API is misaligned,Closed,Yara Mockford,3,4 - High,API\Search,Release 3\Sprint 4,2024-03-30,2024-04-04,2024-04-04,Omar Placeholder,,Contoso Demo,Staging
+10204,Bug,Payment API ignores filter,Closed,Mateo Sample,2,2 - Critical,Reporting,Release 3\Sprint 6,2024-10-03,2024-11-05,2024-11-05,Yara Mockford,,Contoso Demo,UAT
+10205,User Story,Profile form returns 500,Closed,Hugo Example,3,1 - Critical,API\Search,Release 3\Sprint 8,2024-10-09,2024-10-29,2024-10-29,Lena Mockford,regression,Contoso Demo,QA
+10206,Bug,Dashboard widget ignores filter,Closed,Yara Mockford,3,3 - Low,Mobile\Android,Release 3\Sprint 2,2024-04-17,2024-05-24,2024-05-24,Tara Example,regression,Contoso Demo,QA
+10207,Task,Invoice export crashes,Re-open,Kiri Testwell,4,2 - Critical,Web\Checkout,Release 3\Sprint 3,2024-10-26,2024-10-30,,Tara Example,,Contoso Demo,UAT
+10208,Bug,Payment API is misaligned,New,Yara Mockford,2,2 - Medium,API\Search,Release 3\Sprint 2,2024-04-05,2024-05-08,,Nia Example,,Contoso Demo,QA
+10209,Task,Profile form times out,Resolved,Quinn Testwell,1,4 - Medium,Web\Login,Release 3\Sprint 7,2024-03-10,2024-03-20,,Aarav Sample,,Contoso Demo,QA
+10210,Bug,Login page returns 500,Closed,Vik Demo,4,1 - Critical,API\Search,Release 3\Sprint 11,2024-09-29,2024-10-17,2024-10-17,Wen Testwell,,Contoso Demo,Staging
+10211,Bug,Settings screen fails,Closed,Dara Demo,2,1 - Low,Mobile\Android,Release 3\Sprint 2,2024-06-29,2024-08-06,2024-08-06,Mateo Sample,regression,Contoso Demo,UAT
+10212,Bug,Profile form times out,Closed,Tara Example,3,3 - Critical,API\Search,Release 3\Sprint 5,2024-05-14,2024-05-27,2024-05-27,Kiri Testwell,regression,Contoso Demo,UAT
+10213,Bug,Dashboard widget times out,On Hold,Gita Sample,3,1 - Critical,API\Search,Release 3\Sprint 2,2024-03-25,2024-04-26,,Nia Example,regression,Contoso Demo,QA
+10214,User Story,Profile form times out,Closed,,2,2 - Low,Web\Checkout,Release 3\Sprint 12,2024-05-16,2024-06-12,2024-06-12,Ines Placeholder,,Contoso Demo,UAT
+10215,Bug,Checkout button fails,Ready for QA,Vik Demo,2,4 - High,API\Search,Release 3\Sprint 2,2024-04-30,2024-05-25,,Kiri Testwell,,Contoso Demo,QA
+10216,Bug,Payment API ignores filter,Re-open,Hugo Example,3,4 - Medium,Web\Checkout,Release 3\Sprint 9,2024-04-29,2024-05-25,,Jonas Demo,regression,Contoso Demo,QA
+10217,Bug,Search results shows wrong total,Re-open,Omar Placeholder,4,4 - Medium,Mobile\iOS,Release 3\Sprint 5,2024-08-31,2024-09-10,,Sven Sample,,Contoso Demo,Staging
+10218,Task,Payment API times out,New,Bea Example,3,2 - Medium,API\Search,Release 3\Sprint 6,2024-01-29,2024-03-07,,Uma Placeholder,regression,Contoso Demo,UAT
+10219,User Story,Settings screen returns 500,Development in Progress,Kiri Testwell,3,1 - Low,Web\Checkout,Release 3\Sprint 1,2024-01-10,2024-02-14,,Omar Placeholder,,Contoso Demo,UAT
+10220,User Story,Login page is misaligned,Re-open,Nia Example,2,4 - Low,Mobile\iOS,Release 3\Sprint 6,2024-08-18,2024-09-07,,Tara Example,,Contoso Demo,QA
+10221,Bug,Dashboard widget is slow,Active,Uma Placeholder,3,1 - Low,Mobile\Android,Release 3\Sprint 7,2024-09-25,2024-10-16,,Dara Demo,regression,Contoso Demo,QA
+10222,Task,Settings screen returns 500,New,Vik Demo,3,4 - High,Web\Checkout,Release 3\Sprint 10,2024-05-30,2024-06-24,,Dara Demo,regression,Contoso Demo,Staging
+10223,Task,Settings screen crashes,Development in Progress,Bea Example,2,4 - Medium,Mobile\iOS,Release 3\Sprint 1,2024-03-14,2024-03-29,,Ines Placeholder,,Contoso Demo,QA
+10224,Bug,Checkout button is misaligned,New,Yara Mockford,3,1 - Low,Mobile\iOS,Release 3\Sprint 5,2024-05-01,2024-06-05,,Kiri Testwell,,Contoso Demo,QA
+10225,Bug,Search results fails,Closed,Gita Sample,2,3 - Medium,API\Payments,Release 3\Sprint 8,2024-10-10,2024-11-10,2024-11-10,Bea Example,,Contoso Demo,QA
+10226,Bug,Settings screen crashes,Development in Progress,Sven Sample,4,1 - Low,Mobile\iOS,Release 3\Sprint 11,2024-06-26,2024-08-04,,Chen Placeholder,,Contoso Demo,QA
+10227,Bug,Invoice export fails,Closed,Nia Example,4,2 - Medium,Reporting,Release 3\Sprint 4,2024-09-18,2024-10-03,2024-10-03,Rosa Mockford,regression,Contoso Demo,Staging
+10228,Task,Search results is misaligned,Closed,Aarav Sample,2,3 - Low,Mobile\iOS,Release 3\Sprint 11,2024-02-29,2024-04-03,2024-04-03,Hugo Example,,Contoso Demo,QA
+10229,Bug,Dashboard widget fails,New,Uma Placeholder,3,3 - Medium,Web\Checkout,Release 3\Sprint 8,2024-10-01,2024-11-07,,Quinn Testwell,,Contoso Demo,QA
+10230,Bug,Dashboard widget is misaligned,Closed,Ines Placeholder,4,3 - High,API\Payments,Release 3\Sprint 10,2024-04-22,2024-05-18,2024-05-18,Yara Mockford,,Contoso Demo,Staging
+10231,User Story,Checkout button times out,Development in Progress,Bea Example,2,2 - High,Mobile\iOS,Release 3\Sprint 3,2024-10-23,2024-11-09,,Yara Mockford,,Contoso Demo,QA
+10232,Task,Search results crashes,Active,Ines Placeholder,3,2 - Critical,Mobile\Android,Release 3\Sprint 10,2024-03-28,2024-04-27,,Tara Example,regression,Contoso Demo,QA
+10233,Bug,Login page is slow,Development in Progress,Vik Demo,2,1 - Medium,Web\Checkout,Release 3\Sprint 6,2024-01-04,2024-01-07,,Jonas Demo,,Contoso Demo,QA
+10234,Task,Search results fails,Active,Jonas Demo,3,1 - Medium,Mobile\Android,Release 3\Sprint 12,2024-02-07,2024-03-05,,Elif Testwell,,Contoso Demo,UAT
+10235,Bug,Invoice export is slow,Closed,Aarav Sample,2,3 - Medium,API\Payments,Release 3\Sprint 7,2024-10-04,2024-10-16,2024-10-16,Mateo Sample,,Contoso Demo,UAT
+10236,Bug,Checkout button times out,Development in Progress,Vik Demo,2,2 - Low,Web\Checkout,Release 3\Sprint 1,2024-01-24,2024-01-31,,Kiri Testwell,,Contoso Demo,QA
+10237,Bug,Payment API is misaligned,Closed,Vik Demo,4,3 - High,Mobile\Android,Release 3\Sprint 7,2024-07-24,2024-08-20,2024-08-20,Sven Sample,,Contoso Demo,UAT
+10238,User Story,Dashboard widget times out,Closed,Aarav Sample,3,4 - High,Mobile\iOS,Release 3\Sprint 12,2024-04-17,2024-04-26,2024-04-26,Kiri Testwell,,Contoso Demo,UAT
+10239,Task,Search results ignores filter,Development in Progress,Aarav Sample,2,2 - High,Web\Checkout,Release 3\Sprint 4,2024-03-19,2024-03-20,,Femi Mockford,,Contoso Demo,UAT
+10240,Bug,Search results returns 500,New,Vik Demo,3,2 - Critical,API\Payments,Release 3\Sprint 1,2024-02-28,2024-04-07,,Yara Mockford,regression,Contoso Demo,QA
+10241,Bug,Search results returns 500,Development in Progress,Omar Placeholder,4,1 - Critical,Mobile\Android,Release 3\Sprint 6,2024-07-11,2024-07-26,,Rosa Mockford,,Contoso Demo,Staging
+10242,Bug,Checkout button shows wrong total,Development in Progress,Mateo Sample,,4 - High,API\Payments,Release 3\Sprint 9,2024-09-07,2024-10-08,,Omar Placeholder,,Contoso Demo,QA
+10243,Task,Search results shows wrong total,New,Wen Testwell,2,4 - Medium,API\Payments,Release 3\Sprint 7,2024-09-05,2024-10-11,,Aarav Sample,,Contoso Demo,Staging
+10244,Bug,Settings screen returns 500,New,Sven Sample,3,1 - Medium,API\Payments,Release 3\Sprint 2,2024-06-10,2024-06-19,,Omar Placeholder,,Contoso Demo,QA
+10245,Bug,Search results fails,Re-open,Bea Example,2,2 - Medium,Mobile\Android,Release 3\Sprint 11,2024-09-07,2024-09-08,,Kiri Testwell,regression,Contoso Demo,UAT
+10246,Bug,Settings screen is misaligned,Closed,Lena Mockford,2,1 - High,Web\Login,Release 3\Sprint 5,2024-06-22,2024-06-25,2024-06-25,Wen Testwell,,Contoso Demo,Staging
+10247,User Story,Payment API fails,Re-open,Wen Testwell,4,4 - Low,Mobile\Android,Release 3\Sprint 10,2024-07-28,2024-08-14,,Dara Demo,,Contoso Demo,UAT
+10248,Bug,Settings screen returns 500,On Hold,Femi Mockford,2,2 - Low,Reporting,Release 3\Sprint 3,2024-03-15,2024-03-26,,Mateo Sample,,Contoso Demo,UAT
+10249,Bug,Settings screen shows wrong total,Closed,Lena Mockford,3,3 - Critical,Mobile\iOS,Release 3\Sprint 1,2024-05-20,2024-06-23,2024-06-23,Elif Testwell,,Contoso Demo,QA
+10250,Bug,Login page is misaligned,Ready for QA,Quinn Testwell,3,4 - Medium,Web\Login,Release 3\Sprint 4,2024-09-12,2024-09-14,,Uma Placeholder,regression,Contoso Demo,UAT
+10251,User Story,Settings screen is slow,Development in Progress,Jonas Demo,2,4 - Medium,API\Search,Release 3\Sprint 8,2024-03-03,2024-03-18,,Dara Demo,,Contoso Demo,Staging
+10252,Bug,Profile form shows wrong total,New,Femi Mockford,4,3 - Critical,Web\Login,Release 3\Sprint 2,2024-08-02,2024-08-31,,Ines Placeholder,,Contoso Demo,UAT
+10253,User Story,Settings screen returns 500,Re-open,Ines Placeholder,4,2 - Low,Mobile\Android,Release 3\Sprint 3,2024-10-26,2024-11-04,,Omar Placeholder,,Contoso Demo,Staging
+10254,Bug,Login page fails,Ready for QA,Femi Mockford,2,3 - Low,API\Payments,Release 3\Sprint 2,2024-02-22,2024-03-30,,Bea Example,regression,Contoso Demo,QA
+10255,Task,Profile form is misaligned,Closed,Wen Testwell,3,2 - High,Mobile\iOS,Release 3\Sprint 3,2024-10-06,2024-11-07,2024-11-07,Sven Sample,,Contoso Demo,QA
+10256,User Story,Dashboard widget times out,Closed,Wen Testwell,3,2 - High,API\Search,Release 3\Sprint 4,2024-06-23,2024-07-09,2024-07-09,Vik Demo,regression,Contoso Demo,QA
+10257,Bug,Payment API ignores filter,Closed,Mateo Sample,3,2 - Medium,API\Payments,Release 3\Sprint 11,2024-02-07,2024-03-09,2024-03-09,Priya Demo,,Contoso Demo,Staging
+10258,User Story,Dashboard widget ignores filter,Closed,Kiri Testwell,3,2 - High,Reporting,Release 3\Sprint 8,2024-04-03,2024-04-10,2024-04-10,Lena Mockford,regression,Contoso Demo,QA
+10259,Bug,Settings screen shows wrong total,New,Kiri Testwell,2,3 - Medium,Mobile\Android,Release 3\Sprint 7,2024-07-29,2024-09-06,,Aarav Sample,regression,Contoso Demo,UAT
+10260,Bug,Payment API ignores filter,Closed,Tara Example,2,1 - High,Web\Login,Release 3\Sprint 1,2024-08-10,2024-08-26,2024-08-26,Femi Mockford,,Contoso Demo,QA
+10261,Bug,Invoice export returns 500,Ready for QA,,4,2 - Low,Reporting,Release 3\Sprint 6,2024-08-29,2024-09-15,,Yara Mockford,,Contoso Demo,UAT
+10262,Bug,Login page ignores filter,Blocked,Omar Placeholder,4,3 - Low,Web\Login,Release 3\Sprint 6,2024-03-28,2024-04-08,,Dara Demo,regression,Contoso Demo,Staging
+10263,Bug,Payment API fails,Ready for QA,Femi Mockford,1,3 - High,Mobile\Android,Release 3\Sprint 9,2024-04-09,2024-05-02,,Chen Placeholder,regression,Contoso Demo,Staging
+10264,Bug,Login page times out,Closed,Wen Testwell,3,4 - Critical,API\Payments,Release 3\Sprint 3,2024-05-28,2024-06-10,2024-06-10,Hugo Example,,Contoso Demo,UAT
+10265,Bug,Profile form shows wrong total,Closed,Dara Demo,4,1 - Medium,API\Search,Release 3\Sprint 2,2024-09-18,2024-09-27,2024-09-27,Lena Mockford,regression,Contoso Demo,UAT
+10266,User Story,Invoice export fails,Closed,Rosa Mockford,3,2 - Medium,Reporting,Release 3\Sprint 3,2024-10-23,2024-11-05,2024-11-05,Vik Demo,,Contoso Demo,Staging
+10267,User Story,Invoice export returns 500,Closed,Quinn Testwell,2,2 - Critical,Reporting,Release 3\Sprint 10,2024-02-08,2024-03-16,2024-03-16,Omar Placeholder,,Contoso Demo,UAT
+10268,User Story,Login page times out,Closed,Uma Placeholder,1,2 - Low,Mobile\Android,Release 3\Sprint 7,2024-07-14,2024-08-12,2024-08-12,Yara Mockford,,Contoso Demo,QA
+10269,User Story,Search results crashes,Closed,Chen Placeholder,3,1 - Medium,API\Search,Release 3\Sprint 12,2024-03-26,2024-04-30,2024-04-30,Sven Sample,,Contoso Demo,QA
+10270,Bug,Dashboard widget shows wrong total,Closed,Priya Demo,1,3 - Critical,API\Search,Release 3\Sprint 4,2024-05-16,2024-05-16,2024-05-16,Nia Example,regression,Contoso Demo,UAT
+10271,Bug,Invoice export is misaligned,Closed,Femi Mockford,2,2 - Critical,Mobile\Android,Release 3\Sprint 3,2024-06-25,2024-07-07,2024-07-07,Aarav Sample,regression,Contoso Demo,QA
+10272,Bug,Payment API crashes,Closed,Sven Sample,3,4 - Critical,API\Payments,Release 3\Sprint 8,2024-05-10,2024-06-04,2024-06-04,Ines Placeholder,regression,Contoso Demo,UAT
+10273,User Story,Dashboard widget ignores filter,Closed,Gita Sample,3,2 - Low,Mobile\Android,Release 3\Sprint 12,2024-04-21,2024-05-09,2024-05-09,Ines Placeholder,,Contoso Demo,UAT
+10274,User Story,Payment API returns 500,Ready for QA,Mateo Sample,2,3 - High,Web\Checkout,Release 3\Sprint 12,2024-08-02,2024-08-05,,Yara Mockford,,Contoso Demo,UAT
+10275,Bug,Checkout button returns 500,Development in Progress,Yara Mockford,3,2 - Low,Reporting,Release 3\Sprint 12,2024-01-13,2024-02-04,,Mateo Sample,,Contoso Demo,Staging
+10276,Bug,Payment API times out,Ready for QA,Nia Example,3,2 - High,Web\Checkout,Release 3\Sprint 10,2024-05-27,2024-06-30,,Vik Demo,regression,Contoso Demo,Staging
+10277,User Story,Dashboard widget times out,New,Lena Mockford,1,3 - Critical,Web\Login,Release 3\Sprint 1,2024-01-26,2024-03-01,,Chen Placeholder,,Contoso Demo,QA
+10278,Task,Profile form crashes,Closed,Yara Mockford,2,3 - Low,Mobile\iOS,Release 3\Sprint 11,2024-01-13,2024-02-03,2024-02-03,Ines Placeholder,regression,Contoso Demo,UAT
+10279,Bug,Login page times out,New,Hugo Example,4,3 - Critical,Reporting,Release 3\Sprint 3,2024-01-22,2024-02-20,,Mateo Sample,,Contoso Demo,QA
+10280,User Story,Checkout button shows wrong total,Active,Jonas Demo,3,4 - High,Mobile\Android,Release 3\Sprint 11,2024-08-02,2024-08-26,,Kiri Testwell,regression,Contoso Demo,UAT
+10281,Bug,Payment API returns 500,Closed,Priya Demo,3,3 - Critical,Mobile\iOS,Release 3\Sprint 7,2024-07-10,2024-07-26,2024-07-26,Bea Example,,Contoso Demo,Staging
+10282,Bug,Settings screen is misaligned,Re-open,Tara Example,2,2 - Medium,API\Search,Release 3\Sprint 10,2024-10-12,2024-11-06,,Aarav Sample,,Contoso Demo,UAT
+10283,Task,Payment API shows wrong total,Closed,Uma Placeholder,4,3 - Critical,Web\Checkout,Release 3\Sprint 4,2024-06-02,2024-06-09,2024-06-09,Sven Sample,,Contoso Demo,QA
+10284,Task,Login page times out,Active,Rosa Mockford,1,1 - Critical,Mobile\iOS,Release 3\Sprint 9,2024-03-17,2024-03-26,,Vik Demo,,Contoso Demo,Staging
+10285,Task,Payment API ignores filter,Closed,Aarav Sample,3,4 - Low,API\Payments,Release 3\Sprint 11,2024-05-26,2024-06-12,2024-06-12,Mateo Sample,regression,Contoso Demo,UAT
+10286,User Story,Checkout button ignores filter,Closed,Aarav Sample,1,1 - Medium,Web\Checkout,Release 3\Sprint 10,2024-03-05,2024-04-11,2024-04-11,Omar Placeholder,,Contoso Demo,Staging
+10287,User Story,Login page fails,Re-open,Kiri Testwell,4,2 - Medium,Mobile\Android,Release 3\Sprint 11,2024-05-13,2024-06-01,,Dara Demo,regression,Contoso Demo,UAT
+10288,Bug,Settings screen crashes,Development in Progress,Dara Demo,3,4 - Medium,API\Payments,Release 3\Sprint 7,2024-05-30,2024-06-14,,Nia Example,,Contoso Demo,QA
+10289,Bug,Dashboard widget crashes,Ready for QA,Bea Example,2,2 - High,Reporting,Release 3\Sprint 12,2024-04-12,2024-05-10,,Chen Placeholder,,Contoso Demo,QA
+10290,User Story,Settings screen is misaligned,Development in Progress,Wen Testwell,2,3 - Low,Reporting,Release 3\Sprint 5,2024-09-14,2024-09-21,,Aarav Sample,,Contoso Demo,QA
+10291,Bug,Login page is misaligned,Active,Elif Testwell,,2 - Medium,Web\Checkout,Release 3\Sprint 11,2024-03-02,2024-03-20,,Uma Placeholder,,Contoso Demo,UAT
+10292,Bug,Search results shows wrong total,Development in Progress,Quinn Testwell,4,3 - High,API\Payments,Release 3\Sprint 11,2024-02-01,2024-03-11,,Yara Mockford,,Contoso Demo,QA
+10293,Bug,Dashboard widget shows wrong total,Blocked,Nia Example,4,4 - High,Mobile\Android,Release 3\Sprint 8,2024-02-16,2024-02-22,,Omar Placeholder,regression,Contoso Demo,Staging
+10294,Task,Login page is misaligned,Re-open,Chen Placeholder,1,3 - High,Reporting,Release 3\Sprint 12,2024-02-13,2024-02-29,,Ines Placeholder,regression,Contoso Demo,UAT
+10295,Task,Invoice export times out,Closed,,3,2 - Critical,Web\Checkout,Release 3\Sprint 5,2024-04-22,2024-04-29,2024-04-29,Jonas Demo,,Contoso Demo,Staging
+10296,Bug,Dashboard widget shows wrong total,Re-open,Hugo Example,3,3 - Low,Web\Checkout,Release 3\Sprint 9,2024-04-18,2024-05-26,,Jonas Demo,,Contoso Demo,QA
+10297,User Story,Payment API is slow,New,Sven Sample,3,2 - High,Mobile\iOS,Release 3\Sprint 1,2024-10-14,2024-10-19,,Ines Placeholder,regression,Contoso Demo,QA
+10298,User Story,Invoice export shows wrong total,Re-open,Lena Mockford,2,3 - High,API\Search,Release 3\Sprint 9,2024-10-16,2024-11-08,,Jonas Demo,,Contoso Demo,Staging
+10299,Bug,Profile form fails,Blocked,,3,4 - Critical,Mobile\Android,Release 3\Sprint 5,2024-06-06,2024-07-07,,Chen Placeholder,,Contoso Demo,Staging
+10300,Bug,Checkout button returns 500,Re-open,Vik Demo,3,4 - Medium,Mobile\Android,Release 3\Sprint 7,2024-09-11,2024-09-13,,Ines Placeholder,regression,Contoso Demo,QA
+10301,Task,Dashboard widget crashes,Closed,Kiri Testwell,2,4 - Medium,Mobile\iOS,Release 3\Sprint 9,2024-07-18,2024-08-19,2024-08-19,Chen Placeholder,,Contoso Demo,UAT
+10302,User Story,Login page returns 500,New,Dara Demo,3,3 - Low,Web\Login,Release 3\Sprint 12,2024-03-07,2024-03-24,,Omar Placeholder,,Contoso Demo,Staging
+10303,Bug,Search results returns 500,Closed,Chen Placeholder,3,1 - Critical,Mobile\iOS,Release 3\Sprint 12,2024-09-07,2024-09-30,2024-09-30,Femi Mockford,regression,Contoso Demo,UAT
+10304,Bug,Settings screen ignores filter,Ready for QA,Aarav Sample,2,3 - High,Web\Login,Release 3\Sprint 1,2024-02-11,2024-02-24,,Ines Placeholder,regression,Contoso Demo,QA
+10305,Task,Settings screen fails,Development in Progress,Tara Example,1,3 - Critical,Web\Login,Release 3\Sprint 3,2024-09-22,2024-10-30,,Gita Sample,regression,Contoso Demo,Staging
+10306,Bug,Dashboard widget returns 500,Development in Progress,Rosa Mockford,3,1 - Low,Reporting,Release 3\Sprint 4,2024-08-16,2024-08-28,,Yara Mockford,,Contoso Demo,QA
+10307,User Story,Search results is misaligned,Closed,Quinn Testwell,1,3 - Critical,Mobile\iOS,Release 3\Sprint 1,2024-03-03,2024-03-23,2024-03-23,Uma Placeholder,,Contoso Demo,UAT
+10308,Task,Checkout button returns 500,On Hold,Sven Sample,1,2 - Critical,Reporting,Release 3\Sprint 12,2024-03-05,2024-03-19,,Quinn Testwell,regression,Contoso Demo,Staging
+10309,User Story,Dashboard widget shows wrong total,Re-open,Femi Mockford,2,1 - Critical,API\Search,Release 3\Sprint 7,2024-02-14,2024-02-19,,Gita Sample,,Contoso Demo,UAT
+10310,User Story,Settings screen fails,Development in Progress,Bea Example,3,3 - Low,Mobile\iOS,Release 3\Sprint 6,2024-06-18,2024-07-22,,Ines Placeholder,,Contoso Demo,Staging
+10311,Bug,Login page times out,New,Dara Demo,1,2 - High,API\Search,Release 3\Sprint 4,2024-01-04,2024-01-10,,Kiri Testwell,,Contoso Demo,UAT
+10312,Bug,Settings screen fails,New,Rosa Mockford,3,4 - High,API\Payments,Release 3\Sprint 12,2024-09-09,2024-10-01,,Omar Placeholder,,Contoso Demo,UAT
+10313,Task,Login page shows wrong total,Closed,Omar Placeholder,3,2 - High,Web\Login,Release 3\Sprint 6,2024-01-12,2024-01-23,2024-01-23,Dara Demo,regression,Contoso Demo,UAT
+10314,Bug,Settings screen shows wrong total,Ready for QA,Jonas Demo,3,4 - Critical,Reporting,Release 3\Sprint 2,2024-01-06,2024-01-31,,Quinn Testwell,,Contoso Demo,QA
+10315,Bug,Search results shows wrong total,Resolved,Yara Mockford,1,1 - High,API\Search,Release 3\Sprint 8,2024-05-13,2024-06-07,,Rosa Mockford,regression,Contoso Demo,UAT
+10316,User Story,Payment API fails,Active,Tara Example,1,4 - Medium,Mobile\iOS,Release 3\Sprint 1,2024-01-10,2024-02-02,,Omar Placeholder,,Contoso Demo,QA
+10317,Bug,Dashboard widget is slow,Closed,Chen Placeholder,4,4 - High,Mobile\iOS,Release 3\Sprint 11,2024-04-23,2024-05-19,2024-05-19,Gita Sample,,Contoso Demo,UAT
+10318,Bug,Invoice export fails,Development in Progress,Elif Testwell,3,1 - Low,Reporting,Release 3\Sprint 5,2024-08-16,2024-09-01,,Bea Example,,Contoso Demo,UAT
+10319,Bug,Search results crashes,New,Yara Mockford,,1 - High,Web\Login,Release 3\Sprint 1,2024-10-14,2024-10-25,,Nia Example,regression,Contoso Demo,Staging
+10320,User Story,Invoice export returns 500,Ready for QA,Bea Example,3,3 - High,Mobile\Android,Release 3\Sprint 4,2024-01-15,2024-01-29,,Kiri Testwell,regression,Contoso Demo,UAT
+10321,Task,Checkout button ignores filter,New,Chen Placeholder,3,4 - Medium,Web\Checkout,Release 3\Sprint 2,2024-03-13,2024-04-12,,Dara Demo,,Contoso Demo,UAT
+10322,Bug,Dashboard widget is misaligned,Closed,Femi Mockford,3,1 - High,Reporting,Release 3\Sprint 6,2024-07-22,2024-07-30,2024-07-30,Uma Placeholder,,Contoso Demo,Staging
+10323,Bug,Dashboard widget fails,Closed,Elif Testwell,3,4 - Medium,Web\Checkout,Release 3\Sprint 12,2024-03-16,2024-04-14,2024-04-14,Elif Testwell,,Contoso Demo,UAT
+10324,Task,Search results is slow,Closed,Uma Placeholder,4,3 - Medium,API\Payments,Release 3\Sprint 3,2024-04-30,2024-05-02,2024-05-02,Chen Placeholder,,Contoso Demo,QA
+10325,Task,Search results fails,Closed,Hugo Example,3,1 - High,Mobile\iOS,Release 3\Sprint 8,2024-10-13,2024-10-23,2024-10-23,Omar Placeholder,regression,Contoso Demo,UAT
+10326,Task,Invoice export is misaligned,Active,Jonas Demo,4,3 - Critical,API\Search,Release 3\Sprint 1,2024-09-30,2024-10-15,,Quinn Testwell,,Contoso Demo,UAT
+10327,User Story,Invoice export is misaligned,Ready for QA,Uma Placeholder,2,4 - Critical,API\Payments,Release 3\Sprint 12,2024-03-23,2024-04-24,,Aarav Sample,regression,Contoso Demo,Staging
+10328,Task,Checkout button ignores filter,Closed,,3,2 - High,Web\Checkout,Release 3\Sprint 11,2024-09-14,2024-09-16,2024-09-16,Ines Placeholder,,Contoso Demo,Staging
+10329,Bug,Profile form returns 500,Re-open,Uma Placeholder,3,3 - High,API\Payments,Release 3\Sprint 9,2024-10-11,2024-10-14,,Elif Testwell,,Contoso Demo,Staging
+10330,Bug,Checkout button crashes,Closed,Tara Example,,2 - Medium,Mobile\Android,Release 3\Sprint 12,2024-02-05,2024-03-09,2024-03-09,Tara Example,,Contoso Demo,QA
+10331,Task,Invoice export is misaligned,Closed,Mateo Sample,3,2 - Critical,Mobile\Android,Release 3\Sprint 5,2024-02-19,2024-02-28,2024-02-28,Yara Mockford,,Contoso Demo,Staging
+10332,Bug,Search results fails,Ready for QA,Aarav Sample,3,3 - Critical,Web\Login,Release 3\Sprint 11,2024-10-07,2024-10-24,,Rosa Mockford,regression,Contoso Demo,QA
+10333,Task,Dashboard widget times out,Development in Progress,Omar Placeholder,2,3 - High,Web\Login,Release 3\Sprint 11,2024-01-23,2024-02-11,,Quinn Testwell,,Contoso Demo,Staging
+10334,Bug,Payment API ignores filter,Development in Progress,Elif Testwell,3,4 - Critical,API\Payments,Release 3\Sprint 9,2024-01-27,2024-01-31,,Vik Demo,regression,Contoso Demo,UAT
+10335,Bug,Profile form is slow,Closed,Vik Demo,2,3 - Low,API\Payments,Release 3\Sprint 12,2024-05-03,2024-05-25,2024-05-25,Bea Example,regression,Contoso Demo,UAT
+10336,User Story,Login page is misaligned,New,Priya Demo,3,3 - High,Mobile\iOS,Release 3\Sprint 7,2024-05-16,2024-05-30,,Mateo Sample,,Contoso Demo,UAT
+10337,Bug,Payment API times out,Development in Progress,Quinn Testwell,3,4 - High,API\Payments,Release 3\Sprint 3,2024-07-22,2024-07-29,,Jonas Demo,,Contoso Demo,QA
+10338,Bug,Profile form is slow,Development in Progress,,2,2 - Medium,Mobile\Android,Release 3\Sprint 8,2024-07-16,2024-08-09,,Sven Sample,,Contoso Demo,Staging
+10339,User Story,Checkout button crashes,New,Chen Placeholder,4,2 - Critical,API\Search,Release 3\Sprint 3,2024-04-10,2024-04-15,,Lena Mockford,,Contoso Demo,UAT
+10340,Bug,Settings screen crashes,Resolved,Priya Demo,3,4 - Low,Mobile\Android,Release 3\Sprint 7,2024-01-12,2024-01-16,,Ines Placeholder,regression,Contoso Demo,UAT
+10341,Bug,Settings screen ignores filter,Active,Bea Example,2,4 - High,Reporting,Release 3\Sprint 1,2024-07-19,2024-08-21,,Jonas Demo,,Contoso Demo,QA
+10342,Bug,Settings screen is misaligned,New,Jonas Demo,3,1 - High,API\Search,Release 3\Sprint 10,2024-05-25,2024-07-02,,Yara Mockford,regression,Contoso Demo,UAT
+10343,Bug,Invoice export returns 500,New,,4,4 - Low,Reporting,Release 3\Sprint 12,2024-01-17,2024-02-07,,Yara Mockford,regression,Contoso Demo,QA
+10344,Bug,Dashboard widget shows wrong total,Active,Uma Placeholder,2,3 - High,Web\Login,Release 3\Sprint 12,2024-09-05,2024-09-27,,Sven Sample,,Contoso Demo,QA
+10345,User Story,Checkout button crashes,Development in Progress,Chen Placeholder,2,4 - Low,Mobile\Android,Release 3\Sprint 4,2024-03-22,2024-03-25,,Omar Placeholder,,Contoso Demo,UAT
+10346,Bug,Login page returns 500,Closed,Ines Placeholder,3,3 - Medium,API\Payments,Release 3\Sprint 5,2024-09-14,2024-10-23,2024-10-23,Uma Placeholder,,Contoso Demo,UAT
+10347,Bug,Login page fails,Re-open,Nia Example,4,3 - Critical,Mobile\iOS,Release 3\Sprint 12,2024-07-10,2024-07-16,,Kiri Testwell,,Contoso Demo,Staging
+10348,Bug,Payment API fails,New,Yara Mockford,2,1 - Medium,API\Search,Release 3\Sprint 11,2024-10-04,2024-10-18,,Femi Mockford,,Contoso Demo,UAT
+10349,Bug,Payment API times out,Closed,Hugo Example,3,2 - Critical,Mobile\iOS,Release 3\Sprint 6,2024-09-12,2024-10-02,2024-10-02,Uma Placeholder,regression,Contoso Demo,QA
+10350,Bug,Login page crashes,Closed,Tara Example,,3 - Critical,Web\Login,Release 3\Sprint 12,2024-10-06,2024-10-09,2024-10-09,Aarav Sample,,Contoso Demo,Staging
+10351,Bug,Search results ignores filter,New,Elif Testwell,1,4 - Low,API\Payments,Release 3\Sprint 9,2024-07-08,2024-07-18,,Elif Testwell,,Contoso Demo,QA
+10352,Bug,Settings screen is misaligned,Development in Progress,Wen Testwell,3,2 - Low,Mobile\iOS,Release 3\Sprint 7,2024-10-03,2024-10-18,,Dara Demo,regression,Contoso Demo,UAT
+10353,User Story,Profile form shows wrong total,New,Bea Example,1,3 - Critical,API\Payments,Release 3\Sprint 2,2024-09-09,2024-09-19,,Nia Example,regression,Contoso Demo,UAT
+10354,Bug,Invoice export returns 500,Closed,Kiri Testwell,4,4 - Low,API\Search,Release 3\Sprint 12,2024-01-22,2024-02-05,2024-02-05,Mateo Sample,,Contoso Demo,Staging
+10355,Bug,Checkout button is slow,Closed,Sven Sample,3,3 - Low,Mobile\Android,Release 3\Sprint 5,2024-05-25,2024-06-03,2024-06-03,Chen Placeholder,,Contoso Demo,UAT
+10356,Task,Search results is misaligned,Closed,Nia Example,3,2 - High,Mobile\iOS,Release 3\Sprint 1,2024-08-01,2024-09-04,2024-09-04,Wen Testwell,regression,Contoso Demo,UAT
+10357,User Story,Dashboard widget is misaligned,Ready for QA,Femi Mockford,2,4 - Medium,Reporting,Release 3\Sprint 10,2024-07-30,2024-08-30,,Sven Sample,,Contoso Demo,QA
+10358,Task,Login page fails,New,Ines Placeholder,1,1 - High,API\Search,Release 3\Sprint 11,2024-03-31,2024-04-24,,Aarav Sample,regression,Contoso Demo,QA
+10359,Bug,Invoice export crashes,Development in Progress,Ines Placeholder,1,3 - Medium,API\Search,Release 3\Sprint 3,2024-08-23,2024-09-02,,Ines Placeholder,,Contoso Demo,UAT
+10360,User Story,Checkout button crashes,Re-open,Aarav Sample,3,3 - Low,API\Search,Release 3\Sprint 5,2024-05-13,2024-05-20,,Hugo Example,,Contoso Demo,Staging
+10361,Bug,Settings screen ignores filter,Closed,Bea Example,2,3 - High,API\Search,Release 3\Sprint 9,2024-02-14,2024-03-19,2024-03-19,Priya Demo,regression,Contoso Demo,QA
+10362,Bug,Profile form times out,Closed,Rosa Mockford,3,4 - High,Mobile\iOS,Release 3\Sprint 8,2024-09-24,2024-10-31,2024-10-31,Femi Mockford,regression,Contoso Demo,Staging
+10363,Task,Settings screen times out,Closed,Hugo Example,2,4 - Low,Mobile\iOS,Release 3\Sprint 11,2024-04-19,2024-05-15,2024-05-15,Hugo Example,regression,Contoso Demo,Staging
+10364,Bug,Login page fails,Development in Progress,Quinn Testwell,3,2 - Critical,Web\Login,Release 3\Sprint 2,2024-06-06,2024-06-09,,Elif Testwell,regression,Contoso Demo,QA
+10365,Bug,Login page returns 500,Ready for QA,Aarav Sample,3,3 - Low,Mobile\iOS,Release 3\Sprint 11,2024-02-12,2024-03-02,,Tara Example,,Contoso Demo,QA
+10366,Bug,Search results fails,Development in Progress,Chen Placeholder,2,1 - Low,API\Payments,Release 3\Sprint 1,2024-04-21,2024-05-16,,Hugo Example,,Contoso Demo,Staging
+10367,Bug,Search results ignores filter,New,Elif Testwell,2,4 - Critical,Web\Login,Release 3\Sprint 3,2024-04-05,2024-04-08,,Nia Example,,Contoso Demo,QA
+10368,User Story,Profile form crashes,New,Femi Mockford,2,2 - High,Mobile\Android,Release 3\Sprint 11,2024-06-28,2024-07-17,,Sven Sample,regression,Contoso Demo,QA
+10369,User Story,Login page times out,Ready for QA,Tara Example,1,4 - High,Web\Login,Release 3\Sprint 11,2024-09-24,2024-10-31,,Wen Testwell,,Contoso Demo,UAT
+10370,Bug,Payment API times out,New,Gita Sample,4,2 - Medium,Reporting,Release 3\Sprint 8,2024-06-02,2024-06-13,,Nia Example,,Contoso Demo,Staging
+10371,Bug,Payment API returns 500,New,Uma Placeholder,2,2 - Medium,API\Payments,Release 3\Sprint 4,2024-10-21,2024-11-06,,Bea Example,,Contoso Demo,UAT
+10372,Task,Settings screen is misaligned,Ready for QA,Mateo Sample,1,4 - Medium,Mobile\Android,Release 3\Sprint 8,2024-06-18,2024-07-10,,Mateo Sample,,Contoso Demo,Staging
+10373,Task,Invoice export ignores filter,Closed,Hugo Example,2,4 - High,API\Search,Release 3\Sprint 6,2024-09-14,2024-10-11,2024-10-11,Bea Example,,Contoso Demo,Staging
+10374,Bug,Search results is slow,Closed,Femi Mockford,2,3 - Low,API\Payments,Release 3\Sprint 10,2024-04-12,2024-05-09,2024-05-09,Mateo Sample,,Contoso Demo,UAT
+10375,User Story,Dashboard widget ignores filter,Resolved,Hugo Example,4,4 - Medium,Mobile\Android,Release 3\Sprint 7,2024-10-07,2024-11-07,,Wen Testwell,,Contoso Demo,UAT
+10376,Task,Login page ignores filter,Closed,Rosa Mockford,3,1 - Low,Mobile\iOS,Release 3\Sprint 5,2024-06-21,2024-07-23,2024-07-23,Dara Demo,,Contoso Demo,UAT
+10377,User Story,Search results fails,Closed,Uma Placeholder,3,3 - Low,API\Search,Release 3\Sprint 7,2024-08-15,2024-09-04,2024-09-04,Lena Mockford,,Contoso Demo,Staging
+10378,Task,Login page fails,Development in Progress,Gita Sample,2,3 - Medium,Web\Login,Release 3\Sprint 5,2024-02-09,2024-03-16,,Aarav Sample,,Contoso Demo,Staging
+10379,Bug,Search results is misaligned,Closed,Yara Mockford,3,4 - High,Mobile\iOS,Release 3\Sprint 7,2024-01-07,2024-01-29,2024-01-29,Mateo Sample,,Contoso Demo,Staging
+10380,Task,Settings screen is misaligned,Closed,Femi Mockford,3,2 - Medium,Web\Login,Release 3\Sprint 10,2024-01-08,2024-02-11,2024-02-11,Omar Placeholder,,Contoso Demo,UAT
+10381,Bug,Checkout button ignores filter,Closed,Sven Sample,3,1 - Critical,API\Search,Release 3\Sprint 5,2024-06-15,2024-07-01,2024-07-01,Priya Demo,regression,Contoso Demo,UAT
+10382,Bug,Checkout button shows wrong total,Blocked,,4,1 - Critical,Mobile\iOS,Release 3\Sprint 3,2024-05-01,2024-05-12,,Ines Placeholder,regression,Contoso Demo,UAT
+10383,Bug,Profile form shows wrong total,Closed,Elif Testwell,2,1 - High,Reporting,Release 3\Sprint 2,2024-06-09,2024-06-22,2024-06-22,Dara Demo,,Contoso Demo,UAT
+10384,Task,Search results ignores filter,New,Bea Example,3,3 - Low,Web\Login,Release 3\Sprint 4,2024-09-15,2024-10-07,,Gita Sample,regression,Contoso Demo,QA
+10385,Task,Payment API is misaligned,Closed,Elif Testwell,4,2 - High,Mobile\iOS,Release 3\Sprint 6,2024-04-16,2024-05-04,2024-05-04,Lena Mockford,,Contoso Demo,UAT
+10386,Bug,Invoice export times out,Closed,Uma Placeholder,4,1 - High,Web\Checkout,Release 3\Sprint 9,2024-04-02,2024-05-09,2024-05-09,Dara Demo,regression,Contoso Demo,UAT
+10387,Bug,Invoice export shows wrong total,Development in Progress,Priya Demo,2,1 - High,Web\Login,Release 3\Sprint 12,2024-07-27,2024-08-03,,Kiri Testwell,,Contoso Demo,QA
+10388,Bug,Dashboard widget shows wrong total,Resolved,Uma Placeholder,4,4 - Critical,Reporting,Release 3\Sprint 11,2024-10-15,2024-10-19,,Wen Testwell,,Contoso Demo,Staging
+10389,Task,Search results crashes,New,Lena Mockford,4,1 - High,API\Payments,Release 3\Sprint 12,2024-09-14,2024-10-20,,Nia Example,,Contoso Demo,QA
+10390,Bug,Login page times out,Development in Progress,Sven Sample,2,1 - High,Mobile\iOS,Release 3\Sprint 9,2024-03-10,2024-04-09,,Elif Testwell,,Contoso Demo,UAT
+10391,User Story,Search results shows wrong total,Development in Progress,Nia Example,4,1 - High,API\Payments,Release 3\Sprint 4,2024-09-13,2024-09-20,,Sven Sample,regression,Contoso Demo,UAT
+10392,Task,Settings screen crashes,Closed,Ines Placeholder,1,3 - High,Web\Login,Release 3\Sprint 2,2024-03-08,2024-04-07,2024-04-07,Vik Demo,,Contoso Demo,Staging
+10393,Bug,Checkout button is slow,Closed,Wen Testwell,3,2 - Critical,Mobile\Android,Release 3\Sprint 9,2024-04-27,2024-05-23,2024-05-23,Nia Example,,Contoso Demo,QA
+10394,Bug,Login page shows wrong total,Re-open,Jonas Demo,1,1 - Low,Reporting,Release 3\Sprint 8,2024-08-13,2024-08-18,,Ines Placeholder,,Contoso Demo,UAT
+10395,Bug,Search results shows wrong total,New,Quinn Testwell,3,1 - Low,API\Payments,Release 3\Sprint 8,2024-09-21,2024-09-27,,Tara Example,,Contoso Demo,UAT
+10396,Bug,Search results is slow,New,Sven Sample,3,3 - Medium,Web\Login,Release 3\Sprint 9,2024-04-09,2024-05-18,,Mateo Sample,regression,Contoso Demo,QA
+10397,Task,Dashboard widget ignores filter,Blocked,Aarav Sample,3,4 - Critical,Web\Checkout,Release 3\Sprint 4,2024-05-14,2024-06-09,,Tara Example,,Contoso Demo,UAT
+10398,Bug,Dashboard widget ignores filter,Development in Progress,Kiri Testwell,2,2 - Medium,API\Payments,Release 3\Sprint 3,2024-02-24,2024-03-18,,Priya Demo,regression,Contoso Demo,QA
+10399,Bug,Login page fails,New,Dara Demo,3,2 - Low,Reporting,Release 3\Sprint 8,2024-09-28,2024-10-06,,Ines Placeholder,,Contoso Demo,QA
+10400,Bug,Checkout button fails,Ready for QA,Kiri Testwell,2,3 - High,API\Search,Release 3\Sprint 4,2024-03-06,2024-03-21,,Mateo Sample,,Contoso Demo,Staging
+10401,Task,Profile form fails,Closed,Jonas Demo,2,3 - Critical,Reporting,Release 3\Sprint 7,2024-08-20,2024-08-23,2024-08-23,Rosa Mockford,,Contoso Demo,Staging
+10402,User Story,Settings screen is misaligned,Closed,Wen Testwell,2,1 - Medium,API\Payments,Release 3\Sprint 4,2024-01-23,2024-02-28,2024-02-28,Ines Placeholder,regression,Contoso Demo,Staging
+10403,Task,Checkout button fails,Ready for QA,Femi Mockford,2,3 - High,API\Search,Release 3\Sprint 4,2024-03-27,2024-04-22,,Nia Example,,Contoso Demo,Staging
+10404,User Story,Login page returns 500,Active,Bea Example,3,3 - High,Mobile\Android,Release 3\Sprint 11,2024-01-22,2024-02-26,,Tara Example,,Contoso Demo,Staging
+10405,Bug,Login page fails,Closed,Chen Placeholder,2,3 - Medium,API\Search,Release 3\Sprint 6,2024-04-21,2024-05-08,2024-05-08,Aarav Sample,,Contoso Demo,UAT
+10406,User Story,Login page crashes,Development in Progress,Dara Demo,2,2 - Critical,API\Search,Release 3\Sprint 1,2024-03-14,2024-03-18,,Bea Example,,Contoso Demo,QA
+10407,Bug,Settings screen crashes,Closed,Nia Example,2,4 - Low,Mobile\Android,Release 3\Sprint 11,2024-07-16,2024-07-20,2024-07-20,Rosa Mockford,,Contoso Demo,UAT
+10408,Bug,Invoice export shows wrong total,New,Mateo Sample,2,1 - High,API\Payments,Release 3\Sprint 11,2024-04-07,2024-05-01,,Omar Placeholder,regression,Contoso Demo,QA
+10409,Task,Search results times out,New,Gita Sample,4,4 - Critical,Mobile\Android,Release 3\Sprint 6,2024-05-25,2024-06-11,,Quinn Testwell,,Contoso Demo,UAT
+10410,Bug,Checkout button times out,Development in Progress,Omar Placeholder,2,4 - Critical,Web\Login,Release 3\Sprint 12,2024-08-12,2024-08-31,,Lena Mockford,regression,Contoso Demo,UAT
+10411,User Story,Payment API returns 500,Ready for QA,Yara Mockford,2,2 - Medium,Web\Checkout,Release 3\Sprint 9,2024-09-23,2024-10-07,,Lena Mockford,regression,Contoso Demo,Staging
+10412,User Story,Search results ignores filter,New,Wen Testwell,1,4 - Low,Web\Login,Release 3\Sprint 10,2024-07-17,2024-08-25,,Femi Mockford,regression,Contoso Demo,QA
+10413,Bug,Invoice export crashes,Closed,Jonas Demo,3,4 - High,Reporting,Release 3\Sprint 3,2024-07-02,2024-08-10,2024-08-10,Aarav Sample,regression,Contoso Demo,QA
+10414,Bug,Login page shows wrong total,Closed,Bea Example,1,4 - Medium,API\Payments,Release 3\Sprint 7,2024-09-26,2024-10-16,2024-10-16,Rosa Mockford,,Contoso Demo,QA
+10415,Task,Search results is slow,On Hold,Mateo Sample,2,4 - Critical,Reporting,Release 3\Sprint 9,2024-01-30,2024-02-20,,Quinn Testwell,,Contoso Demo,QA
+10416,Task,Invoice export times out,Re-open,Quinn Testwell,4,1 - Low,Mobile\iOS,Release 3\Sprint 5,2024-01-05,2024-01-30,,Jonas Demo,,Contoso Demo,QA
+10417,Bug,Invoice export crashes,Closed,Elif Testwell,1,1 - Critical,Reporting,Release 3\Sprint 6,2024-05-29,2024-06-12,2024-06-12,Kiri Testwell,,Contoso Demo,UAT
+10418,Bug,Profile form ignores filter,New,Nia Example,2,4 - Medium,Mobile\iOS,Release 3\Sprint 10,2024-03-17,2024-03-17,,Chen Placeholder,regression,Contoso Demo,UAT
+10419,Bug,Settings screen shows wrong total,Closed,Mateo Sample,4,4 - Low,API\Search,Release 3\Sprint 10,2024-07-17,2024-08-25,2024-08-25,Lena Mockford,,Contoso Demo,QA
+10420,Bug,Payment API ignores filter,Closed,Lena Mockford,4,3 - High,Mobile\iOS,Release 3\Sprint 8,2024-06-20,2024-07-08,2024-07-08,Bea Example,regression,Contoso Demo,QA
+10421,Bug,Dashboard widget returns 500,Development in Progress,Omar Placeholder,2,3 - Low,Web\Checkout,Release 3\Sprint 4,2024-02-12,2024-02-12,,Priya Demo,,Contoso Demo,QA
+10422,Task,Payment API ignores filter,Closed,Ines Placeholder,2,3 - Medium,Reporting,Release 3\Sprint 11,2024-07-06,2024-08-14,2024-08-14,Chen Placeholder,,Contoso Demo,Staging
+10423,Bug,Invoice export fails,Re-open,Priya Demo,3,3 - Medium,Reporting,Release 3\Sprint 1,2024-02-29,2024-03-09,,Dara Demo,,Contoso Demo,UAT
+10424,Task,Checkout button times out,Ready for QA,Elif Testwell,4,1 - Critical,Web\Login,Release 3\Sprint 10,2024-08-18,2024-09-12,,Ines Placeholder,,Contoso Demo,UAT
+10425,User Story,Dashboard widget is misaligned,Ready for QA,Uma Placeholder,2,2 - Low,Web\Checkout,Release 3\Sprint 2,2024-08-24,2024-09-17,,Quinn Testwell,regression,Contoso Demo,UAT
+10426,Bug,Checkout button fails,Active,Yara Mockford,3,1 - Medium,Web\Login,Release 3\Sprint 2,2024-01-21,2024-02-18,,Mateo Sample,,Contoso Demo,UAT
+10427,User Story,Login page shows wrong total,Ready for QA,,3,4 - High,Reporting,Release 3\Sprint 2,2024-06-22,2024-06-29,,Bea Example,,Contoso Demo,UAT
+10428,Bug,Dashboard widget ignores filter,New,Aarav Sample,4,2 - Medium,Mobile\Android,Release 3\Sprint 2,2024-07-10,2024-07-21,,Nia Example,,Contoso Demo,Staging
+10429,Bug,Login page ignores filter,Blocked,Hugo Example,2,3 - Critical,Web\Login,Release 3\Sprint 3,2024-09-16,2024-10-23,,Mateo Sample,,Contoso Demo,QA
+10430,Task,Settings screen is slow,Development in Progress,Quinn Testwell,2,3 - High,Mobile\Android,Release 3\Sprint 8,2024-07-31,2024-09-04,,Gita Sample,,Contoso Demo,UAT
+10431,User Story,Search results ignores filter,New,Vik Demo,3,2 - High,Mobile\iOS,Release 3\Sprint 11,2024-04-18,2024-05-25,,Mateo Sample,,Contoso Demo,Staging
+10432,User Story,Invoice export returns 500,New,Dara Demo,2,1 - Low,API\Payments,Release 3\Sprint 6,2024-07-03,2024-07-05,,Omar Placeholder,,Contoso Demo,QA
+10433,User Story,Login page crashes,Active,Vik Demo,4,2 - Critical,API\Payments,Release 3\Sprint 11,2024-09-30,2024-10-13,,Hugo Example,,Contoso Demo,Staging
+10434,Task,Payment API ignores filter,Closed,Bea Example,1,2 - Critical,API\Search,Release 3\Sprint 12,2024-05-04,2024-05-30,2024-05-30,Elif Testwell,regression,Contoso Demo,QA
+10435,Task,Settings screen is misaligned,Closed,Vik Demo,4,4 - Medium,API\Payments,Release 3\Sprint 5,2024-01-22,2024-02-15,2024-02-15,Kiri Testwell,regression,Contoso Demo,Staging
+10436,Bug,Dashboard widget ignores filter,Closed,Ines Placeholder,3,3 - Critical,Mobile\Android,Release 3\Sprint 8,2024-07-21,2024-08-01,2024-08-01,Yara Mockford,,Contoso Demo,QA
+10437,Bug,Profile form shows wrong total,Development in Progress,Tara Example,2,4 - Medium,Mobile\iOS,Release 3\Sprint 10,2024-10-03,2024-11-11,,Omar Placeholder,regression,Contoso Demo,UAT
+10438,User Story,Profile form shows wrong total,Closed,Kiri Testwell,3,2 - Low,Web\Login,Release 3\Sprint 5,2024-05-24,2024-05-31,2024-05-31,Bea Example,regression,Contoso Demo,Staging
+10439,Bug,Search results is misaligned,Closed,Wen Testwell,1,3 - Critical,Mobile\iOS,Release 3\Sprint 11,2024-01-16,2024-01-27,2024-01-27,Wen Testwell,,Contoso Demo,QA
+10440,Bug,Invoice export is slow,Development in Progress,Aarav Sample,3,3 - High,API\Search,Release 3\Sprint 3,2024-05-09,2024-05-23,,Wen Testwell,regression,Contoso Demo,QA
+10441,Task,Login page fails,Ready for QA,Yara Mockford,4,3 - Medium,Web\Login,Release 3\Sprint 10,2024-06-19,2024-06-23,,Sven Sample,,Contoso Demo,Staging
+10442,Bug,Invoice export fails,New,Gita Sample,4,3 - Medium,Mobile\Android,Release 3\Sprint 11,2024-07-11,2024-07-31,,Gita Sample,regression,Contoso Demo,Staging
+10443,Bug,Profile form shows wrong total,Closed,Bea Example,1,3 - High,Reporting,Release 3\Sprint 12,2024-01-30,2024-02-29,2024-02-29,Omar Placeholder,regression,Contoso Demo,UAT
+10444,Bug,Payment API returns 500,New,Sven Sample,1,4 - Critical,Reporting,Release 3\Sprint 1,2024-08-10,2024-08-10,,Bea Example,,Contoso Demo,Staging
+10445,Task,Payment API is misaligned,Development in Progress,Priya Demo,2,1 - Medium,Mobile\iOS,Release 3\Sprint 1,2024-08-20,2024-08-29,,Ines Placeholder,,Contoso Demo,QA
+10446,Task,Login page shows wrong total,Resolved,Jonas Demo,2,4 - Low,API\Search,Release 3\Sprint 12,2024-09-20,2024-10-28,,Lena Mockford,,Contoso Demo,Staging
+10447,Task,Payment API shows wrong total,Development in Progress,Priya Demo,3,4 - Medium,API\Payments,Release 3\Sprint 4,2024-03-18,2024-03-26,,Bea Example,,Contoso Demo,UAT
+10448,Task,Checkout button returns 500,On Hold,Mateo Sample,1,2 - Low,Web\Login,Release 3\Sprint 3,2024-08-02,2024-08-08,,Chen Placeholder,,Contoso Demo,Staging
+10449,Bug,Login page ignores filter,Closed,Hugo Example,3,1 - Low,Mobile\iOS,Release 3\Sprint 1,2024-08-01,2024-08-04,2024-08-04,Elif Testwell,,Contoso Demo,Staging
+10450,Task,Payment API shows wrong total,Active,Uma Placeholder,3,3 - Medium,Reporting,Release 3\Sprint 6,2024-05-09,2024-05-13,,Priya Demo,,Contoso Demo,QA
+10451,Bug,Login page times out,Closed,Hugo Example,3,3 - Low,Reporting,Release 3\Sprint 12,2024-09-05,2024-10-14,2024-10-14,Ines Placeholder,regression,Contoso Demo,QA
+10452,Bug,Profile form times out,New,Mateo Sample,2,1 - Critical,Web\Login,Release 3\Sprint 1,2024-08-02,2024-09-10,,Chen Placeholder,,Contoso Demo,QA
+10453,Bug,Login page crashes,Ready for QA,Quinn Testwell,3,2 - Low,Mobile\Android,Release 3\Sprint 4,2024-08-29,2024-09-25,,Kiri Testwell,,Contoso Demo,Staging
+10454,Bug,Login page crashes,Ready for QA,Wen Testwell,3,4 - Low,Mobile\iOS,Release 3\Sprint 4,2024-08-22,2024-09-20,,Tara Example,regression,Contoso Demo,UAT
+10455,Bug,Invoice export is slow,Re-open,Vik Demo,2,3 - Medium,Reporting,Release 3\Sprint 5,2024-04-17,2024-05-15,,Priya Demo,,Contoso Demo,QA
+10456,Bug,Search results fails,Ready for QA,Chen Placeholder,2,4 - High,Web\Login,Release 3\Sprint 2,2024-04-15,2024-05-22,,Ines Placeholder,,Contoso Demo,Staging
+10457,Bug,Payment API shows wrong total,Closed,Rosa Mockford,4,1 - High,Mobile\iOS,Release 3\Sprint 11,2024-08-05,2024-08-15,2024-08-15,Jonas Demo,,Contoso Demo,Staging
+10458,Bug,Login page ignores filter,Development in Progress,Elif Testwell,3,1 - Medium,API\Payments,Release 3\Sprint 8,2024-07-19,2024-08-24,,Lena Mockford,,Contoso Demo,UAT
+10459,User Story,Checkout button ignores filter,Closed,Lena Mockford,2,3 - Low,Mobile\Android,Release 3\Sprint 11,2024-07-13,2024-07-23,2024-07-23,Kiri Testwell,regression,Contoso Demo,QA
+10460,Task,Profile form crashes,Closed,Wen Testwell,3,2 - Critical,Reporting,Release 3\Sprint 5,2024-05-25,2024-06-21,2024-06-21,Ines Placeholder,regression,Contoso Demo,Staging
+10461,Bug,Checkout button shows wrong total,New,Rosa Mockford,2,4 - Low,API\Search,Release 3\Sprint 10,2024-04-28,2024-05-10,,Quinn Testwell,regression,Contoso Demo,UAT
+10462,Bug,Settings screen times out,Closed,Jonas Demo,2,4 - Low,API\Search,Release 3\Sprint 1,2024-01-22,2024-02-29,2024-02-29,Gita Sample,,Contoso Demo,Staging
+10463,User Story,Checkout button fails,New,Lena Mockford,2,3 - Medium,Web\Login,Release 3\Sprint 5,2024-08-10,2024-09-09,,Kiri Testwell,,Contoso Demo,Staging
+10464,Bug,Payment API is slow,Development in Progress,Yara Mockford,3,2 - Medium,Web\Login,Release 3\Sprint 11,2024-03-07,2024-03-13,,Vik Demo,regression,Contoso Demo,QA
+10465,Task,Profile form fails,New,Chen Placeholder,2,2 - Critical,Web\Checkout,Release 3\Sprint 8,2024-10-23,2024-11-16,,Dara Demo,,Contoso Demo,Staging
+10466,Bug,Search results returns 500,Resolved,,3,4 - Medium,Mobile\Android,Release 3\Sprint 4,2024-03-11,2024-03-27,,Femi Mockford,regression,Contoso Demo,Staging
+10467,Bug,Profile form is slow,Blocked,Dara Demo,3,1 - Critical,Web\Checkout,Release 3\Sprint 6,2024-02-13,2024-03-21,,Vik Demo,,Contoso Demo,QA
+10468,Bug,Dashboard widget is slow,Development in Progress,Gita Sample,2,1 - Critical,Mobile\iOS,Release 3\Sprint 6,2024-06-28,2024-08-04,,Wen Testwell,regression,Contoso Demo,QA
+10469,Bug,Search results is slow,Blocked,Gita Sample,3,3 - Medium,API\Search,Release 3\Sprint 10,2024-10-06,2024-11-12,,Vik Demo,,Contoso Demo,Staging
+10470,Bug,Checkout button is slow,Ready for QA,Gita Sample,1,2 - Medium,Mobile\iOS,Release 3\Sprint 1,2024-08-22,2024-09-16,,Chen Placeholder,regression,Contoso Demo,Staging
+10471,Bug,Dashboard widget shows wrong total,Re-open,Hugo Example,2,2 - Medium,API\Payments,Release 3\Sprint 6,2024-02-13,2024-03-15,,Quinn Testwell,regression,Contoso Demo,UAT
+10472,Bug,Profile form times out,Closed,Hugo Example,3,2 - High,Web\Login,Release 3\Sprint 9,2024-07-18,2024-07-26,2024-07-26,Dara Demo,regression,Contoso Demo,QA
+10473,Bug,Invoice export is slow,New,Sven Sample,2,1 - Medium,Web\Login,Release 3\Sprint 4,2024-10-18,2024-11-22,,Omar Placeholder,regression,Contoso Demo,UAT
+10474,Bug,Search results is misaligned,Closed,Priya Demo,2,2 - Critical,Mobile\iOS,Release 3\Sprint 2,2024-10-19,2024-10-19,2024-10-19,Vik Demo,,Contoso Demo,QA
+10475,User Story,Settings screen crashes,On Hold,Chen Placeholder,4,1 - Low,Mobile\Android,Release 3\Sprint 11,2024-02-23,2024-02-26,,Hugo Example,,Contoso Demo,Staging
+10476,Bug,Search results crashes,On Hold,Kiri Testwell,2,1 - High,Mobile\iOS,Release 3\Sprint 3,2024-01-03,2024-02-09,,Kiri Testwell,,Contoso Demo,UAT
+10477,Bug,Login page shows wrong total,Closed,Rosa Mockford,1,3 - Critical,Reporting,Release 3\Sprint 5,2024-02-01,2024-03-03,2024-03-03,Tara Example,,Contoso Demo,Staging
+10478,Task,Dashboard widget is misaligned,Resolved,Tara Example,2,4 - Medium,Mobile\iOS,Release 3\Sprint 10,2024-07-14,2024-07-28,,Dara Demo,,Contoso Demo,Staging
+10479,Bug,Profile form fails,Closed,Yara Mockford,4,2 - Critical,Web\Checkout,Release 3\Sprint 8,2024-07-21,2024-08-25,2024-08-25,Mateo Sample,,Contoso Demo,Staging
+10480,User Story,Login page is slow,Active,Uma Placeholder,1,3 - Medium,Web\Checkout,Release 3\Sprint 3,2024-04-19,2024-04-26,,Tara Example,regression,Contoso Demo,UAT
+10481,Task,Checkout button fails,New,Femi Mockford,3,2 - Medium,Mobile\Android,Release 3\Sprint 1,2024-04-24,2024-05-25,,Bea Example,regression,Contoso Demo,QA
+10482,Bug,Dashboard widget crashes,Resolved,Priya Demo,3,3 - Low,Reporting,Release 3\Sprint 8,2024-02-24,2024-03-30,,Nia Example,,Contoso Demo,Staging
+10483,Bug,Payment API ignores filter,Closed,Priya Demo,3,2 - Medium,Web\Login,Release 3\Sprint 10,2024-04-02,2024-04-20,2024-04-20,Jonas Demo,regression,Contoso Demo,Staging
+10484,Task,Checkout button fails,Development in Progress,Elif Testwell,3,2 - Critical,Web\Checkout,Release 3\Sprint 7,2024-08-04,2024-08-18,,Quinn Testwell,,Contoso Demo,UAT
+10485,Bug,Payment API times out,Closed,Nia Example,1,4 - Low,Mobile\Android,Release 3\Sprint 7,2024-02-01,2024-02-14,2024-02-14,Vik Demo,,Contoso Demo,QA
+10486,Bug,Dashboard widget is misaligned,Closed,Ines Placeholder,2,1 - Low,Mobile\iOS,Release 3\Sprint 5,2024-02-23,2024-02-27,2024-02-27,Bea Example,regression,Contoso Demo,Staging
+10487,User Story,Invoice export fails,On Hold,,1,2 - Low,API\Payments,Release 3\Sprint 2,2024-01-03,2024-01-19,,Quinn Testwell,regression,Contoso Demo,Staging
+10488,Bug,Checkout button fails,Development in Progress,Hugo Example,1,4 - High,API\Search,Release 3\Sprint 10,2024-03-12,2024-03-24,,Chen Placeholder,,Contoso Demo,QA
+10489,Bug,Invoice export returns 500,Development in Progress,Yara Mockford,2,4 - Medium,Mobile\iOS,Release 3\Sprint 5,2024-01-27,2024-02-29,,Gita Sample,regression,Contoso Demo,QA
+10490,Task,Payment API returns 500,Closed,Chen Placeholder,2,1 - Medium,Reporting,Release 3\Sprint 4,2024-06-02,2024-06-22,2024-06-22,Femi Mockford,,Contoso Demo,QA
+10491,Bug,Search results returns 500,New,Lena Mockford,3,4 - High,API\Payments,Release 3\Sprint 8,2024-05-03,2024-06-09,,Yara Mockford,,Contoso Demo,QA
+10492,Bug,Login page ignores filter,Development in Progress,Priya Demo,3,4 - Medium,Mobile\Android,Release 3\Sprint 11,2024-02-26,2024-03-23,,Aarav Sample,,Contoso Demo,Staging
+10493,Bug,Login page crashes,Closed,Uma Placeholder,2,2 - Critical,API\Search,Release 3\Sprint 7,2024-03-29,2024-04-11,2024-04-11,Bea Example,,Contoso Demo,QA
+10494,Task,Payment API times out,Closed,Gita Sample,4,2 - Critical,Mobile\iOS,Release 3\Sprint 5,2024-08-27,2024-09-07,2024-09-07,Jonas Demo,,Contoso Demo,UAT
+10495,Task,Settings screen times out,Closed,Aarav Sample,2,2 - High,Web\Checkout,Release 3\Sprint 11,2024-10-13,2024-11-04,2024-11-04,Mateo Sample,regression,Contoso Demo,UAT
+10496,Task,Login page returns 500,Ready for QA,Dara Demo,1,2 - Low,Mobile\Android,Release 3\Sprint 2,2024-08-14,2024-09-01,,Tara Example,,Contoso Demo,UAT
+10497,Bug,Login page fails,New,Sven Sample,3,4 - Medium,Mobile\Android,Release 3\Sprint 8,2024-05-29,2024-06-26,,Vik Demo,,Contoso Demo,Staging
+10498,Bug,Payment API returns 500,Development in Progress,Chen Placeholder,3,4 - Medium,Mobile\Android,Release 3\Sprint 4,2024-04-18,2024-05-22,,Kiri Testwell,,Contoso Demo,Staging
+10499,Bug,Dashboard widget is misaligned,Re-open,Nia Example,4,4 - Critical,API\Search,Release 3\Sprint 1,2024-10-07,2024-10-27,,Lena Mockford,,Contoso Demo,QA
+10500,Bug,Search results crashes,Closed,Tara Example,4,3 - High,API\Payments,Release 3\Sprint 8,2024-09-01,2024-09-29,2024-09-29,Chen Placeholder,,Contoso Demo,UAT
+10501,Bug,Checkout button ignores filter,New,Rosa Mockford,3,3 - Medium,Web\Login,Release 3\Sprint 7,2024-02-15,2024-02-24,,Aarav Sample,,Contoso Demo,Staging
+10502,Bug,Search results times out,Closed,Quinn Testwell,3,1 - High,Mobile\iOS,Release 3\Sprint 10,2024-03-02,2024-04-05,2024-04-05,Elif Testwell,,Contoso Demo,UAT
+10503,Bug,Invoice export fails,Blocked,Hugo Example,4,4 - Low,API\Search,Release 3\Sprint 9,2024-10-05,2024-11-03,,Dara Demo,regression,Contoso Demo,UAT
+10504,User Story,Profile form shows wrong total,Closed,Vik Demo,3,3 - High,Mobile\Android,Release 3\Sprint 9,2024-06-01,2024-06-28,2024-06-28,Tara Example,,Contoso Demo,UAT
+10505,Bug,Payment API times out,Closed,Dara Demo,,1 - Critical,API\Payments,Release 3\Sprint 5,2024-10-09,2024-10-27,2024-10-27,Wen Testwell,regression,Contoso Demo,QA
+10506,User Story,Settings screen ignores filter,New,Jonas Demo,2,2 - Medium,Mobile\Android,Release 3\Sprint 9,2024-06-26,2024-07-01,,Priya Demo,,Contoso Demo,UAT
+10507,User Story,Dashboard widget crashes,Active,Rosa Mockford,4,4 - Low,API\Payments,Release 3\Sprint 7,2024-08-14,2024-08-30,,Elif Testwell,,Contoso Demo,QA
+10508,Bug,Invoice export ignores filter,Closed,Vik Demo,4,3 - Medium,API\Search,Release 3\Sprint 1,2024-03-06,2024-04-08,2024-04-08,Dara Demo,,Contoso Demo,Staging
+10509,Bug,Search results returns 500,New,Lena Mockford,2,4 - High,Reporting,Release 3\Sprint 7,2024-09-03,2024-09-10,,Hugo Example,,Contoso Demo,Staging
+10510,Bug,Search results is misaligned,Closed,Vik Demo,4,2 - Medium,Web\Login,Release 3\Sprint 5,2024-01-10,2024-02-12,2024-02-12,Elif Testwell,,Contoso Demo,Staging
+10511,Bug,Login page is slow,Closed,,3,3 - Low,API\Search,Release 3\Sprint 8,2024-05-26,2024-07-03,2024-07-03,Rosa Mockford,,Contoso Demo,QA
+10512,User Story,Payment API shows wrong total,Blocked,Tara Example,3,2 - High,API\Search,Release 3\Sprint 10,2024-05-10,2024-06-01,,Kiri Testwell,,Contoso Demo,UAT
+10513,Bug,Invoice export is misaligned,Re-open,Uma Placeholder,3,4 - Critical,Mobile\iOS,Release 3\Sprint 11,2024-01-10,2024-02-18,,Sven Sample,regression,Contoso Demo,Staging
+10514,Bug,Login page times out,Resolved,Wen Testwell,1,1 - Medium,Reporting,Release 3\Sprint 12,2024-08-08,2024-08-19,,Femi Mockford,,Contoso Demo,QA
+10515,Bug,Login page is misaligned,Closed,Yara Mockford,3,4 - High,Mobile\Android,Release 3\Sprint 10,2024-07-12,2024-07-29,2024-07-29,Lena Mockford,regression,Contoso Demo,Staging
+10516,User Story,Checkout button is slow,Active,Bea Example,4,1 - Low,Mobile\iOS,Release 3\Sprint 2,2024-06-04,2024-06-22,,Yara Mockford,,Contoso Demo,QA
+10517,Task,Invoice export times out,Closed,Elif Testwell,3,3 - Low,Web\Login,Release 3\Sprint 7,2024-06-20,2024-07-25,2024-07-25,Vik Demo,,Contoso Demo,Staging
+10518,Bug,Checkout button crashes,New,Dara Demo,4,2 - Critical,Web\Login,Release 3\Sprint 8,2024-04-01,2024-04-14,,Yara Mockford,,Contoso Demo,UAT
+10519,Task,Search results is slow,Development in Progress,Chen Placeholder,,2 - Medium,Reporting,Release 3\Sprint 3,2024-04-02,2024-04-09,,Gita Sample,,Contoso Demo,QA
+10520,Bug,Login page crashes,Ready for QA,Vik Demo,2,1 - Medium,API\Payments,Release 3\Sprint 12,2024-01-22,2024-01-22,,Wen Testwell,,Contoso Demo,QA
+10521,Bug,Login page shows wrong total,Resolved,,2,3 - Medium,Reporting,Release 3\Sprint 8,2024-08-28,2024-09-05,,Wen Testwell,regression,Contoso Demo,UAT
+10522,Bug,Checkout button times out,Active,Ines Placeholder,1,4 - Low,Mobile\Android,Release 3\Sprint 9,2024-06-14,2024-06-23,,Lena Mockford,,Contoso Demo,UAT
+10523,Bug,Settings screen is slow,Ready for QA,Mateo Sample,4,2 - High,Mobile\iOS,Release 3\Sprint 5,2024-09-24,2024-10-12,,Bea Example,,Contoso Demo,QA
+10524,Task,Payment API fails,Ready for QA,Vik Demo,1,4 - Critical,Web\Login,Release 3\Sprint 4,2024-09-19,2024-10-16,,Priya Demo,,Contoso Demo,QA
+10525,User Story,Settings screen crashes,New,Priya Demo,1,3 - High,Mobile\iOS,Release 3\Sprint 5,2024-07-22,2024-07-27,,Priya Demo,,Contoso Demo,UAT
+10526,Bug,Dashboard widget is slow,Ready for QA,Ines Placeholder,1,4 - High,Web\Checkout,Release 3\Sprint 4,2024-08-31,2024-09-30,,Yara Mockford,,Contoso Demo,UAT
+10527,Task,Checkout button returns 500,Closed,Nia Example,4,2 - Medium,Mobile\Android,Release 3\Sprint 10,2024-02-20,2024-02-26,2024-02-26,Aarav Sample,,Contoso Demo,UAT
+10528,User Story,Login page times out,Development in Progress,Femi Mockford,2,4 - Critical,API\Search,Release 3\Sprint 11,2024-01-31,2024-02-10,,Vik Demo,,Contoso Demo,UAT
+10529,Bug,Settings screen fails,Closed,Lena Mockford,4,4 - Critical,Web\Checkout,Release 3\Sprint 2,2024-05-23,2024-06-02,2024-06-02,Ines Placeholder,,Contoso Demo,Staging
+10530,Bug,Payment API times out,Ready for QA,Aarav Sample,3,1 - Medium,Mobile\iOS,Release 3\Sprint 1,2024-08-12,2024-08-27,,Vik Demo,,Contoso Demo,UAT
+10531,Task,Invoice export crashes,Development in Progress,Sven Sample,4,4 - High,API\Search,Release 3\Sprint 7,2024-10-26,2024-11-22,,Vik Demo,regression,Contoso Demo,QA
+10532,Task,Profile form is misaligned,Closed,Kiri Testwell,4,4 - Medium,Web\Login,Release 3\Sprint 1,2024-01-07,2024-02-10,2024-02-10,Mateo Sample,,Contoso Demo,UAT
+10533,Bug,Profile form fails,Closed,Yara Mockford,2,4 - Critical,Mobile\Android,Release 3\Sprint 10,2024-04-24,2024-04-27,2024-04-27,Wen Testwell,,Contoso Demo,UAT
+10534,Task,Invoice export returns 500,Ready for QA,Hugo Example,3,2 - Low,Reporting,Release 3\Sprint 2,2024-05-17,2024-06-18,,Hugo Example,regression,Contoso Demo,QA
+10535,Bug,Login page ignores filter,New,Sven Sample,2,1 - Medium,API\Search,Release 3\Sprint 3,2024-06-11,2024-07-04,,Sven Sample,,Contoso Demo,QA
+10536,Bug,Dashboard widget is slow,New,Quinn Testwell,3,2 - High,Web\Checkout,Release 3\Sprint 9,2024-09-14,2024-10-17,,Rosa Mockford,regression,Contoso Demo,Staging
+10537,Bug,Invoice export returns 500,New,Wen Testwell,4,3 - Low,Mobile\iOS,Release 3\Sprint 7,2024-07-18,2024-08-17,,Quinn Testwell,,Contoso Demo,Staging
+10538,Task,Login page returns 500,Ready for QA,Nia Example,2,4 - High,API\Search,Release 3\Sprint 2,2024-03-27,2024-03-27,,Kiri Testwell,,Contoso Demo,Staging
+10539,Bug,Dashboard widget ignores filter,Closed,Jonas Demo,1,2 - Low,Mobile\Android,Release 3\Sprint 7,2024-03-01,2024-03-27,2024-03-27,Aarav Sample,,Contoso Demo,QA
+10540,User Story,Login page ignores filter,Closed,Hugo Example,3,4 - Critical,Web\Checkout,Release 3\Sprint 12,2024-01-25,2024-02-27,2024-02-27,Wen Testwell,,Contoso Demo,QA
+10541,Bug,Settings screen is slow,New,Femi Mockford,3,4 - High,Mobile\iOS,Release 3\Sprint 12,2024-09-16,2024-10-15,,Bea Example,,Contoso Demo,UAT
+10542,User Story,Login page times out,Closed,Hugo Example,4,4 - Critical,API\Search,Release 3\Sprint 10,2024-09-06,2024-09-16,2024-09-16,Tara Example,,Contoso Demo,Staging
+10543,User Story,Profile form crashes,Active,Quinn Testwell,2,3 - High,API\Search,Release 3\Sprint 9,2024-07-10,2024-08-16,,Dara Demo,regression,Contoso Demo,Staging
+10544,Bug,Login page fails,Closed,Bea Example,1,4 - Medium,Web\Checkout,Release 3\Sprint 4,2024-05-01,2024-05-28,2024-05-28,Quinn Testwell,,Contoso Demo,Staging
+10545,Bug,Profile form is misaligned,On Hold,Chen Placeholder,1,3 - Medium,Web\Checkout,Release 3\Sprint 9,2024-08-17,2024-09-12,,Quinn Testwell,,Contoso Demo,Staging
+10546,User Story,Dashboard widget is slow,Development in Progress,Femi Mockford,3,4 - Medium,Web\Login,Release 3\Sprint 2,2024-10-06,2024-11-14,,Elif Testwell,regression,Contoso Demo,Staging
+10547,Bug,Search results fails,New,Aarav Sample,3,3 - Low,API\Search,Release 3\Sprint 1,2024-08-15,2024-09-12,,Aarav Sample,regression,Contoso Demo,QA
+10548,Bug,Login page returns 500,Closed,Rosa Mockford,2,3 - High,Web\Checkout,Release 3\Sprint 4,2024-08-28,2024-09-16,2024-09-16,Wen Testwell,regression,Contoso Demo,QA
+10549,Bug,Search results is slow,Active,Aarav Sample,3,3 - Low,API\Search,Release 3\Sprint 9,2024-04-28,2024-05-15,,Nia Example,,Contoso Demo,UAT
+10550,User Story,Dashboard widget shows wrong total,New,Lena Mockford,3,2 - Critical,Web\Checkout,Release 3\Sprint 6,2024-07-23,2024-08-30,,Omar Placeholder,,Contoso Demo,Staging
+10551,User Story,Invoice export ignores filter,Re-open,Yara Mockford,,3 - High,Web\Checkout,Release 3\Sprint 1,2024-08-02,2024-08-24,,Rosa Mockford,,Contoso Demo,Staging
+10552,Bug,Login page returns 500,Ready for QA,Mateo Sample,3,2 - Medium,API\Search,Release 3\Sprint 10,2024-05-28,2024-06-22,,Tara Example,,Contoso Demo,Staging
+10553,Bug,Checkout button ignores filter,Ready for QA,Rosa Mockford,3,1 - Low,Mobile\iOS,Release 3\Sprint 3,2024-01-11,2024-01-22,,Vik Demo,regression,Contoso Demo,Staging
+10554,User Story,Settings screen is misaligned,New,Elif Testwell,2,1 - Critical,Web\Login,Release 3\Sprint 4,2024-05-09,2024-05-15,,Gita Sample,regression,Contoso Demo,QA
+10555,User Story,Login page returns 500,Closed,Ines Placeholder,2,1 - Low,Reporting,Release 3\Sprint 8,2024-10-03,2024-10-13,2024-10-13,Nia Example,,Contoso Demo,QA
+10556,User Story,Dashboard widget ignores filter,New,Uma Placeholder,3,3 - Low,API\Payments,Release 3\Sprint 1,2024-10-11,2024-11-07,,Quinn Testwell,regression,Contoso Demo,Staging
+10557,User Story,Profile form shows wrong total,Closed,Chen Placeholder,3,4 - Critical,API\Search,Release 3\Sprint 8,2024-03-07,2024-03-30,2024-03-30,Dara Demo,,Contoso Demo,QA
+10558,Task,Invoice export crashes,Ready for QA,Aarav Sample,2,3 - Critical,Web\Checkout,Release 3\Sprint 4,2024-08-19,2024-09-20,,Sven Sample,regression,Contoso Demo,QA
+10559,Bug,Search results times out,Closed,,2,3 - High,Web\Checkout,Release 3\Sprint 8,2024-01-11,2024-02-13,2024-02-13,Uma Placeholder,regression,Contoso Demo,QA
+10560,Bug,Search results times out,Resolved,Wen Testwell,2,2 - Low,Web\Checkout,Release 3\Sprint 9,2024-07-07,2024-08-11,,Jonas Demo,regression,Contoso Demo,UAT
+10561,Bug,Payment API times out,On Hold,Priya Demo,3,3 - Low,Web\Checkout,Release 3\Sprint 10,2024-02-18,2024-03-18,,Rosa Mockford,,Contoso Demo,QA
+10562,Bug,Payment API is slow,Closed,Omar Placeholder,3,2 - Medium,Web\Checkout,Release 3\Sprint 1,2024-05-13,2024-06-03,2024-06-03,Omar Placeholder,,Contoso Demo,Staging
+10563,Bug,Payment API ignores filter,New,Chen Placeholder,2,1 - Critical,API\Payments,Release 3\Sprint 10,2024-10-24,2024-12-01,,Aarav Sample,regression,Contoso Demo,QA
+10564,Bug,Dashboard widget is misaligned,On Hold,Sven Sample,4,1 - High,Web\Checkout,Release 3\Sprint 1,2024-01-06,2024-01-17,,Lena Mockford,,Contoso Demo,UAT
+10565,Bug,Invoice export times out,Resolved,Nia Example,2,2 - Low,Reporting,Release 3\Sprint 6,2024-08-17,2024-09-10,,Kiri Testwell,,Contoso Demo,UAT
+10566,Task,Search results is misaligned,Development in Progress,Priya Demo,2,3 - Medium,Web\Checkout,Release 3\Sprint 3,2024-08-27,2024-09-30,,Lena Mockford,,Contoso Demo,UAT
+10567,Bug,Dashboard widget times out,Closed,Aarav Sample,3,4 - Medium,Mobile\Android,Release 3\Sprint 2,2024-04-12,2024-05-15,2024-05-15,Sven Sample,regression,Contoso Demo,QA
+10568,Bug,Dashboard widget is slow,Closed,Hugo Example,3,1 - High,Web\Login,Release 3\Sprint 2,2024-06-18,2024-07-01,2024-07-01,Femi Mockford,regression,Contoso Demo,QA
+10569,Bug,Login page fails,Development in Progress,Wen Testwell,1,1 - Critical,Web\Checkout,Release 3\Sprint 8,2024-10-01,2024-10-05,,Wen Testwell,,Contoso Demo,UAT
+10570,Bug,Dashboard widget fails,Closed,Kiri Testwell,3,3 - Low,Mobile\iOS,Release 3\Sprint 2,2024-05-06,2024-05-07,2024-05-07,Jonas Demo,regression,Contoso Demo,QA
+10571,Bug,Search results shows wrong total,Closed,Priya Demo,1,2 - Critical,Mobile\iOS,Release 3\Sprint 12,2024-01-02,2024-01-06,2024-01-06,Vik Demo,,Contoso Demo,QA
+10572,Bug,Payment API fails,Closed,Jonas Demo,1,2 - Critical,Reporting,Release 3\Sprint 8,2024-08-28,2024-09-18,2024-09-18,Rosa Mockford,regression,Contoso Demo,QA
+10573,Bug,Login page ignores filter,New,Elif Testwell,4,2 - Medium,API\Payments,Release 3\Sprint 8,2024-05-18,2024-06-19,,Quinn Testwell,regression,Contoso Demo,Staging
+10574,Bug,Checkout button returns 500,Ready for QA,Femi Mockford,1,2 - Medium,Web\Checkout,Release 3\Sprint 8,2024-05-20,2024-06-16,,Dara Demo,,Contoso Demo,UAT
+10575,Task,Search results fails,Ready for QA,Elif Testwell,1,1 - Low,Mobile\iOS,Release 3\Sprint 6,2024-05-17,2024-06-02,,Lena Mockford,regression,Contoso Demo,Staging
+10576,Task,Dashboard widget shows wrong total,Closed,Tara Example,3,3 - Low,Web\Login,Release 3\Sprint 6,2024-06-03,2024-06-27,2024-06-27,Lena Mockford,,Contoso Demo,Staging
+10577,Bug,Search results crashes,Re-open,Bea Example,1,1 - Medium,Mobile\Android,Release 3\Sprint 11,2024-05-30,2024-06-16,,Kiri Testwell,,Contoso Demo,UAT
+10578,Bug,Profile form fails,Closed,Priya Demo,4,4 - Critical,API\Payments,Release 3\Sprint 9,2024-04-17,2024-05-13,2024-05-13,Rosa Mockford,regression,Contoso Demo,UAT
+10579,Bug,Dashboard widget fails,Active,Wen Testwell,3,4 - Low,Web\Login,Release 3\Sprint 5,2024-05-07,2024-06-02,,Vik Demo,,Contoso Demo,UAT
+10580,User Story,Invoice export is misaligned,Active,Uma Placeholder,3,4 - Critical,Mobile\iOS,Release 3\Sprint 9,2024-08-11,2024-08-31,,Aarav Sample,,Contoso Demo,Staging
+10581,Bug,Dashboard widget fails,New,Omar Placeholder,4,4 - Medium,Reporting,Release 3\Sprint 1,2024-04-25,2024-04-28,,Dara Demo,,Contoso Demo,Staging
+10582,Bug,Settings screen shows wrong total,Development in Progress,Jonas Demo,,1 - High,Mobile\Android,Release 3\Sprint 10,2024-08-12,2024-08-13,,Kiri Testwell,regression,Contoso Demo,Staging
+10583,User Story,Payment API is slow,Closed,Mateo Sample,3,1 - High,Mobile\Android,Release 3\Sprint 6,2024-09-19,2024-10-28,2024-10-28,Priya Demo,,Contoso Demo,QA
+10584,Bug,Payment API ignores filter,Closed,Vik Demo,3,4 - Critical,Reporting,Release 3\Sprint 11,2024-08-19,2024-09-06,2024-09-06,Gita Sample,,Contoso Demo,Staging
+10585,Bug,Profile form is slow,New,Yara Mockford,2,3 - Low,API\Payments,Release 3\Sprint 4,2024-08-01,2024-09-09,,Yara Mockford,,Contoso Demo,Staging
+10586,Task,Search results fails,New,Priya Demo,4,2 - Low,API\Payments,Release 3\Sprint 3,2024-06-13,2024-06-20,,Tara Example,,Contoso Demo,QA
+10587,User Story,Payment API fails,Closed,Vik Demo,4,1 - Low,Mobile\Android,Release 3\Sprint 10,2024-01-11,2024-02-13,2024-02-13,Quinn Testwell,,Contoso Demo,Staging
+10588,Task,Invoice export times out,Re-open,Priya Demo,3,2 - Low,Web\Checkout,Release 3\Sprint 7,2024-02-10,2024-03-18,,Kiri Testwell,regression,Contoso Demo,UAT
+10589,Bug,Settings screen times out,Closed,Tara Example,2,1 - Medium,Mobile\Android,Release 3\Sprint 9,2024-04-07,2024-05-04,2024-05-04,Kiri Testwell,,Contoso Demo,UAT
+10590,Bug,Payment API is misaligned,Blocked,Priya Demo,1,3 - Critical,Reporting,Release 3\Sprint 11,2024-10-03,2024-10-29,,Omar Placeholder,,Contoso Demo,Staging
+10591,Bug,Dashboard widget returns 500,Closed,Bea Example,2,1 - Low,Mobile\iOS,Release 3\Sprint 11,2024-04-24,2024-05-27,2024-05-27,Yara Mockford,,Contoso Demo,QA
+10592,Task,Payment API shows wrong total,New,Bea Example,3,4 - Medium,Mobile\iOS,Release 3\Sprint 9,2024-07-05,2024-07-30,,Uma Placeholder,regression,Contoso Demo,UAT
+10593,User Story,Settings screen returns 500,Closed,Rosa Mockford,3,3 - Critical,Web\Login,Release 3\Sprint 9,2024-04-08,2024-05-16,2024-05-16,Elif Testwell,,Contoso Demo,QA
+10594,Task,Profile form fails,Closed,Yara Mockford,2,3 - Critical,Mobile\Android,Release 3\Sprint 11,2024-03-24,2024-04-06,2024-04-06,Tara Example,,Contoso Demo,UAT
+10595,Bug,Profile form fails,Closed,Lena Mockford,2,3 - Medium,Mobile\iOS,Release 3\Sprint 2,2024-07-08,2024-08-14,2024-08-14,Vik Demo,regression,Contoso Demo,Staging
+10596,Bug,Settings screen shows wrong total,Closed,Gita Sample,1,1 - Low,API\Payments,Release 3\Sprint 7,2024-03-20,2024-04-11,2024-04-11,Elif Testwell,,Contoso Demo,QA
+10597,User Story,Checkout button times out,Development in Progress,Sven Sample,,4 - Critical,API\Payments,Release 3\Sprint 3,2024-01-22,2024-02-25,,Elif Testwell,regression,Contoso Demo,Staging
+10598,Bug,Payment API shows wrong total,Ready for QA,Lena Mockford,3,1 - Low,Reporting,Release 3\Sprint 5,2024-03-25,2024-04-06,,Rosa Mockford,,Contoso Demo,UAT
+10599,User Story,Checkout button returns 500,Closed,Rosa Mockford,3,1 - Low,Mobile\Android,Release 3\Sprint 7,2024-08-17,2024-08-26,2024-08-26,Bea Example,,Contoso Demo,UAT

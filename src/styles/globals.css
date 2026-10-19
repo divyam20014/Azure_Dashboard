@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 97%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 221 83% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14% 94%;
+    --secondary-foreground: 222 47% 15%;
+    --muted: 220 14% 95%;
+    --muted-foreground: 220 9% 40%;
+    --accent: 214 95% 95%;
+    --accent-foreground: 221 83% 30%;
+    --destructive: 0 72% 46%;
+    --destructive-foreground: 0 0% 100%;
+    --warning: 35 92% 42%;
+    --warning-foreground: 0 0% 100%;
+    --border: 220 13% 88%;
+    --input: 220 13% 82%;
+    --ring: 221 83% 50%;
+    --radius: 0.65rem;
+    color-scheme: light;
+  }
+
+  .dark {
+    --background: 222 32% 8%;
+    --foreground: 210 30% 95%;
+    --card: 222 28% 12%;
+    --card-foreground: 210 30% 95%;
+    --popover: 222 28% 13%;
+    --popover-foreground: 210 30% 95%;
+    --primary: 217 91% 62%;
+    --primary-foreground: 222 47% 8%;
+    --secondary: 222 20% 19%;
+    --secondary-foreground: 210 30% 92%;
+    --muted: 222 20% 17%;
+    --muted-foreground: 217 15% 68%;
+    --accent: 217 40% 22%;
+    --accent-foreground: 213 90% 85%;
+    --destructive: 0 70% 58%;
+    --destructive-foreground: 0 0% 100%;
+    --warning: 38 92% 55%;
+    --warning-foreground: 222 47% 8%;
+    --border: 222 18% 22%;
+    --input: 222 18% 28%;
+    --ring: 217 91% 62%;
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: 'tnum' 1, 'cv11' 1;
+  }
+}
+
+@layer components {
+  .section-title {
+    @apply text-base font-semibold tracking-tight text-foreground sm:text-lg;
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Print: the printable report view is the only thing on paper. */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm;
+  }
+  html,
+  body {
+    background: #fff !important;
+    color: #0f172a !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-avoid-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .print-page-break {
+    break-before: page;
+    page-break-before: always;
+  }
+}
