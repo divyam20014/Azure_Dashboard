@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useId, useRef } from 'react';
 import * as echarts from 'echarts/core';
 import { BarChart, PieChart } from 'echarts/charts';
 import { GridComponent, LegendComponent, TooltipComponent, AriaComponent } from 'echarts/components';
@@ -20,13 +20,16 @@ interface EChartProps {
   ariaLabel: string;
   onClick?: (event: ChartClick) => void;
   className?: string;
+  /** Text alternative read by screen readers (exact values of the chart). */
+  summary?: string;
 }
 
 /**
  * Thin ECharts wrapper. Uses the SVG renderer so charts stay sharp when printed.
  * All chart data stays in this page; ECharts makes no network requests.
  */
-export function EChart({ option, height, ariaLabel, onClick, className }: EChartProps) {
+export function EChart({ option, height, ariaLabel, onClick, className, summary }: EChartProps) {
+  const summaryId = useId();
   const ref = useRef<HTMLDivElement>(null);
   const chartRef = useRef<echarts.ECharts | null>(null);
   const clickRef = useRef(onClick);
@@ -60,5 +63,21 @@ export function EChart({ option, height, ariaLabel, onClick, className }: EChart
     chartRef.current?.resize();
   }, [height]);
 
-  return <div ref={ref} role="img" aria-label={ariaLabel} className={className} style={{ height, width: '100%', minWidth: 0, overflow: 'hidden', cursor: onClick ? 'pointer' : undefined }} />;
+  return (
+    <>
+      <div
+        ref={ref}
+        role="img"
+        aria-label={ariaLabel}
+        aria-describedby={summary ? summaryId : undefined}
+        className={className}
+        style={{ height, width: '100%', minWidth: 0, overflow: 'hidden', cursor: onClick ? 'pointer' : undefined }}
+      />
+      {summary && (
+        <p id={summaryId} className="sr-only">
+          {summary}
+        </p>
+      )}
+    </>
+  );
 }

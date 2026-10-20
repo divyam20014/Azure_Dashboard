@@ -54,7 +54,38 @@ export function buildWorkbook(tables: ReportTable[]): XLSX.WorkBook {
   return wb;
 }
 
+const FROZEN_PANE = '<pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/>';
+
+/**
+ * Freeze the header row of every worksheet. The community SheetJS writer has no option
+ * for frozen panes, so the generated (in-memory) package is opened with SheetJS' own
+ * zip reader and a standard <pane> element is added to each <sheetView>.
+ * Falls back to the unmodified workbook if anything unexpected is found.
+ */
+export function freezeHeaderRows(xlsx: ArrayBuffer): ArrayBuffer {
+  try {
+    const zip = XLSX.CFB.read(new Uint8Array(xlsx), { type: 'array' });
+    let patched = 0;
+    zip.FullPaths.forEach((path: string, i: number) => {
+      if (!/xl\/worksheets\/sheet\d+\.xml$/.test(path)) return;
+      const entry = zip.FileIndex[i];
+      const xml = new TextDecoder().decode(entry.content as Uint8Array);
+      const next = xml.replace(/<sheetView([^>]*)\/>/, `<sheetView$1>${FROZEN_PANE}</sheetView>`);
+      if (next === xml) return;
+      const bytes = new TextEncoder().encode(next);
+      entry.content = bytes as unknown as typeof entry.content;
+      entry.size = bytes.length;
+      patched++;
+    });
+    if (patched === 0) return xlsx;
+    const out = XLSX.CFB.write(zip, { type: 'array', fileType: 'zip', compression: true }) as unknown as ArrayBuffer | Uint8Array;
+    return out instanceof Uint8Array ? (out.buffer.slice(out.byteOffset, out.byteOffset + out.byteLength) as ArrayBuffer) : out;
+  } catch {
+    return xlsx;
+  }
+}
+
 export function workbookBlob(tables: ReportTable[]): Blob {
   const data = XLSX.write(buildWorkbook(tables), { bookType: 'xlsx', type: 'array', compression: true }) as ArrayBuffer;
-  return new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  return new Blob([freezeHeaderRows(data)], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
 }

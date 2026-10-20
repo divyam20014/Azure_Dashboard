@@ -72,5 +72,6 @@ export function StatusDonutChart({ items, total, selected, onSelect, height = 32
     };
   }, [items, total, selected, onSelect, p, legendType]);
 
-  return <EChart option={option} height={height} ariaLabel={ariaLabel} onClick={onSelect ? (e) => onSelect(e.name) : undefined} />;
+  const summary = items.map((i) => `${i.label}: ${formatCount(i.count)} (${formatPercent(percentOf(i.count, total))})`).join('; ');
+  return <EChart option={option} height={height} ariaLabel={ariaLabel} summary={summary} onClick={onSelect ? (e) => onSelect(e.name) : undefined} />;
 }

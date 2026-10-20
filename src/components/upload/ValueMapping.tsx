@@ -9,7 +9,8 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Badge } from '@/components/ui/badge';
 import { Notice } from '@/components/common/Common';
 import { CORE_STATUSES, CATEGORY_LABELS, buildStatusColors } from '@/lib/normalization/statusNormalizer';
-import { mergePriorityOrder, priorityColors } from '@/lib/normalization/priorityNormalizer';
+import { mergePriorityOrder, priorityColors, recognizePriority } from '@/lib/normalization/priorityNormalizer';
+import { NO_PRIORITY_LABEL, UNKNOWN_PRIORITY_LABEL } from '@/types/issue';
 import { formatCount } from '@/lib/text';
 
 interface Props {
@@ -143,6 +144,12 @@ function PriorityMapping({ values, onChange }: Omit<Props, 'mapping'>) {
     onChange({ ...values, priority: next, priorityOrder, highPriority: values.highPriority.filter((l) => priorityOrder.includes(l)) });
   };
   const patch = (key: string, p: Partial<PriorityRule>) => update({ ...values.priority, [key]: { ...values.priority[key], ...p } });
+  /** "Unknown" means the value explicitly says the priority is not known (e.g. TBD) — kept apart from blank cells. */
+  const setUnknown = (rule: PriorityRule, unknown: boolean) => {
+    if (unknown) return patch(rule.key, { unknown: true, confirmed: true, label: UNKNOWN_PRIORITY_LABEL });
+    const recognized = recognizePriority(rule.sourceLabel);
+    patch(rule.key, { unknown: false, confirmed: recognized !== null, label: recognized?.label ?? rule.sourceLabel });
+  };
   const move = (index: number, delta: number) => {
     const order = [...values.priorityOrder];
     const target = index + delta;
@@ -163,6 +170,7 @@ function PriorityMapping({ values, onChange }: Omit<Props, 'mapping'>) {
         <SubHeading title="Priority values" />
         <p className="mb-2 text-xs text-muted-foreground">
           Recognized notations (P1, Priority 2, Critical, High…) are confirmed automatically. Custom values keep their label and are reported as unmapped until you confirm them.
+          Tick <b>Unknown</b> for values that mean the priority is not known (e.g. TBD); they are reported separately from blank cells and never join the high-priority group.
           Severity is a separate field and is never treated as priority.
         </p>
         {numeric && (
@@ -178,6 +186,7 @@ function PriorityMapping({ values, onChange }: Omit<Props, 'mapping'>) {
                 <th className="px-3 py-2 text-right font-medium">Records</th>
                 <th className="px-3 py-2 text-left font-medium">Priority label</th>
                 <th className="px-3 py-2 text-center font-medium">Confirmed</th>
+                <th className="px-3 py-2 text-center font-medium">Unknown</th>
               </tr>
             </thead>
             <tbody>
@@ -186,14 +195,17 @@ function PriorityMapping({ values, onChange }: Omit<Props, 'mapping'>) {
                   <td className="px-3 py-1.5">{sourceText(r)}</td>
                   <td className="tabular px-3 py-1.5 text-right">{formatCount(r.count)}</td>
                   <td className="px-3 py-1.5">
-                    <Input aria-label={`Priority label for ${r.sourceLabel || 'blank'}`} className="h-8" value={r.label} disabled={r.key === ''} onChange={(e) => patch(r.key, { label: e.target.value })} />
+                    <Input aria-label={`Priority label for ${r.sourceLabel || 'blank'}`} className="h-8" value={r.label} disabled={r.key === '' || r.unknown} onChange={(e) => patch(r.key, { label: e.target.value })} />
                   </td>
                   <td className="px-3 py-1.5 text-center">
                     {r.key === '' ? (
                       <span className="text-xs text-muted-foreground">missing</span>
                     ) : (
-                      <Checkbox aria-label={`Confirm priority ${r.sourceLabel}`} checked={r.confirmed} onChange={(e) => patch(r.key, { confirmed: e.target.checked })} />
+                      <Checkbox aria-label={`Confirm priority ${r.sourceLabel}`} checked={r.confirmed} disabled={r.unknown} onChange={(e) => patch(r.key, { confirmed: e.target.checked })} />
                     )}
+                  </td>
+                  <td className="px-3 py-1.5 text-center">
+                    {r.key === '' ? null : <Checkbox aria-label={`Priority ${r.sourceLabel} means unknown`} checked={!!r.unknown} onChange={(e) => setUnknown(r, e.target.checked)} />}
                   </td>
                 </tr>
               ))}
@@ -211,7 +223,12 @@ function PriorityMapping({ values, onChange }: Omit<Props, 'mapping'>) {
               <span className="tabular w-5 text-xs text-muted-foreground">{i + 1}.</span>
               <span className="min-w-0 flex-1 truncate">{label}</span>
               <label className="flex items-center gap-1 text-xs">
-                <Checkbox checked={values.highPriority.includes(label)} onChange={() => toggleHigh(label)} aria-label={`Include ${label} in high-priority group`} />
+                <Checkbox
+                  checked={values.highPriority.includes(label)}
+                  disabled={label === UNKNOWN_PRIORITY_LABEL || label === NO_PRIORITY_LABEL}
+                  onChange={() => toggleHigh(label)}
+                  aria-label={`Include ${label} in high-priority group`}
+                />
                 High
               </label>
               <Button size="icon" variant="ghost" className="h-7 w-7" disabled={i === 0} onClick={() => move(i, -1)} aria-label={`Move ${label} up`}>

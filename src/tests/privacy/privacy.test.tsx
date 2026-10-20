@@ -105,7 +105,20 @@ describe('runtime: no transmission and no persistence of issue data', () => {
     expect(screen.getByTestId('print-report')).toHaveTextContent('private.csv');
     await user.click(within(screen.getByRole('dialog', { name: 'Printable report' })).getByRole('button', { name: /Close/ }));
 
+    // Report templates, report Excel export and a comparison snapshot — all local.
+    await user.click(screen.getByRole('radio', { name: /Weekly Management Report/ }));
+    const reportDownloads = captureDownloads();
+    try {
+      await user.click(screen.getByRole('button', { name: /Download Excel report/ }));
+      expect(reportDownloads.blobs.length).toBe(1);
+    } finally {
+      reportDownloads.restore();
+    }
+    await user.upload(screen.getByTestId('comparison-file-input'), new File([sampleCsv()], 'previous-snapshot.csv', { lastModified: 5 }));
+    await screen.findByTestId('comparison-result');
+
     await clearData(user);
+    expect(document.body.textContent).not.toContain('previous-snapshot.csv');
 
     expect(spies.fetch).not.toHaveBeenCalled();
     expect(spies.xhrOpen).not.toHaveBeenCalled();

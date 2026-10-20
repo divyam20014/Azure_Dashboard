@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type { CsvDelimiter, ParsedFile } from '@/types/issue';
 import type { SetupConfig } from '@/types/mappings';
 import type { Dataset } from '@/types/analytics';
-import { buildDataset, initialSetup } from '@/lib/normalization/datasetBuilder';
+import { buildDataset, comparisonSetup, initialSetup } from '@/lib/normalization/datasetBuilder';
 import { ImportError, toImportError } from '@/lib/parsers/importErrors';
 import { validateFileMeta } from '@/lib/parsers/fileSniffer';
 import { installUnloadGuard, resetFileInputs } from '@/lib/privacy/sessionCleanup';
@@ -26,6 +26,14 @@ export interface ImportFailure {
   keptExisting: boolean;
 }
 
+/** An earlier export loaded for comparison, normalized with the active dataset's mappings. */
+export interface ComparisonSnapshot {
+  dataset: Dataset;
+  fileName: string;
+  /** Mapped fields of the active dataset that could not be found in the snapshot. */
+  missingFields: string[];
+}
+
 interface State {
   phase: Phase;
   dataset: Dataset | null;
@@ -33,9 +41,31 @@ interface State {
   draft: Draft | null;
   failure: ImportFailure | null;
   building: boolean;
+  comparison: ComparisonSnapshot | null;
+  comparisonLoading: boolean;
+  comparisonError: ImportError | null;
 }
 
-const INITIAL: State = { phase: 'upload', dataset: null, activeFile: null, draft: null, failure: null, building: false };
+const INITIAL: State = {
+  phase: 'upload',
+  dataset: null,
+  activeFile: null,
+  draft: null,
+  failure: null,
+  building: false,
+  comparison: null,
+  comparisonLoading: false,
+  comparisonError: null,
+};
+
+function buildComparison(parsed: ParsedFile, reference: Dataset): ComparisonSnapshot {
+  const config = comparisonSetup(parsed, reference);
+  const dataset = buildDataset(parsed, config);
+  const missingFields = (Object.keys(reference.config.columnMapping) as (keyof SetupConfig['columnMapping'])[])
+    .filter((f) => reference.config.columnMapping[f] !== null && config.columnMapping[f] === null)
+    .map((f) => reference.headers[reference.config.columnMapping[f]!]);
+  return { dataset, fileName: parsed.fileName, missingFields };
+}
 
 /** Yield to the browser so a progress state can paint before heavy synchronous work. */
 const nextFrame = () => new Promise<void>((resolve) => setTimeout(resolve, 0));
@@ -50,6 +80,8 @@ export function useDataset(options: { onDatasetChanged?: () => void } = {}) {
   // would stay reachable after Clear Data. Only the draft is exposed, and only via the ref.
   const draftRef = useRef<Draft | null>(null);
   draftRef.current = state.draft;
+  const datasetRef = useRef<Dataset | null>(null);
+  datasetRef.current = state.dataset;
 
   const hasActiveData = state.dataset !== null || state.draft !== null;
   useEffect(() => (hasActiveData ? installUnloadGuard() : undefined), [hasActiveData]);
@@ -111,7 +143,18 @@ export function useDataset(options: { onDatasetChanged?: () => void } = {}) {
     await nextFrame();
     try {
       const dataset = buildDataset(draft.parsed, draft.config);
-      setState((s) => ({ ...s, phase: 'dashboard', dataset, activeFile: draft.file, draft: null, building: false, failure: null }));
+      setState((s) => {
+        // A new file discards the comparison snapshot; edited mappings re-normalize it with the new rules.
+        let comparison: ComparisonSnapshot | null = null;
+        if (draft.isEdit && s.comparison) {
+          try {
+            comparison = buildComparison(s.comparison.dataset.file, dataset);
+          } catch {
+            comparison = null;
+          }
+        }
+        return { ...s, phase: 'dashboard', dataset, activeFile: draft.file, draft: null, building: false, failure: null, comparison, comparisonError: null };
+      });
       onDatasetChanged?.();
     } catch (err) {
       setState((s) => ({ ...s, building: false }));
@@ -158,6 +201,58 @@ export function useDataset(options: { onDatasetChanged?: () => void } = {}) {
 
   const dismissFailure = useCallback(() => setState((s) => ({ ...s, failure: null })), []);
 
+  /** Load an earlier export as the comparison snapshot (kept in memory only). */
+  const loadComparison = useCallback(
+    async (file: File) => {
+      const reference = datasetRef.current;
+      if (!reference) return;
+      setState((s) => ({ ...s, comparisonLoading: true, comparisonError: null }));
+      try {
+        validateFileMeta(file.name, file.size);
+        let parsed = await importer.parse(file);
+        const sameSheet = reference.file.sheetName;
+        if (parsed.kind !== 'csv' && parsed.sheetName !== sameSheet && parsed.sheetNames.includes(sameSheet)) {
+          parsed = await importer.parse(file, { sheetName: sameSheet });
+        } else if (parsed.kind !== 'csv' && parsed.sheetNames.length > 1 && !parsed.sheetNames.includes(sameSheet)) {
+          // No sheet with the same name: use the worksheet whose columns best match the current mapping.
+          const matched = (p: ParsedFile) => {
+            const mapping = comparisonSetup(p, reference).columnMapping;
+            return (Object.keys(mapping) as (keyof typeof mapping)[]).filter((f) => mapping[f] !== null && reference.config.columnMapping[f] !== null).length;
+          };
+          let best = parsed;
+          let bestScore = parsed.rows.length ? matched(parsed) : -1;
+          for (const name of parsed.sheetNames) {
+            if (name === parsed.sheetName) continue;
+            const candidate = await importer.parse(file, { sheetName: name });
+            const score = candidate.rows.length ? matched(candidate) : -1;
+            if (score > bestScore) {
+              best = candidate;
+              bestScore = score;
+            }
+          }
+          parsed = best;
+        }
+        if (parsed.rows.length === 0) throw new ImportError('no_rows', `"${file.name}" does not contain any rows to compare.`);
+        const snapshot = buildComparison(parsed, reference);
+        if (snapshot.dataset.config.columnMapping.id === null) {
+          throw new ImportError('processing_failed', `"${file.name}" has no issue ID column matching the current file, so records cannot be matched between snapshots.`);
+        }
+        setState((s) => (s.dataset === reference ? { ...s, comparison: snapshot, comparisonLoading: false } : { ...s, comparisonLoading: false }));
+      } catch (err) {
+        const error = toImportError(err);
+        setState((s) => ({ ...s, comparisonLoading: false, comparisonError: error.code === 'cancelled' ? null : error }));
+      } finally {
+        resetFileInputs();
+      }
+    },
+    [importer],
+  );
+
+  const clearComparison = useCallback(() => {
+    setState((s) => ({ ...s, comparison: null, comparisonError: null }));
+    setTimeout(releaseChartTextCache, 0);
+  }, []);
+
   return {
     ...state,
     parsing: importer.busy,
@@ -173,6 +268,8 @@ export function useDataset(options: { onDatasetChanged?: () => void } = {}) {
     cancelParse,
     clearAll,
     dismissFailure,
+    loadComparison,
+    clearComparison,
   };
 }
 

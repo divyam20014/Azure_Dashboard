@@ -60,7 +60,7 @@ describe('end-to-end workflow with a CSV file', () => {
     expect(screen.getByTestId('register-count')).toHaveTextContent('9 record(s)');
     await user.click(screen.getByTestId('kpi-closed'));
     expect(screen.getByTestId('register-count')).toHaveTextContent('2 record(s)');
-    expect(screen.getByTestId('selection-chip')).toHaveTextContent('Closed Issues');
+    expect(screen.getByTestId('selection-chip')).toHaveTextContent('Closed (workflow)');
     expect(kpiCount('total')).toBe('9'); // selection does not change dashboard totals
     await user.click(screen.getByTestId('kpi-closed'));
     expect(screen.getByTestId('register-count')).toHaveTextContent('9 record(s)');

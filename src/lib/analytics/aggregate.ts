@@ -51,13 +51,14 @@ export function computeAggregates(records: IssueRecord[], values: ValueMappings)
 
     let a = assignees.get(r.assignee);
     if (!a) {
-      a = { name: r.assignee, isUnassigned: r.isUnassigned, total: 0, open: 0, closed: 0, unmapped: 0, byStatus: {}, byPriority: {} };
+      a = { name: r.assignee, isUnassigned: r.isUnassigned, total: 0, open: 0, closed: 0, unmapped: 0, byStatus: {}, byPriority: {}, byPriorityOpen: {} };
       assignees.set(r.assignee, a);
     }
     a.total++;
     a[r.statusCategory]++;
     a.byStatus[r.status] = (a.byStatus[r.status] ?? 0) + 1;
     a.byPriority[r.priority] = (a.byPriority[r.priority] ?? 0) + 1;
+    if (r.statusCategory === 'open') a.byPriorityOpen[r.priority] = (a.byPriorityOpen[r.priority] ?? 0) + 1;
     if (r.isUnassigned) unassigned++;
 
     const type = r.type || BLANK_LABEL;

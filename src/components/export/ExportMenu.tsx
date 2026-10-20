@@ -1,4 +1,4 @@
-import { ChevronDown, Download, FileSpreadsheet, FileText, Printer, Table2 } from 'lucide-react';
+import { ChevronDown, Download, FileSpreadsheet, FileText, LayoutTemplate, Printer, Table2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { useToast } from '@/components/common/Toast';
@@ -12,8 +12,8 @@ import { summaryToText } from '@/lib/analytics/summaryGenerator';
 import { formatCount } from '@/lib/text';
 
 /** Every export is generated in the browser and saved via a local download — nothing is uploaded. */
-export function ExportMenu({ onPrintReport }: { onPrintReport: () => void }) {
-  const { dataset, analytics } = useDashboard();
+export function ExportMenu() {
+  const { dataset, analytics, openReportPreview } = useDashboard();
   const notify = useToast();
   const m = dataset.config.columnMapping;
 
@@ -44,8 +44,11 @@ export function ExportMenu({ onPrintReport }: { onPrintReport: () => void }) {
         <DropdownMenuItem onSelect={excel}>
           <FileSpreadsheet /> Excel workbook (.xlsx)
         </DropdownMenuItem>
-        <DropdownMenuItem onSelect={onPrintReport}>
+        <DropdownMenuItem onSelect={openReportPreview}>
           <Printer /> Printable report / PDF
+        </DropdownMenuItem>
+        <DropdownMenuItem onSelect={() => document.getElementById('reports')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
+          <LayoutTemplate /> Report templates…
         </DropdownMenuItem>
         <DropdownMenuItem onSelect={() => downloadBlob(textBlob(summaryToText(analytics.summary, { fileName: dataset.file.fileName, generatedAt: new Date() })), exportFileName(dataset, 'summary', 'txt'))}>
           <FileText /> Executive summary (.txt)
@@ -69,7 +72,7 @@ export function ExportMenu({ onPrintReport }: { onPrintReport: () => void }) {
           </DropdownMenuItem>
         )}
         {m.assignee !== null && (
-          <DropdownMenuItem onSelect={() => csv(assigneeSummaryTable(analytics.agg), 'assignee-summary')}>
+          <DropdownMenuItem onSelect={() => csv(assigneeSummaryTable(analytics.agg, dataset.config.values.highPriority), 'assignee-summary')}>
             <Table2 /> Assignee summary
           </DropdownMenuItem>
         )}

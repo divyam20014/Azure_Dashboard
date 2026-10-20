@@ -32,7 +32,7 @@ export function workbookTables(ctx: ExportContext): ReportTable[] {
   ];
   if (m.status !== null) tables.push(statusSummaryTable(ctx.agg));
   if (m.priority !== null) tables.push(prioritySummaryTable(ctx.agg));
-  if (m.assignee !== null) tables.push(assigneeSummaryTable(ctx.agg));
+  if (m.assignee !== null) tables.push(assigneeSummaryTable(ctx.agg, ctx.dataset.config.values.highPriority));
   if (m.assignee !== null && m.priority !== null) tables.push(assigneePriorityTable(ctx.agg));
   if (m.assignee !== null && m.status !== null) tables.push(assigneeStatusTable(ctx.agg));
   tables.push(issueRegisterTable(ctx.registerRecords, ctx.dataset, 'Filtered Issue Register'));

@@ -10,13 +10,31 @@ export type QualityCategory =
   | 'Missing assignee'
   | 'Missing priority'
   | 'Invalid date'
+  | 'Future date'
   | 'Unmapped status'
   | 'Unmapped priority';
+
+/** Importance of a finding: errors break core metrics, warnings reduce accuracy, info is cosmetic. */
+export type QualitySeverity = 'Error' | 'Warning' | 'Info';
+
+export const CATEGORY_SEVERITY: Record<QualityCategory, QualitySeverity> = {
+  'Blank row': 'Info',
+  'Missing issue ID': 'Error',
+  'Duplicate issue ID': 'Warning',
+  'Missing status': 'Error',
+  'Missing assignee': 'Warning',
+  'Missing priority': 'Warning',
+  'Invalid date': 'Warning',
+  'Future date': 'Warning',
+  'Unmapped status': 'Warning',
+  'Unmapped priority': 'Warning',
+};
 
 export interface QualityIssue {
   sourceRow: number;
   issueId: string;
   category: QualityCategory;
+  severity: QualitySeverity;
   explanation: string;
   recommendation: string;
 }
@@ -37,6 +55,10 @@ export interface DataQualityReport {
   missingPriorities: number;
   /** Records with at least one unparseable date. */
   invalidDates: number;
+  /** Records with a date later than the end of the validation day (e.g. a Created Date in the future). */
+  futureDates: number;
+  /** Validation time used for the future-date check. */
+  checkedAt: Date;
   unmappedStatusRecords: number;
   unmappedStatusValues: string[];
   unmappedPriorityRecords: number;
@@ -61,6 +83,7 @@ export const QUALITY_CATEGORIES: QualityCategory[] = [
   'Missing assignee',
   'Missing priority',
   'Invalid date',
+  'Future date',
   'Unmapped status',
   'Unmapped priority',
 ];
@@ -72,6 +95,8 @@ export interface QualityInput {
   headers: string[];
   duplicateHeaders: string[];
   config: SetupConfig;
+  /** Validation time for the future-date check (defaults to now). */
+  now?: Date;
 }
 
 function mapped(mapping: ColumnMapping, field: keyof ColumnMapping): boolean {
@@ -84,10 +109,12 @@ export function computeDataQuality(input: QualityInput): DataQualityReport {
   const mapping = config.columnMapping;
   const issues: QualityIssue[] = [];
   const counts = Object.fromEntries(QUALITY_CATEGORIES.map((c) => [c, 0])) as Record<QualityCategory, number>;
-  const add = (issue: QualityIssue) => {
-    issues.push(issue);
+  const add = (issue: Omit<QualityIssue, 'severity'>) => {
+    issues.push({ ...issue, severity: CATEGORY_SEVERITY[issue.category] });
     counts[issue.category]++;
   };
+  const checkedAt = input.now ?? new Date();
+  const endOfToday = new Date(checkedAt.getFullYear(), checkedAt.getMonth(), checkedAt.getDate(), 23, 59, 59, 999).getTime();
 
   for (const row of blankRows) {
     add({
@@ -111,6 +138,7 @@ export function computeDataQuality(input: QualityInput): DataQualityReport {
   let missingAssignees = 0;
   let missingPriorities = 0;
   let invalidDates = 0;
+  let futureDates = 0;
   let unmappedStatusRecords = 0;
   let unmappedPriorityRecords = 0;
   const duplicateIds = new Set<string>();
@@ -181,6 +209,19 @@ export function computeDataQuality(input: QualityInput): DataQualityReport {
         recommendation: 'Use a consistent date format (e.g. YYYY-MM-DD) or change the date order setting.',
       });
     }
+    const future = (['created', 'updated', 'closed'] as const).filter((f) => {
+      const d = rec[f];
+      return d !== null && d.getTime() > endOfToday;
+    });
+    if (future.length > 0) {
+      futureDates++;
+      add({
+        ...base,
+        category: 'Future date',
+        explanation: `${future.map((f) => DATE_LABELS[f]).join(', ')} is later than today (${checkedAt.toLocaleDateString()}).`,
+        recommendation: 'Check the date in the source tracker; age-based analysis ignores this record.',
+      });
+    }
     if (issues.length > before) rowsWithIssues.add(rec.sourceRow);
   }
 
@@ -207,6 +248,8 @@ export function computeDataQuality(input: QualityInput): DataQualityReport {
     missingAssignees,
     missingPriorities,
     invalidDates,
+    futureDates,
+    checkedAt,
     unmappedStatusRecords,
     unmappedStatusValues: [...unmappedStatusValues],
     unmappedPriorityRecords,

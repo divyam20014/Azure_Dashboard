@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { Section, Panel, EmptyState, Notice, Swatch } from '@/components/common/Common';
-import { StatusDonutChart } from '@/components/charts/StatusDonutChart';
 import { SimpleBarChart } from '@/components/charts/SimpleBarChart';
 import { CATEGORY_COLORS, CATEGORY_LABELS, CORE_STATUSES, UNMAPPED_COLOR } from '@/lib/normalization/statusNormalizer';
 import { configuredCategories, otherStatuses } from '@/lib/analytics/statusAnalytics';
@@ -9,13 +8,10 @@ import type { WorkflowCategory } from '@/types/issue';
 import { useDashboard } from './DashboardContext';
 
 export function StatusAnalytics() {
-  const { analytics, dataset, select, filters } = useDashboard();
+  const { analytics, dataset, select } = useDashboard();
   const { agg, closure, colors } = analytics;
   const values = dataset.config.values;
   const mapped = dataset.config.columnMapping.status !== null;
-  const selectedStatus = filters.state.selection?.source.startsWith('status:') ? (filters.state.selection.criteria.status?.[0] ?? null) : null;
-
-  const donutItems = useMemo(() => agg.byStatus.map((s) => ({ label: s.label, count: s.count, color: colors.status[s.label] ?? UNMAPPED_COLOR })), [agg, colors]);
 
   const comparison = useMemo(() => {
     const others = otherStatuses(agg);
@@ -46,14 +42,17 @@ export function StatusAnalytics() {
   }
 
   return (
-    <Section id="status" title="Issue Status Overview" description="Current-state snapshot of the uploaded data. Click a segment or bar to list those issues in the register.">
+    <Section
+      id="status"
+      title="Issue Status Overview"
+      description="Current-state snapshot of the uploaded data. The status distribution is in the Executive Dashboard. Click a bar to list those issues in the register."
+      collapsible
+      collapsedSummary={`${agg.byStatus.length} status value(s) · closure ${closure.configured ? formatPercent(closure.percent) : 'not configured'}`}
+    >
       {agg.total === 0 ? (
         <EmptyState title="No issues in the current scope">Adjust or clear the global filters.</EmptyState>
       ) : (
         <div className="grid gap-4 lg:grid-cols-2">
-          <Panel title="Status distribution" description={`${agg.byStatus.length} status value(s), including unmapped ones.`}>
-            <StatusDonutChart items={donutItems} total={agg.total} selected={selectedStatus} onSelect={selectStatus} ariaLabel="Donut chart of issues by status" />
-          </Panel>
           <Panel title="Status comparison" description="Core workflow statuses in fixed order; everything else is grouped as Other.">
             <SimpleBarChart
               items={comparison}

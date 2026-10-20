@@ -3,7 +3,7 @@ import type { SetupConfig } from './mappings';
 import type { DataQualityReport } from '@/lib/analytics/dataQuality';
 
 /** Fields that global filters and chart selections can constrain. */
-export type FilterField = 'status' | 'priority' | 'assignee' | 'type' | 'project' | 'area' | 'category';
+export type FilterField = 'status' | 'priority' | 'assignee' | 'type' | 'project' | 'area' | 'severity' | 'iteration' | 'category';
 
 /** Field -> allowed values. Values within a field are OR-ed, fields are AND-ed. */
 export type Criteria = Partial<Record<FilterField, string[]>>;
@@ -13,9 +13,15 @@ export interface Selection {
   source: string;
   label: string;
   criteria: Criteria;
+  /** Exact record set (record.index values) for selections that criteria cannot express, e.g. an aging bucket. */
+  indexes?: ReadonlySet<number>;
 }
 
-export type CountingRule = 'all' | 'unique';
+/**
+ * all: every imported record. unique: subsequent records with a repeated non-blank ID are excluded.
+ * review: only the duplicate records the user explicitly excluded are left out.
+ */
+export type CountingRule = 'all' | 'unique' | 'review';
 
 export interface Dataset {
   file: ParsedFile;
@@ -49,6 +55,8 @@ export interface AssigneeAggregate {
   unmapped: number;
   byStatus: Record<string, number>;
   byPriority: Record<string, number>;
+  /** Priority counts among records in the Open / Pending workflow category. */
+  byPriorityOpen: Record<string, number>;
 }
 
 export interface Aggregates {

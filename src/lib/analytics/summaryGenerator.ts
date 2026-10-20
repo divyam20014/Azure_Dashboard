@@ -14,6 +14,10 @@ export interface SummaryInput {
   countingRule: CountingRule;
   /** Human-readable description of active global filters (empty when none). */
   filterDescription: string;
+  /** Records left out by the duplicate-review rule (only used when countingRule = 'review'). */
+  reviewExcluded?: number;
+  /** Overall data-quality score (0–100) when it could be calculated. */
+  qualityScore?: number | null;
 }
 
 export interface Insight {
@@ -70,6 +74,8 @@ export function generateSummary(input: SummaryInput): ExecutiveSummary {
 
   if (input.countingRule === 'unique') {
     notes.push(`Counts include one record per issue ID; ${n(quality.duplicateExtraRecords)} repeated-ID record(s) are excluded.`);
+  } else if (input.countingRule === 'review') {
+    notes.push(`Counts exclude ${n(input.reviewExcluded ?? 0)} duplicate-ID record(s) selected during duplicate review; all other imported records are included.`);
   } else if (quality.duplicateIdRecords > 0) {
     notes.push(`Counts include all imported records. ${n(quality.duplicateIdRecords)} records share an ID with another record (${n(quality.duplicateIdValues)} distinct IDs).`);
   } else {
@@ -132,7 +138,10 @@ export function generateSummary(input: SummaryInput): ExecutiveSummary {
       const count = group.reduce((s, p) => s + (agg.priorityMap[p] ?? 0), 0);
       const open = group.reduce((s, p) => s + (agg.priorityCategory[p]?.open ?? 0), 0);
       let text = `${issues(count)} ${count === 1 ? 'is' : 'are'} in the high-priority group (${group.join(', ')}).`;
-      if (hasStatus && computeClosure(agg, values).configured) text += ` ${n(open)} of them ${open === 1 ? 'is' : 'are'} in an open workflow state.`;
+      if (hasStatus && computeClosure(agg, values).configured) {
+        text += ` ${n(open)} of them ${open === 1 ? 'is' : 'are'} in an open workflow state`;
+        text += group.length > 1 ? ` (${group.map((p) => `${p} open: ${n(agg.priorityCategory[p]?.open ?? 0)}`).join(', ')}).` : '.';
+      }
       insights.push({ id: 'high-priority', title: 'High-priority issues', text });
     }
   } else {
@@ -160,14 +169,13 @@ export function generateSummary(input: SummaryInput): ExecutiveSummary {
   }
 
   const attention = quality.rowsNeedingAttention;
-  insights.push({
-    id: 'quality',
-    title: 'Data quality',
-    text:
-      attention > 0
-        ? `${n(attention)} source row(s) need data-quality attention across the full import (see the Data Quality Overview).`
-        : 'No data-quality problems were detected in the import.',
-  });
+  let qualityText =
+    attention > 0
+      ? `${n(attention)} source row(s) need data-quality attention across the full import (see the Data Quality Overview).`
+      : 'No data-quality problems were detected in the import.';
+  if (input.qualityScore !== undefined && input.qualityScore !== null) qualityText += ` Data-quality score: ${input.qualityScore.toFixed(0)}/100.`;
+  if (hasStatus && agg.byCategory.unmapped > 0) qualityText += ` ${issues(agg.byCategory.unmapped)} in scope have unmapped statuses, so open and closed totals are provisional.`;
+  insights.push({ id: 'quality', title: 'Data quality', text: qualityText });
 
   return { headline, insights, notes };
 }

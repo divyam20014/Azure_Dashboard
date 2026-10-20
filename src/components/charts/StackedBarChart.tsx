@@ -19,6 +19,7 @@ interface Props {
   /** Append each category's total to its axis label. */
   showTotals?: boolean;
   labelWidth?: number;
+  valueAxisName?: string;
 }
 
 export function stackedChartHeight(count: number): number {
@@ -29,7 +30,7 @@ export function stackedChartHeight(count: number): number {
  * Stacked bars with a legend (identity never by colour alone) and an axis tooltip
  * listing every non-zero segment with its exact count and the category total.
  */
-export function StackedBarChart({ categories, series, orientation = 'horizontal', onSelect, height, ariaLabel, showTotals = true, labelWidth = 150 }: Props) {
+export function StackedBarChart({ categories, series, orientation = 'horizontal', onSelect, height, ariaLabel, showTotals = true, labelWidth = 150, valueAxisName = 'Issues' }: Props) {
   const p = useChartPalette();
   const horizontal = orientation === 'horizontal';
   const option = useMemo(() => {
@@ -53,9 +54,18 @@ export function StackedBarChart({ categories, series, orientation = 'horizontal'
         },
       },
     };
-    const value = { type: 'value', minInterval: 1, splitLine: { lineStyle: { color: p.grid } }, axisLabel: { color: p.muted, fontSize: 11 } };
+    const value = {
+      type: 'value',
+      minInterval: 1,
+      name: valueAxisName,
+      nameLocation: 'middle',
+      nameGap: horizontal ? 24 : 36,
+      nameTextStyle: { color: p.muted, fontSize: 11 },
+      splitLine: { lineStyle: { color: p.grid } },
+      axisLabel: { color: p.muted, fontSize: 11 },
+    };
     return {
-      grid: { left: 8, right: 24, top: 40, bottom: 8, containLabel: true },
+      grid: { left: horizontal ? 8 : 22, right: 24, top: 40, bottom: horizontal ? 22 : 8, containLabel: true },
       legend: {
         type: 'scroll',
         top: 0,
@@ -88,13 +98,17 @@ export function StackedBarChart({ categories, series, orientation = 'horizontal'
         data: s.values,
       })),
     };
-  }, [categories, series, horizontal, p, showTotals, labelWidth]);
+  }, [categories, series, horizontal, p, showTotals, labelWidth, valueAxisName]);
+  const summary = categories
+    .map((c, ci) => `${c}: ${series.filter((s) => (s.values[ci] ?? 0) > 0).map((s) => `${s.name} ${formatCount(s.values[ci])}`).join(', ') || 'none'}`)
+    .join('; ');
 
   return (
     <EChart
       option={option}
       height={height ?? (horizontal ? stackedChartHeight(categories.length) : 320)}
       ariaLabel={ariaLabel}
+      summary={summary}
       onClick={onSelect ? (e) => onSelect(categories[e.dataIndex] ?? e.name, e.seriesName ?? '') : undefined}
     />
   );

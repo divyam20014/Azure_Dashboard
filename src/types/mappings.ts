@@ -78,6 +78,8 @@ export interface PriorityRule {
   confirmed: boolean;
   /** True when the label was derived from a bare number (e.g. "1" -> "P1"). */
   numeric: boolean;
+  /** The value explicitly means "priority unknown" (e.g. TBD). Kept separate from a blank cell. */
+  unknown?: boolean;
   count: number;
 }
 

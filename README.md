@@ -1,6 +1,14 @@
 # QA Issue Analytics Dashboard
 
-A single-page web app that turns an issue-tracking spreadsheet (Azure DevOps, Jira or any bug-tracker export) into an interactive QA dashboard: KPI cards, status, priority and assignee analytics, an assignee × priority matrix, a development/QA handoff view, a searchable issue register, a data-quality report, a rule-based executive summary, and Excel / CSV / printable exports.
+A single-page web app that turns an issue-tracking spreadsheet (Azure DevOps, Jira or any bug-tracker export) into a QA management dashboard:
+- an executive dashboard with actionable KPI cards;
+- a risk and attention panel;
+- assignee workload analytics with an assignee × priority heatmap;
+- status and priority analytics, and a development/QA handoff view;
+- a searchable issue register;
+- a scored data-quality report with duplicate review;
+- an optional comparison against an earlier snapshot;
+- four management-report templates, exported as Excel or printed / saved as PDF.
 
 **Everything runs in the browser.** The uploaded file is parsed in memory, never sent to a server, never written to browser storage, and released when you click **Clear Data**. See [PRIVACY.md](PRIVACY.md) for how this is enforced and how to verify it.
 
@@ -35,20 +43,131 @@ Sample files with fictional data are in [samples/](samples/): `sample-issues.csv
    - *Priorities*: P1/Priority 1/Critical/High… are recognized; bare numbers are labelled P1, P2… with a notice asking you to confirm the convention. Custom values are kept and reported as unmapped until confirmed. Priority order and the high-priority group are configurable. Severity is never treated as priority.
    - *Assignees*: trimmed and grouped case-insensitively only; blank and placeholder values (e.g. "Unassigned", "N/A") count as Unassigned. You can rename entries (giving two entries the same name merges them) or mark any value as unassigned.
    - Status colors are configurable and used consistently in cards, charts and tables.
+   - *Unknown priorities*: values such as "TBD", "N/A" or "Unknown" are treated by default as an explicit **Unknown** priority. This is kept separate from blank cells and never part of the high-priority group. Untick **Unknown** to treat a value as a custom priority instead.
 5. **Generate dashboard.** Use **Edit Mappings** at any time to change these choices, **Replace File** to load another file (the current analysis stays until the new one is confirmed), and **Clear Data** to release everything.
+
+### Dashboard layout
+
+Header (file, imported vs. in-analytics records, active filters, report template, comparison file), then:
+1. **Executive Dashboard**: KPI cards, plus four overview charts (status distribution, priority distribution, open backlog by priority, top-10 assignee workload).
+2. **Executive Summary**
+3. **Risks and Attention Required**
+4. **Status** and **Priority** analytics
+5. **Assignee Workload and Priority Matrix**
+6. **Development and QA Handoff**
+7. **Issue Register**
+8. **Data Quality**
+9. **Snapshot Comparison**
+10. **Export and Report Generation**
+
+Lower-priority sections can be collapsed: they show a one-line summary, and their content stays loaded, so no filters or settings are lost.
+
+**KPI cards.** Every card filters the issue register; click again to remove the filter.
+- **Total:** imported rows, valid records, records in analytics and records excluded by the duplicate rule.
+- **Closed:** count, share of scope, and the statuses classified as closed.
+- **Closure rate:** a current-state ratio, not a trend. Marked *Provisional* while unmapped statuses exist; shows *Not configured* without a Closed mapping.
+- **Open backlog** and the configured statuses it counts.
+- **P1 + P2 open backlog:** the configured high-priority group, with a per-level split. Shows *Check convention* when bare numbers were read as P-levels.
+- **Reopened:** the current state only.
+- **Ready for QA** and **Unassigned**.
+- **Blocked:** shown only when a status is mapped to Blocked.
+- **Unmapped statuses:** shown only when there are any.
+- **Data-quality score.**
+- A *workflow snapshot* strip keeps the New / Development in Progress / Other counts.
+
+**Risks and Attention Required.** Six rule-based indicators, ranked:
+1. High-priority open backlog
+2. Reopened
+3. Aging open issues: age since creation, with configurable buckets (default 0–7 / 8–14 / 15–30 / >30 days). Missing, unreadable and future Created Dates are flagged, never aged.
+4. Unassigned
+5. Unmapped or incomplete records
+6. QA queue
+
+Each card shows its exact rule, breakdowns, IDs and limitations, and can list or export exactly its records. These are attention indicators, not evidence of missed deadlines.
+
+**Assignee workload.**
+- **Summary table:** total, closed, open, each high-priority level, combined, reopened, ready for QA, share of issues and of the open backlog, and unmapped statuses. Unassigned is shown separately, not as a person.
+- **Display controls:** search, sort by any metric, Top 5 / 10 / 25 / All. These are display-only and never filter records.
+- **Dashboard filters:** searchable multi-select for assignees, statuses and priorities.
+- **Workload-concentration highlight:** optional, neutral, threshold set by you.
+- **Drill-down panel** for a single assignee.
+- **Charts:** stacked bars by priority and by status.
+- **Heatmap:** *Total* or *Open issues only*, sortable columns, exact counts and keyboard-accessible cells.
+
+### Dataset scopes
+
+| Scope | Meaning | Used by |
+|---|---|---|
+| Imported rows | Data rows below the header, blank rows included | Data quality |
+| Valid records | Non-blank rows normalized into issues | Data-quality score and findings |
+| In analytics | Valid records after the duplicate-handling rule | Base for filters and comparison |
+| In scope | In analytics and matching the global filters (incl. created-date range) | All KPIs, charts, risks, assignee figures, reports |
+| Issue register | In scope, narrowed by a KPI/chart/risk selection and search | Register, selection export |
+
+The filter bar always states *Showing X of Y records*. The header shows imported versus in-analytics counts whenever they differ.
 
 ### Filters and counting rules
 
-- **Global filters** (Status, Priority, Assignee, Work Item Type, Project, Area, Workflow) define the scope of *every* section. The assignee *Drill down* selector is a shortcut for the assignee filter.
+- **Global filters** define the scope of *every* section: Status, Priority, Assignee, Work Item Type, Project, Area, Severity, Iteration, Workflow, and a Created Date range when a Created Date column is mapped. The assignee *Drill down* selector is a shortcut for the assignee filter.
 - **Selections** — clicking a KPI card, chart element or matrix cell — narrow only the **Issue Register**, so dashboard totals never change underneath you. A selection can be promoted to a global filter ("apply to dashboard"). Active filters and the selection are always shown as chips with *Clear all filters*.
-- **Counting rule**: by default every imported record is counted (duplicate IDs included, with a visible warning). *Exclude duplicate IDs* counts the first record per ID.
+- **Duplicate IDs** (the counting rule) has three options:
+  - *Include all imported records* (default, with a visible warning);
+  - *Exclude subsequent duplicate IDs* (keeps the first record per ID);
+  - *Review duplicates before excluding*: in the Data Quality section you tick exactly which records to exclude, and nothing is excluded until you choose.
+
+  Blank IDs are never treated as duplicates of each other. Excluded records are always reported separately from imported records.
 - Percentages are always count ÷ issues in the current scope. **Closure %** = issues in the Closed workflow category ÷ issues in scope; it shows *Not configured* when no status is classified as Closed.
+
+### Management reports (Export and Report Generation section)
+
+| Template | Default sections |
+|---|---|
+| Daily QA Status Report | Executive summary & KPIs, status, priority (incl. open high-priority issues), risks (reopened, QA queue, unassigned…), data quality |
+| Weekly Management Report | Summary & KPIs, status, priority, assignee workload & matrix, risks, data quality, snapshot comparison (only when a snapshot is loaded) |
+| Release Readiness Report | Summary & KPIs, readiness indicators, priority, risks, aging, data quality |
+| Developer / Tester Workload Report | Assignee workload & matrix and the issue register, for selected assignees or all |
+
+- **Sections:** each can be included or excluded. Unsupported sections, such as aging without a Created Date, are disabled with the reason.
+- **Release criteria:** the release template accepts optional numeric criteria (maximum open high-priority, open backlog, reopened, unassigned). Without criteria it states that it shows indicators only. It never declares a release approved.
+- **Preview:** shows the template, generation date, dataset scope, filters, selected sections and the applicable data limitations. It is printed with the browser's *Save as PDF*, using A4 print styles: controls hidden, table headers repeated on every page, rows never split, optional page breaks between sections.
+- **Excel report:** contains only the worksheets for the selected sections:
+  - Executive Summary, KPI Details, Release Readiness;
+  - Status, Priority and Assignee Summary, Assignee-Priority Matrix (all and open-only), Assignee-Status;
+  - Risk and Attention Items, Risk Records, Aging;
+  - Data Quality Score, Summary and Report;
+  - Comparison Summary and Changes, Detailed Issue Register.
+
+  Header rows are frozen and detail sheets have auto-filters.
+
+### Snapshot comparison (optional)
+
+Load an earlier export of the same tracker. It is normalized with the current column and value mappings: columns are matched by header name, and in a multi-sheet workbook the best-matching worksheet is chosen. Records are matched by issue ID, and the comparison reports:
+- metric changes (absolute, plus % where the previous value is not zero);
+- issues *newly observed* or *no longer present in the export* (never called created or deleted);
+- status, priority and assignee changes;
+- moves to Closed and back from Closed.
+
+Both snapshots stay in memory. *Remove snapshot* or Clear Data releases them.
+
+### Data-quality score
+
+- **Rules:** eight, each measuring the share of valid records that pass:
+  - ID, status, priority and assignee completeness;
+  - status and priority mapping coverage;
+  - date validity, which includes a future-date check;
+  - unique IDs.
+- **Outcomes:** pass at ≥ 98 %, warning at ≥ 90 %, error below that.
+- **Overall score:** the weight-averaged score of the applicable rules. Weights can be changed.
+- **Absent fields:** rules for fields missing from the file are *not applicable*, not penalised, unless you mark the field as required.
+- **Findings:** every finding lists a severity (Error / Warning / Info) and a recommended correction.
+- **Scope:** this is a completeness and consistency indicator, not a formal quality certification.
 
 ### Exports (all generated locally)
 
-- **Excel workbook**: Executive Summary, Status Summary, Priority Summary, Assignee Summary, Assignee-Priority Matrix, Assignee-Status Summary, Filtered Issue Register, Data Quality Summary and Data Quality Report (sheets that need unmapped columns are omitted).
+- **Excel workbook (quick export)**: Executive Summary, Status Summary, Priority Summary, Assignee Summary, Assignee-Priority Matrix, Assignee-Status Summary, Filtered Issue Register, Data Quality Summary and Data Quality Report. Sheets that need unmapped columns are omitted, and header rows are frozen.
+- **Selection export**: the exact records of any KPI, chart segment, heatmap cell or risk card (*export* on the selection chip, or *CSV* on a risk card).
 - **CSV**: all issues, filtered issues, status / priority / assignee summaries, data-quality report. Values that start with `=`, `+`, `-`, `@`, tab or CR are prefixed with `'` to prevent spreadsheet formula injection; text cells in the `.xlsx` export are typed as strings, which Excel never evaluates.
-- **Printable report / PDF**: a print-optimized page (KPIs, insights, status/priority/assignee charts, data-quality summary) printed with the browser's own *Save as PDF*.
+- **Printable report / PDF**: opens the report preview for the selected template (see Management reports).
 - **Executive summary** as text (also *Copy Summary*).
 
 ## Architecture
@@ -57,13 +176,14 @@ Sample files with fictional data are in [samples/](samples/): `sample-issues.csv
 |---|---|---|
 | Parsing | `src/lib/parsers/` | Content sniffing (zip / OLE / text) instead of trusting extensions; SheetJS for workbooks, Papa Parse for CSV; `ImportSession` runs inside `src/workers/parsingWorker.ts` (main-thread fallback where workers are unavailable). |
 | Normalization | `src/lib/normalization/` | Header-row and column detection, status / priority / assignee normalizers, date parser, `datasetBuilder` (rows → `IssueRecord`s, duplicate flags). |
-| Analytics | `src/lib/analytics/` | Filter model, single-pass aggregation, KPIs/closure/handoff, priority backlog, assignee leaders & matrix, data quality, rule-based summary. |
+| Analytics | `src/lib/analytics/` | Pure functions, all fed by one pipeline (`src/hooks/useAnalytics.ts`):<br>• filter model and single-pass aggregation;<br>• `executiveMetrics` (KPIs and dataset scopes);<br>• `riskAnalytics` (risk indicators and aging);<br>• `assigneeAnalytics` (workload, sort keys, total/open matrix);<br>• `dataQuality` and `dataQualityScore`;<br>• `snapshotComparison`;<br>• the rule-based summary. |
+| Reports | `src/lib/reports/` | Report templates, section availability, release criteria, report workbook assembly. |
 | Export | `src/lib/export/` | Format-neutral report tables rendered to CSV and XLSX; local download helper. |
 | Privacy | `src/lib/privacy/`, `vite.config.ts`, `public/` | Session cleanup, unload warning, Content-Security-Policy (meta + HTTP headers). |
-| State | `src/hooks/` | `useDataset` (import → setup draft → active dataset), `useFilters`, memoized `useAnalytics` pipeline. |
+| State | `src/hooks/` | `useDataset` (import → setup draft → active dataset, comparison snapshot), `useFilters` (global filters, created range, selection, duplicate rule and review decisions), `useAnalysisSettings` (aging buckets, score weights, required fields, workload threshold, report options), memoized `useAnalytics`. All state is in memory only and is reset on a new dataset and on Clear Data. |
 | UI | `src/components/` | shadcn/ui-style components (Radix primitives + Tailwind + class-variance-authority) and Lucide icons; Apache ECharts (SVG renderer) for charts. |
 
-Stack: React 18, TypeScript 5.6, Vite 6, Tailwind CSS 3.4, Radix UI, Lucide, Apache ECharts 6.1, SheetJS 0.20.3 (installed from the SheetJS CDN tarball — the npm registry copy is an older, vulnerable release), Papa Parse 5.4, Vitest 5 + React Testing Library.
+Stack: React 18, TypeScript 5.6, Vite 6, Tailwind CSS 3.4, Radix UI, Lucide, Apache ECharts 6.1 (with its renderer ZRender 6.1.0 pinned as a direct dependency), SheetJS 0.20.3 (installed from the SheetJS CDN tarball — the npm registry copy is an older, vulnerable release), Papa Parse 5.4, Vitest 5 + React Testing Library.
 
 ## Deployment
 
@@ -79,8 +199,27 @@ Stack: React 18, TypeScript 5.6, Vite 6, Tailwind CSS 3.4, Radix UI, Lucide, Apa
 
 ## Verification performed
 
-These were executed for this delivery (Windows 11, Node 22.16, Chrome stable, headless):
+These were executed for this delivery (Windows 11, Node 22.16, Chrome stable, headless).
 
+Management enhancement (latest):
+- `npm test`: **145 tests in 10 files passed**. New coverage includes:
+  - executive metrics, assignee metrics, sort keys and the open-only matrix;
+  - risk indicators, aging buckets and future dates;
+  - data-quality score (absent vs. required fields, weights);
+  - unknown priorities, duplicate review and created-date range, record-set selections;
+  - snapshot comparison;
+  - report templates, section availability and release criteria;
+  - report workbook with frozen headers, and inert formula-like Excel cells;
+  - UI integration: KPI cards, risk drill-down and export, heatmap modes, Top-N and search, duplicate review, templates, sections, preview, Excel, comparison and full Clear Data reset.
+- Browser verification of the production build against a 480-record adversarial dataset with an explicit truth table: **43/43 checks passed**.
+  - Every executive KPI, risk count, risk drill-down, selection export and open-only heatmap cell matched the truth.
+  - The Weekly Excel report had all 15 expected sheets, frozen headers, and KPI and assignee values equal to the truth.
+  - The print preview had the expected sections, a PDF was generated, controls were hidden in print and table headers repeated.
+  - No horizontal overflow at 390 px.
+  - After Clear Data (with reports, risks and a comparison snapshot used), 0 heap objects holding uploaded or comparison data remained reachable, and the worker was terminated.
+  - No browser storage was used, the app made only GET requests to its own server, the uploaded data never appeared in network traffic, and the disk profile was clean.
+
+Earlier delivery:
 - `npm test`: 112 tests in 8 files passed. They cover:
   - Unit: normalizers, column/header detection, dates, aggregation, KPIs, matrix, filters, counting rules, closure, summary, data quality, CSV escaping, formula injection, workbook round-trip.
   - Integration (CSV and Excel): upload → mapping → KPIs → charts → KPI/chart drill-down → global filter → search → export → clear; replacement-failure handling.
@@ -103,4 +242,11 @@ These were executed for this delivery (Windows 11, Node 22.16, Chrome stable, he
 - **Memory release**: Clear Data drops every reference to the data, resets the file input and terminates the parsing worker; the browser's garbage collector then reclaims memory. No claim is made about forensic erasure of physical memory.
 - **Theme choice is not remembered** between visits, because the app deliberately uses no browser storage.
 - **Dev-time advisories**: `npm audit` reports advisories in Tailwind CSS 3's build-time dependencies (glob matching). They affect only the local build tooling, not the shipped app; upgrading means migrating to Tailwind 4.
+- **Snapshot comparison** matches records by issue ID only. Records without an ID cannot be matched (they are counted and reported). For repeated IDs only the first occurrence is compared. Changes between snapshots are differences between two exports, not a workflow history.
+- **Aging** is age since creation for open issues, measured against the local date when the dashboard is viewed. It is not time spent in the current state.
+- **Report charts** in the printed report show at most the top 20 assignees; the report tables list all. The printed register is capped (configurable, default 200 rows); the Excel report always contains every record.
+- **Frozen header rows** are added by editing the generated workbook in memory, because the SheetJS community edition has no option for them. If that step fails, the workbook is still produced, just without frozen headers.
+- **Behaviour changes in this release**:
+  - The *Closed Issues* card now counts every status in the Closed workflow category, not only the literal status "Closed".
+  - Source priority values such as "N/A", "TBD" or "-" now default to the explicit *Unknown* priority instead of an unconfirmed custom value.
 - **Charts in tests**: jsdom cannot lay out ECharts, so automated tests use a stand-in for the chart canvas that exposes the same data and click events; real chart rendering was verified in the browser run above.

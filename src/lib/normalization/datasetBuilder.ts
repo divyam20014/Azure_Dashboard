@@ -1,5 +1,5 @@
 import type { CellValue, DateField, IssueRecord, ParsedFile } from '@/types/issue';
-import { NO_PRIORITY_LABEL, NO_STATUS_LABEL } from '@/types/issue';
+import { NO_PRIORITY_LABEL, NO_STATUS_LABEL, UNKNOWN_PRIORITY_LABEL } from '@/types/issue';
 import type { ColumnMapping, DateOrder, LogicalField, SetupConfig, ValueMappings } from '@/types/mappings';
 import type { Dataset } from '@/types/analytics';
 import { cellToString, cleanText, isBlankCell, normKey } from '@/lib/text';
@@ -92,6 +92,40 @@ export function initialSetup(file: ParsedFile, dateOrder: DateOrder = 'MDY', hea
   };
 }
 
+/**
+ * Setup for a comparison snapshot: reuse the reference dataset's mapping by header name
+ * (falling back to automatic detection for fields whose column is not found) and its
+ * value rules, so both snapshots are normalized the same way.
+ */
+export function comparisonSetup(file: ParsedFile, reference: { headers: string[]; config: SetupConfig }): SetupConfig {
+  const headerIdx = detectHeaderRow(file.rows);
+  const table = sliceSource(file, headerIdx);
+  const detected = detectColumns(table.headers);
+  const byName = new Map(table.headers.map((h, i) => [h.toLowerCase(), i]));
+  const columnMapping = { ...detected };
+  const used = new Set<number>();
+  for (const field of Object.keys(columnMapping) as LogicalField[]) {
+    const refCol = reference.config.columnMapping[field];
+    const name = refCol === null ? undefined : reference.headers[refCol]?.toLowerCase();
+    const match = name !== undefined ? byName.get(name) : undefined;
+    columnMapping[field] = match ?? null;
+    if (match !== undefined) used.add(match);
+  }
+  for (const field of Object.keys(columnMapping) as LogicalField[]) {
+    if (columnMapping[field] === null && reference.config.columnMapping[field] !== null && detected[field] !== null && !used.has(detected[field]!)) {
+      columnMapping[field] = detected[field];
+      used.add(detected[field]!);
+    }
+  }
+  return {
+    sheetName: file.sheetName,
+    headerRowIndex: headerIdx,
+    columnMapping,
+    values: buildValueMappings(table, columnMapping, reference.config.values),
+    dateOrder: reference.config.dateOrder,
+  };
+}
+
 /** True when at least one issue-identifying column is mapped. */
 export function hasRecognizableFields(mapping: ColumnMapping): boolean {
   const keyFields: LogicalField[] = ['id', 'title', 'status', 'assignee', 'priority'];
@@ -151,7 +185,7 @@ export function buildDataset(file: ParsedFile, config: SetupConfig): Dataset {
       status: statusRule ? cleanText(statusRule.label) || NO_STATUS_LABEL : NO_STATUS_LABEL,
       statusCategory: statusRule ? statusRule.category : 'unmapped',
       priorityRaw,
-      priority: priorityRule ? cleanText(priorityRule.label) || NO_PRIORITY_LABEL : NO_PRIORITY_LABEL,
+      priority: priorityRule ? (priorityRule.unknown ? UNKNOWN_PRIORITY_LABEL : cleanText(priorityRule.label) || NO_PRIORITY_LABEL) : NO_PRIORITY_LABEL,
       assigneeRaw,
       assignee: assignee.label,
       isUnassigned: assignee.unassigned,

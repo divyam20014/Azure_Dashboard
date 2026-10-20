@@ -4,7 +4,7 @@ import { FIELD_LABELS, type LogicalField } from '@/types/mappings';
 import { cellToString, percentOf } from '@/lib/text';
 import { CATEGORY_LABELS } from '@/lib/normalization/statusNormalizer';
 import { computeBacklog } from '@/lib/analytics/priorityAnalytics';
-import { assigneePriorityMatrix } from '@/lib/analytics/assigneeAnalytics';
+import { assigneePriorityMatrix, calculateAssigneeMetrics, type MatrixMode } from '@/lib/analytics/assigneeAnalytics';
 import type { DataQualityReport } from '@/lib/analytics/dataQuality';
 import type { ExecutiveSummary } from '@/lib/analytics/summaryGenerator';
 
@@ -52,21 +52,50 @@ export function prioritySummaryTable(agg: Aggregates): ReportTable {
   };
 }
 
-export function assigneeSummaryTable(agg: Aggregates): ReportTable {
+/**
+ * Per-assignee workload. The first six columns are unchanged from earlier versions; the
+ * high-priority, reopened, ready-for-QA and open-share columns follow.
+ */
+export function assigneeSummaryTable(agg: Aggregates, highPriority: string[] = []): ReportTable {
+  const rows = calculateAssigneeMetrics(agg, highPriority);
   return {
     name: 'Assignee Summary',
-    columns: [text('Assignee'), int('Total Issues'), pctCol('% of Total'), int('Open'), int('Closed'), int('Unmapped Status')],
-    rows: agg.byAssignee.map((a) => [a.name, a.total, fraction(a.total, agg.total), a.open, a.closed, a.unmapped]),
+    columns: [
+      text('Assignee'),
+      int('Total Issues'),
+      pctCol('% of Total'),
+      int('Open'),
+      int('Closed'),
+      int('Unmapped Status'),
+      ...highPriority.map((p) => int(`${p} Issues`)),
+      ...(highPriority.length > 1 ? [int(`${highPriority.join(' + ')} Issues`)] : []),
+      int('Reopened'),
+      int('Ready for QA'),
+      pctCol('% of Open Backlog'),
+    ],
+    rows: rows.map((a) => [
+      a.name,
+      a.total,
+      fraction(a.total, agg.total),
+      a.open,
+      a.closed,
+      a.unmapped,
+      ...highPriority.map((p) => a.levels[p] ?? 0),
+      ...(highPriority.length > 1 ? [a.highPriority] : []),
+      a.reopened,
+      a.readyForQa,
+      a.shareOfOpen === null ? null : a.shareOfOpen / 100,
+    ]),
   };
 }
 
-export function assigneePriorityTable(agg: Aggregates): ReportTable {
+export function assigneePriorityTable(agg: Aggregates, mode: MatrixMode = 'all'): ReportTable {
   const priorities = agg.byPriority.map((p) => p.label);
-  const matrix = assigneePriorityMatrix(agg, priorities);
+  const matrix = assigneePriorityMatrix(agg, priorities, mode);
   return {
-    name: 'Assignee-Priority Matrix',
+    name: mode === 'open' ? 'Assignee-Priority (Open)' : 'Assignee-Priority Matrix',
     columns: [text('Assignee'), ...priorities.map(int), int('Total')],
-    rows: [...matrix.rows.map((r) => [r.assignee, ...r.cells, r.total]), ['Total', ...matrix.columnTotals, agg.total]],
+    rows: [...matrix.rows.map((r) => [r.assignee, ...r.cells, r.total]), ['Total', ...matrix.columnTotals, matrix.grandTotal]],
   };
 }
 
@@ -125,8 +154,8 @@ export function issueRegisterTable(records: IssueRecord[], dataset: Dataset, nam
 export function dataQualityTable(quality: DataQualityReport): ReportTable {
   return {
     name: 'Data Quality Report',
-    columns: [int('Source Row'), text('Issue ID'), text('Validation Category'), text('Explanation'), text('Recommended Correction')],
-    rows: quality.issues.map((i) => [i.sourceRow, i.issueId, i.category, i.explanation, i.recommendation]),
+    columns: [int('Source Row'), text('Issue ID'), text('Validation Category'), text('Explanation'), text('Severity'), text('Recommended Correction')],
+    rows: quality.issues.map((i) => [i.sourceRow, i.issueId, i.category, i.explanation, i.severity, i.recommendation]),
   };
 }
 
@@ -142,6 +171,7 @@ export function dataQualitySummaryTable(quality: DataQualityReport): ReportTable
     ['Missing assignees', quality.missingAssignees],
     ['Missing priorities', quality.missingPriorities],
     ['Records with invalid dates', quality.invalidDates],
+    ['Records with future dates', quality.futureDates],
     ['Records with unmapped statuses', quality.unmappedStatusRecords],
     ['Records with unmapped priorities', quality.unmappedPriorityRecords],
     ['Unrecognized (unmapped) columns', quality.unrecognizedColumns.length],

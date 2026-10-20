@@ -68,4 +68,6 @@ export type DateField = 'created' | 'updated' | 'closed';
 export const UNASSIGNED_LABEL = 'Unassigned';
 export const NO_STATUS_LABEL = '(No Status)';
 export const NO_PRIORITY_LABEL = '(No Priority)';
+/** A source value the user (or the defaults) declared to mean 'priority unknown' — distinct from a blank cell. */
+export const UNKNOWN_PRIORITY_LABEL = 'Unknown';
 export const BLANK_LABEL = '(Blank)';

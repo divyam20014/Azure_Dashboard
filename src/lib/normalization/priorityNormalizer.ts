@@ -1,4 +1,4 @@
-import { NO_PRIORITY_LABEL } from '@/types/issue';
+import { NO_PRIORITY_LABEL, UNKNOWN_PRIORITY_LABEL } from '@/types/issue';
 import type { PriorityRule } from '@/types/mappings';
 import { cleanText, compactKey } from '@/lib/text';
 import type { DistinctValue } from './statusNormalizer';
@@ -35,9 +35,15 @@ export function recognizePriority(raw: string): Recognized | null {
   return null;
 }
 
+/** Source values that, by default, mean the priority is explicitly unknown. Users can change this per value. */
+export const UNKNOWN_PRIORITY_VALUES = ['unknown', 'tbd', 'to be decided', 'to be determined', 'not set', 'unset', 'n/a', 'na', 'none', '-', '--', '?', 'unprioritized', 'not prioritized'];
+
 export function defaultPriorityRule(value: DistinctValue): PriorityRule {
   if (value.key === '') {
     return { key: '', sourceLabel: '', label: NO_PRIORITY_LABEL, confirmed: true, numeric: false, count: value.count };
+  }
+  if (UNKNOWN_PRIORITY_VALUES.includes(value.key)) {
+    return { key: value.key, sourceLabel: value.sourceLabel, label: UNKNOWN_PRIORITY_LABEL, confirmed: true, numeric: false, unknown: true, count: value.count };
   }
   const recognized = recognizePriority(value.sourceLabel);
   if (recognized) {
@@ -58,6 +64,7 @@ export function buildPriorityRules(values: DistinctValue[], previous?: Record<st
 /** Sort weight for the default order: P-levels, then word levels, then custom (alphabetical), then blank. */
 function defaultWeight(label: string): [number, number, string] {
   if (label === NO_PRIORITY_LABEL) return [4, 0, label];
+  if (label === UNKNOWN_PRIORITY_LABEL) return [3, 0, label];
   const p = /^P(\d+)$/.exec(label);
   if (p) return [0, Number(p[1]), label];
   const w = WORD_INDEX.get(label.toLowerCase());

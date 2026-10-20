@@ -28,5 +28,7 @@ if (!window.matchMedia) {
   }));
 }
 if (!Element.prototype.scrollIntoView) Element.prototype.scrollIntoView = vi.fn();
+// jsdom has no canvas; the chart renderer only needs text measurement from it.
+HTMLCanvasElement.prototype.getContext = vi.fn(() => ({ measureText: (t: string) => ({ width: t.length * 7 }), font: '' })) as unknown as typeof HTMLCanvasElement.prototype.getContext;
 if (!Element.prototype.hasPointerCapture) Element.prototype.hasPointerCapture = vi.fn(() => false);
 if (!Element.prototype.releasePointerCapture) Element.prototype.releasePointerCapture = vi.fn();

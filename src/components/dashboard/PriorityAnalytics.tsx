@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react';
 import { Section, Panel, EmptyState, Notice, Swatch } from '@/components/common/Common';
-import { SimpleBarChart } from '@/components/charts/SimpleBarChart';
 import { StackedBarChart } from '@/components/charts/StackedBarChart';
 import { CATEGORY_COLORS, CATEGORY_LABELS, UNMAPPED_COLOR } from '@/lib/normalization/statusNormalizer';
 import { computeBacklog, highPriorityRecords } from '@/lib/analytics/priorityAnalytics';
@@ -18,7 +17,6 @@ export function PriorityAnalytics() {
   const m = dataset.config.columnMapping;
   const [hpLimit, setHpLimit] = useState(HP_PAGE);
 
-  const distribution = useMemo(() => agg.byPriority.map((p) => ({ label: p.label, value: p.count, color: colors.priority[p.label] ?? UNMAPPED_COLOR })), [agg, colors]);
   const priorities = agg.byPriority.map((p) => p.label);
   const statusSeries = useMemo(
     () =>
@@ -47,18 +45,20 @@ export function PriorityAnalytics() {
     );
   }
 
-  const selectPriority = (label: string) => select(`priority:${label}`, `Priority = ${label}`, { priority: [label] });
 
   return (
-    <Section id="priority" title="Priority Analysis" description={`Priority order: ${values.priorityOrder.join(' › ') || '—'}`}>
+    <Section
+      id="priority"
+      title="Priority Analysis"
+      description={`Priority order: ${values.priorityOrder.join(' › ') || '—'}. The priority distribution and open backlog by priority are in the Executive Dashboard.`}
+      collapsible
+      collapsedSummary={`${agg.byPriority.length} priority level(s) · ${highPriority.length} high-priority issue(s)`}
+    >
       {agg.total === 0 ? (
         <EmptyState title="No issues in the current scope">Adjust or clear the global filters.</EmptyState>
       ) : (
         <>
-          <div className="grid gap-4 lg:grid-cols-2">
-            <Panel title="Priority distribution" description="Issue count and share per priority (including unknown values).">
-              <SimpleBarChart items={distribution} total={agg.total} onSelect={selectPriority} ariaLabel="Bar chart of issues by priority" />
-            </Panel>
+          <div className="grid gap-4">
             {m.status !== null && (
               <Panel title="Priority by status" description="Status mix within each priority. Click a segment to list those issues.">
                 <StackedBarChart

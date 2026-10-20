@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react';
-import { AlertTriangle, Info, Loader2, Inbox } from 'lucide-react';
+import { useState, type ReactNode } from 'react';
+import { AlertTriangle, ChevronRight, Info, Loader2, Inbox } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Card } from '@/components/ui/card';
 
@@ -10,22 +10,51 @@ interface SectionProps {
   actions?: ReactNode;
   children: ReactNode;
   className?: string;
+  /** Allow the user to collapse the section. Content stays mounted, so no state is lost. */
+  collapsible?: boolean;
+  defaultCollapsed?: boolean;
+  /** Short summary shown while collapsed, e.g. "12 findings". */
+  collapsedSummary?: ReactNode;
 }
 
 /** A titled dashboard section; `id` doubles as the in-page navigation anchor. */
-export function Section({ id, title, description, actions, children, className }: SectionProps) {
+export function Section({ id, title, description, actions, children, className, collapsible, defaultCollapsed = false, collapsedSummary }: SectionProps) {
+  const [collapsed, setCollapsed] = useState(collapsible ? defaultCollapsed : false);
+  const contentId = `${id}-content`;
   return (
     <section id={id} aria-labelledby={`${id}-title`} className={cn('scroll-mt-28 space-y-3', className)}>
       <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h2 id={`${id}-title`} className="section-title">
-            {title}
-          </h2>
-          {description && <p className="mt-0.5 text-sm text-muted-foreground">{description}</p>}
+        <div className="flex min-w-0 items-start gap-2">
+          {collapsible && (
+            <button
+              type="button"
+              className="no-print mt-0.5 rounded-md p-0.5 text-muted-foreground hover:bg-secondary hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              aria-expanded={!collapsed}
+              aria-controls={contentId}
+              aria-label={`${collapsed ? 'Expand' : 'Collapse'} ${title}`}
+              onClick={() => setCollapsed((c) => !c)}
+            >
+              <ChevronRight className={cn('h-5 w-5 transition-transform', !collapsed && 'rotate-90')} aria-hidden />
+            </button>
+          )}
+          <div className="min-w-0">
+            <h2 id={`${id}-title`} className="section-title">
+              {title}
+            </h2>
+            {collapsed && collapsedSummary ? (
+              <p className="mt-0.5 text-sm text-muted-foreground" data-testid={`${id}-collapsed-summary`}>
+                {collapsedSummary}
+              </p>
+            ) : (
+              description && <p className="mt-0.5 text-sm text-muted-foreground">{description}</p>
+            )}
+          </div>
         </div>
         {actions && <div className="no-print flex flex-wrap items-center gap-2">{actions}</div>}
       </div>
-      {children}
+      <div id={contentId} hidden={collapsed} className="space-y-3">
+        {children}
+      </div>
     </section>
   );
 }

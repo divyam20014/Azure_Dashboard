@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useDataset } from '@/hooks/useDataset';
 import { useFilters } from '@/hooks/useFilters';
+import { useAnalysisSettings } from '@/hooks/useAnalysisSettings';
 import { DashboardHeader } from '@/components/layout/DashboardHeader';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { FileUpload } from '@/components/upload/FileUpload';
@@ -11,8 +12,21 @@ import { ToastProvider, useToast } from '@/components/common/Toast';
 
 function AppShell() {
   const filters = useFilters();
+  const settings = useAnalysisSettings();
   const notify = useToast();
-  const controller = useDataset({ onDatasetChanged: filters.reset });
+  const { reset: resetFilters } = filters;
+  const { reset: resetSettings } = settings;
+  // A new or re-mapped dataset, and Clear Data, reset every filter, selection and setting.
+  const onDatasetChanged = useCallback(() => {
+    resetFilters();
+    resetSettings();
+  }, [resetFilters, resetSettings]);
+  const controller = useDataset({ onDatasetChanged });
+  const { comparison: snapshot, comparisonLoading, comparisonError, loadComparison, clearComparison } = controller;
+  const comparison = useMemo(
+    () => ({ snapshot, loading: comparisonLoading, error: comparisonError, load: loadComparison, clear: clearComparison }),
+    [snapshot, comparisonLoading, comparisonError, loadComparison, clearComparison],
+  );
   const [confirmClear, setConfirmClear] = useState(false);
   const { phase, dataset, draft } = controller;
   const hasAnalysis = dataset !== null || draft !== null;
@@ -26,7 +40,15 @@ function AppShell() {
   return (
     <div className="min-h-screen">
       {phase === 'dashboard' && dataset ? (
-        <DashboardLayout dataset={dataset} filters={filters} onReplace={controller.startReplace} onEditMappings={controller.editMappings} onClear={requestClear} />
+        <DashboardLayout
+          dataset={dataset}
+          filters={filters}
+          settings={settings}
+          comparison={comparison}
+          onReplace={controller.startReplace}
+          onEditMappings={controller.editMappings}
+          onClear={requestClear}
+        />
       ) : (
         <>
           <DashboardHeader
@@ -58,7 +80,7 @@ function AppShell() {
         title="Clear data and start a new analysis?"
         description={
           <div className="space-y-2">
-            <p>This removes the uploaded file, all parsed records, mappings, charts, filters and selections from this page.</p>
+            <p>This removes the uploaded file, any comparison snapshot, all parsed records, mappings, charts, filters, selections, report settings and previews from this page.</p>
             <p>Nothing is stored anywhere else, so the analysis cannot be recovered afterwards. Export anything you need first.</p>
           </div>
         }

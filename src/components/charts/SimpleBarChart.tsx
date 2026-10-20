@@ -19,6 +19,8 @@ interface Props {
   height?: number;
   ariaLabel: string;
   labelWidth?: number;
+  /** Title of the value axis (default "Issues"). */
+  valueAxisName?: string;
 }
 
 export function barChartHeight(count: number): number {
@@ -26,7 +28,7 @@ export function barChartHeight(count: number): number {
 }
 
 /** Single-series bar chart; each bar is labelled with its exact count (and share). */
-export function SimpleBarChart({ items, total, orientation = 'horizontal', selected, onSelect, height, ariaLabel, labelWidth = 150 }: Props) {
+export function SimpleBarChart({ items, total, orientation = 'horizontal', selected, onSelect, height, ariaLabel, labelWidth = 150, valueAxisName = 'Issues' }: Props) {
   const p = useChartPalette();
   const horizontal = orientation === 'horizontal';
   const option = useMemo(() => {
@@ -46,9 +48,18 @@ export function SimpleBarChart({ items, total, orientation = 'horizontal', selec
         formatter: (v: string) => (horizontal ? v : truncateLabel(v, 16)),
       },
     };
-    const value = { type: 'value', minInterval: 1, splitLine: { lineStyle: { color: p.grid } }, axisLabel: { color: p.muted, fontSize: 11 } };
+    const value = {
+      type: 'value',
+      minInterval: 1,
+      name: valueAxisName,
+      nameLocation: 'middle',
+      nameGap: horizontal ? 24 : 36,
+      nameTextStyle: { color: p.muted, fontSize: 11 },
+      splitLine: { lineStyle: { color: p.grid } },
+      axisLabel: { color: p.muted, fontSize: 11 },
+    };
     return {
-      grid: horizontal ? { left: 8, right: 80, top: 8, bottom: 8, containLabel: true } : { left: 8, right: 8, top: 28, bottom: 8, containLabel: true },
+      grid: horizontal ? { left: 8, right: 80, top: 8, bottom: 22, containLabel: true } : { left: 22, right: 8, top: 28, bottom: 8, containLabel: true },
       tooltip: {
         ...baseTooltip(p),
         trigger: 'item',
@@ -82,13 +93,15 @@ export function SimpleBarChart({ items, total, orientation = 'horizontal', selec
         },
       ],
     };
-  }, [items, total, horizontal, selected, p, labelWidth]);
+  }, [items, total, horizontal, selected, p, labelWidth, valueAxisName]);
+  const summary = items.map((i) => `${i.label}: ${formatCount(i.value)}${total !== undefined ? ` (${formatPercent(percentOf(i.value, total))})` : ''}`).join('; ');
 
   return (
     <EChart
       option={option}
       height={height ?? (horizontal ? barChartHeight(items.length) : 300)}
       ariaLabel={ariaLabel}
+      summary={summary}
       onClick={onSelect ? (e) => onSelect(items[e.dataIndex]?.label ?? e.name) : undefined}
     />
   );

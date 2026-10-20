@@ -12,6 +12,8 @@ Statement shown on the upload screen:
 | No data leaves the browser | No application code calls `fetch`, `XMLHttpRequest`, `sendBeacon`, `WebSocket` or `EventSource`. Production builds also carry a Content-Security-Policy with `connect-src 'none'` (plus `img-src 'self' data: blob:`, `form-action 'none'`, `script-src 'self'`), so the browser itself refuses outbound connections, image beacons and form posts — even from a third-party library. The policy is sent both as a `<meta>` tag (page) and as HTTP headers (`vite preview`, `staticwebapp.config.json`, `_headers`), because a Web Worker takes its policy from the headers of its own script. |
 | No external AI / analytics / telemetry | The executive summary is produced by fixed rules (`src/lib/analytics/summaryGenerator.ts`). No analytics, error-reporting or AI packages are installed; no fonts or scripts load from other origins. |
 | No persistence | No `localStorage`, `sessionStorage`, IndexedDB, cookies, Cache Storage or service worker. All data lives in React state, the worker and the file input. Refreshing the page discards it (a browser prompt warns first). |
+| Reports and comparisons are local | Report previews, the management Excel report and the snapshot comparison are built from in-memory analytics. A comparison snapshot is parsed by the same worker and held only in React state. |
+| Settings are not persisted | Aging buckets, score weights, required fields, the workload threshold, report template, sections and release criteria live in React state only. No browser storage is used. They are reset on a new dataset and on Clear Data. |
 | Exports are local | Files are built in memory (`Blob`) and saved through an object URL that is revoked afterwards, only after a user click. PDF output uses the browser's own print dialog. |
 | Clear Data releases the session | Confirmation dialog → terminates the parsing worker (dropping its cached workbook), clears the file input, resets the dataset, setup draft, filters, selections, search and messages, and returns to the upload screen. Three less obvious holders are also released (see below). |
 
@@ -64,6 +66,21 @@ An end-to-end verifier drove the production build in Chrome. It used a 480-recor
 - **Network:** Chrome NetLog with full byte capture. The page and its worker made only `GET` requests to the app server, and the uploaded data appears nowhere in the captured traffic. Chrome's own background services (time sync, Safe Browsing, accounts, autofill, GCM) also appear in a NetLog. They are attributable by initiator and none were initiated by the app.
 - **Disk:** the browser profile directory was byte-scanned after the session; it contains no uploaded data. `localStorage`, `sessionStorage`, IndexedDB, Cache Storage, service workers and cookies were all empty.
 - **Memory:** heap snapshots before and after Clear Data; strong-reachability analysis as described above. The parsing worker is terminated.
+
+## Verification of the management enhancement
+
+The same method was applied after adding the executive dashboard, risk panel, assignee workload, report generator, data-quality score, duplicate review and snapshot comparison. The flow:
+1. Upload the 480-record truth dataset and verify the KPIs, risks and heatmap.
+2. Export the selection.
+3. Load a comparison snapshot.
+4. Generate the Weekly Excel report and the print preview / PDF.
+5. Clear Data.
+
+Results observed:
+- **Memory:** 0 strongly reachable heap objects holding uploaded titles, assignee names, statuses, priorities or the comparison file name after Clear Data. The parsing worker was terminated.
+- **Network:** NetLog showed only GET requests from the app to its own server, and the dataset marker never appeared in any traffic.
+- **Storage and disk:** `localStorage`, `sessionStorage`, IndexedDB, Cache Storage and cookies stayed empty. The browser profile on disk contained no uploaded data.
+- **Automated tests:** the runtime privacy test now also covers the report generator's Excel export and loading a comparison snapshot; no requests and no storage writes. After Clear Data, no trace of the snapshot file name remains in the page.
 
 ## Results of the earlier verification run
 

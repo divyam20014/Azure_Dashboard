@@ -3,7 +3,7 @@ import { BLANK_LABEL } from '@/types/issue';
 import type { CountingRule, Criteria, FilterField } from '@/types/analytics';
 import { CATEGORY_LABELS } from '@/lib/normalization/statusNormalizer';
 
-export const FILTER_FIELDS: FilterField[] = ['status', 'priority', 'assignee', 'type', 'project', 'area', 'category'];
+export const FILTER_FIELDS: FilterField[] = ['status', 'priority', 'assignee', 'type', 'project', 'area', 'severity', 'iteration', 'category'];
 
 export const FILTER_FIELD_LABELS: Record<FilterField, string> = {
   status: 'Status',
@@ -12,6 +12,8 @@ export const FILTER_FIELD_LABELS: Record<FilterField, string> = {
   type: 'Work Item Type',
   project: 'Project',
   area: 'Area',
+  severity: 'Severity',
+  iteration: 'Iteration',
   category: 'Workflow',
 };
 
@@ -32,6 +34,10 @@ export function fieldValue(record: IssueRecord, field: FilterField): string {
       return record.project || BLANK_LABEL;
     case 'area':
       return record.area || BLANK_LABEL;
+    case 'severity':
+      return record.severity || BLANK_LABEL;
+    case 'iteration':
+      return record.iteration || BLANK_LABEL;
   }
 }
 
@@ -63,10 +69,31 @@ export function applyCriteria(records: IssueRecord[], criteria: Criteria | null 
   return records.filter((r) => sets.every(([field, allowed]) => allowed.has(fieldValue(r, field))));
 }
 
-/** Records included by the counting rule: all imported records, or one record per issue ID. */
-export function applyCountingRule(records: IssueRecord[], rule: CountingRule): IssueRecord[] {
+/**
+ * Records included by the counting rule. 'unique' keeps the first record per non-blank ID
+ * (records without an ID are never treated as duplicates of each other); 'review' leaves out
+ * only the duplicate records the user explicitly excluded.
+ */
+export function applyCountingRule(records: IssueRecord[], rule: CountingRule, reviewExcluded?: ReadonlySet<number>): IssueRecord[] {
   if (rule === 'all') return records;
+  if (rule === 'review') return reviewExcluded && reviewExcluded.size ? records.filter((r) => !reviewExcluded.has(r.index)) : records;
   return records.filter((r) => !r.isDuplicateId || r.isFirstOfId);
+}
+
+/** Inclusive created-date range on local calendar days (yyyy-mm-dd). Records without a valid created date are excluded while a range is active. */
+export function applyCreatedRange(records: IssueRecord[], from: string, to: string): IssueRecord[] {
+  if (!from && !to) return records;
+  const start = from ? new Date(`${from}T00:00:00`).getTime() : -Infinity;
+  const end = to ? new Date(`${to}T23:59:59.999`).getTime() : Infinity;
+  return records.filter((r) => r.created !== null && r.created.getTime() >= start && r.created.getTime() <= end);
+}
+
+/** Apply a chart / KPI / risk selection: criteria and, when present, an exact record set. */
+export function applySelection(records: IssueRecord[], selection: { criteria: Criteria; indexes?: ReadonlySet<number> } | null | undefined): IssueRecord[] {
+  if (!selection) return records;
+  const byCriteria = applyCriteria(records, selection.criteria);
+  const set = selection.indexes;
+  return set ? byCriteria.filter((r) => set.has(r.index)) : byCriteria;
 }
 
 /** Distinct values (with counts) for a field, most frequent first. */
