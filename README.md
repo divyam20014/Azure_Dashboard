@@ -17,6 +17,7 @@ A single-page web app that turns an issue-tracking spreadsheet (Azure DevOps, Ji
 
 - Node.js 22.12+ (required by the test runner; developed and verified with Node 22.16 / npm 10.9)
 - A modern browser (Chrome, Edge, Firefox, Safari — current versions)
+- For the browser verification suites only: Google Chrome and Python 3
 
 ## Commands
 
@@ -29,6 +30,8 @@ A single-page web app that turns an issue-tracking spreadsheet (Azure DevOps, Ji
 | Production build (to `dist/`) | `npm run build` |
 | Preview the production build (with production security headers) | `npm run preview` → http://localhost:4173 |
 | Static privacy audit (run after `npm run build` to include the build checks) | `npm run privacy:check` |
+| Browser verification of the production build against an independent oracle (after `npm run build`; see [e2e/README.md](e2e/README.md)) | `npm run e2e` |
+| 100,000-row performance measurement | `npm run e2e:perf` |
 | Regenerate the sample data files | `node scripts/generate-sample-data.mjs` |
 | Generate a large performance dataset | `node scripts/generate-sample-data.mjs --rows 100000 --columns 50 --out <dir>` |
 
@@ -230,6 +233,8 @@ Stack: React 18, TypeScript 5.6, Vite 6, Tailwind CSS 3.4, Radix UI, Lucide, Apa
 - Maximum upload size defaults to 100 MB; override at build time with `VITE_MAX_FILE_SIZE_MB=200 npm run build`.
 
 ## Verification performed
+
+The browser verification described below is in the repository as `npm run e2e` ([e2e/README.md](e2e/README.md)). CI (`.github/workflows/ci.yml`) runs typecheck, tests, build, the privacy audit, `npm audit --omit=dev` and the browser suites on every push and pull request.
 
 These were executed for this delivery (Windows 11, Node 22.16, Chrome stable, headless).
 

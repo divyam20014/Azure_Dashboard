@@ -5,3 +5,4 @@ coverage
 .vite
 *.tsbuildinfo
 node_modules
+e2e/.work
