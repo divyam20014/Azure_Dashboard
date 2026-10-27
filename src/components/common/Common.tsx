@@ -22,7 +22,7 @@ export function Section({ id, title, description, actions, children, className, 
   const [collapsed, setCollapsed] = useState(collapsible ? defaultCollapsed : false);
   const contentId = `${id}-content`;
   return (
-    <section id={id} aria-labelledby={`${id}-title`} className={cn('scroll-mt-28 space-y-3', className)}>
+    <section id={id} aria-labelledby={`${id}-title`} className={cn('scroll-mt-[calc(var(--header-offset,112px)+12px)] space-y-3', className)}>
       <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div className="flex min-w-0 items-start gap-2">
           {collapsible && (

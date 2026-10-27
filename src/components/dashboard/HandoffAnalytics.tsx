@@ -58,7 +58,8 @@ export function HandoffAnalytics() {
             items={stages.map((s) => ({ label: s.label, value: s.count, color: s.label === 'Other statuses' ? UNMAPPED_COLOR : (colors.status[s.statuses[0]] ?? UNMAPPED_COLOR) }))}
             total={agg.total}
             onSelect={selectStage}
-            ariaLabel="Bar chart of issues per workflow stage"
+            title="Issues by workflow stage"
+                ariaLabel="Bar chart of issues per workflow stage"
           />
           <p className="mt-2 text-xs text-muted-foreground">
             Work waiting on QA: <b>{formatCount(stages[2].count)}</b> ({formatPercent(percentOf(stages[2].count, agg.total))}) · In development:{' '}

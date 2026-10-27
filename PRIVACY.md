@@ -14,6 +14,8 @@ Statement shown on the upload screen:
 | No persistence | No `localStorage`, `sessionStorage`, IndexedDB, cookies, Cache Storage or service worker. All data lives in React state, the worker and the file input. Refreshing the page discards it (a browser prompt warns first). |
 | Reports and comparisons are local | Report previews, the management Excel report and the snapshot comparison are built from in-memory analytics. A comparison snapshot is parsed by the same worker and held only in React state. |
 | Settings are not persisted | Aging buckets, score weights, required fields, the workload threshold, report template, sections and release criteria live in React state only. No browser storage is used. They are reset on a new dataset and on Clear Data. |
+| Custom charts are not persisted | Builder chart configurations (groupings, metrics, chart filters, titles) live in React state only (`useAnalysisSettings`). Chart previews are computed in memory from the current dataset. Configurations are cleared on a new dataset and on Clear Data, and are never written to browser storage. |
+| Chart images are local | PNG / SVG downloads are composed from the chart's own in-memory SVG; the PNG is rasterised on a local canvas. Nothing is fetched or uploaded, and the CSP would block it anyway. |
 | Exports are local | Files are built in memory (`Blob`) and saved through an object URL that is revoked afterwards, only after a user click. PDF output uses the browser's own print dialog. |
 | Clear Data releases the session | Confirmation dialog → terminates the parsing worker (dropping its cached workbook), clears the file input, resets the dataset, setup draft, filters, selections, search and messages, and returns to the upload screen. Three less obvious holders are also released (see below). |
 
@@ -81,6 +83,20 @@ Results observed:
 - **Network:** NetLog showed only GET requests from the app to its own server, and the dataset marker never appeared in any traffic.
 - **Storage and disk:** `localStorage`, `sessionStorage`, IndexedDB, Cache Storage and cookies stayed empty. The browser profile on disk contained no uploaded data.
 - **Automated tests:** the runtime privacy test now also covers the report generator's Excel export and loading a comparison snapshot; no requests and no storage writes. After Clear Data, no trace of the snapshot file name remains in the page.
+
+## Verification of the chart visibility work and the Custom Chart Builder
+
+Same method again, on the production build in headless Chrome with the 420-record adversarial dataset:
+1. Build builder charts of every kind: Assignee → Priority heatmap, State → Assignee % table, Assignee → State stacked bars, Priority % of total (bar), the Open vs closed preset (donut), grouped, 100 % stacked, line, donut and a metric comparison.
+2. Drill into a cell and apply chart filters.
+3. Export CSV, Excel, SVG and PNG.
+4. Clear Data.
+
+Results observed:
+- **Memory:** before Clear Data the heap held the dataset (positive control). After it, 0 strongly reachable objects held uploaded titles, assignee names, statuses or priorities, with builder charts and their exports present beforehand.
+- **Chart configurations:** after Clear Data and a fresh upload, the builder showed *No custom charts yet*.
+- **Network:** only GET requests from the app to its own server. The dataset marker and an assignee name never appeared anywhere in the full-byte NetLog, including during the image exports.
+- **Storage and disk:** `localStorage`, `sessionStorage`, IndexedDB, Cache Storage, service workers and cookies were empty. The browser profile on disk contained no uploaded data.
 
 ## Results of the earlier verification run
 

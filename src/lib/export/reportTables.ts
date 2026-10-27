@@ -128,7 +128,8 @@ const ISSUE_FIELDS: { field: LogicalField; value: (r: IssueRecord) => ReportCell
  * Issue register export: normalized fields that are mapped, workflow category,
  * the original status/priority values, then every original source column.
  */
-export function issueRegisterTable(records: IssueRecord[], dataset: Dataset, name = 'Issue Register'): ReportTable {
+export function issueRegisterTable(records: IssueRecord[], dataset: Dataset, name = 'Issue Register', options: { sourceColumns?: boolean } = {}): ReportTable {
+  const withSource = options.sourceColumns ?? true;
   const mapping = dataset.config.columnMapping;
   const fields = ISSUE_FIELDS.filter((f) => mapping[f.field] !== null);
   const columns: ReportColumn[] = [int('Source Row'), ...fields.map((f) => ({ header: FIELD_LABELS[f.field], kind: f.kind }))];
@@ -140,13 +141,13 @@ export function issueRegisterTable(records: IssueRecord[], dataset: Dataset, nam
   if (mapping.priority !== null) extras.push({ header: 'Original Priority', value: (r) => r.priorityRaw });
   if (mapping.id !== null) extras.push({ header: 'Duplicate ID', value: (r) => (r.isDuplicateId ? 'Yes' : 'No') });
   columns.push(...extras.map((e) => text(e.header)));
-  columns.push(...dataset.headers.map((h) => text(`Source: ${h}`)));
+  if (withSource) columns.push(...dataset.headers.map((h) => text(`Source: ${h}`)));
 
   const rows = records.map((r) => [
     r.sourceRow,
     ...fields.map((f) => f.value(r)),
     ...extras.map((e) => e.value(r)),
-    ...dataset.headers.map((_, i) => cellToString(r.cells[i] ?? null)),
+    ...(withSource ? dataset.headers.map((_, i) => cellToString(r.cells[i] ?? null)) : []),
   ]);
   return { name, columns, rows };
 }

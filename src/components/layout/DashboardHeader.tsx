@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useLayoutEffect, useRef, type ReactNode } from 'react';
 import { BarChart3, FileSpreadsheet, Moon, RefreshCw, SlidersHorizontal, Sun, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/components/common/ThemeContext';
@@ -28,6 +28,7 @@ export const SECTION_NAV = [
   { id: 'status', label: 'Status' },
   { id: 'priority', label: 'Priority' },
   { id: 'assignees', label: 'Assignees' },
+  { id: 'builder', label: 'Chart Builder' },
   { id: 'handoff', label: 'Handoff' },
   { id: 'register', label: 'Issues' },
   { id: 'quality', label: 'Data Quality' },
@@ -37,8 +38,23 @@ export const SECTION_NAV = [
 
 export function DashboardHeader({ fileName, sheetName, recordCount, includedCount, activeFilterCount, reportTemplate, comparisonFile, datasetLabel, onReplace, onEditMappings, onClear, exportSlot, showNav }: Props) {
   const { dark, toggle } = useTheme();
+  const headerRef = useRef<HTMLElement>(null);
+  // Publish the real header height so in-page anchors scroll sections below it, at any width.
+  useLayoutEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+    const root = document.documentElement;
+    const update = () => root.style.setProperty('--header-offset', `${Math.ceil(el.getBoundingClientRect().height)}px`);
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      root.style.removeProperty('--header-offset');
+    };
+  }, []);
   return (
-    <header className="no-print sticky top-0 z-30 border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/85">
+    <header ref={headerRef} className="no-print sticky top-0 z-30 border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/85">
       <div className="mx-auto flex max-w-[1500px] flex-wrap items-center gap-x-4 gap-y-2 px-4 py-3">
         <div className="flex min-w-0 items-center gap-2.5">
           <div className="rounded-lg bg-primary p-1.5 text-primary-foreground">

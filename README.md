@@ -4,6 +4,7 @@ A single-page web app that turns an issue-tracking spreadsheet (Azure DevOps, Ji
 - an executive dashboard with actionable KPI cards;
 - a risk and attention panel;
 - assignee workload analytics with an assignee × priority heatmap;
+- a **Custom Chart Builder**: one configuration panel for any grouping, metric and chart type (e.g. Assignee → Priority → Issue Count, State → Assignee → %, Assignee → State → stacked bars);
 - status and priority analytics, and a development/QA handoff view;
 - a searchable issue register;
 - a scored data-quality report with duplicate review;
@@ -54,11 +55,12 @@ Header (file, imported vs. in-analytics records, active filters, report template
 3. **Risks and Attention Required**
 4. **Status** and **Priority** analytics
 5. **Assignee Workload and Priority Matrix**
-6. **Development and QA Handoff**
-7. **Issue Register**
-8. **Data Quality**
-9. **Snapshot Comparison**
-10. **Export and Report Generation**
+6. **Custom Chart Builder**
+7. **Development and QA Handoff**
+8. **Issue Register**
+9. **Data Quality**
+10. **Snapshot Comparison**
+11. **Export and Report Generation**
 
 Lower-priority sections can be collapsed: they show a one-line summary, and their content stays loaded, so no filters or settings are lost.
 
@@ -93,6 +95,34 @@ Each card shows its exact rule, breakdowns, IDs and limitations, and can list or
 - **Drill-down panel** for a single assignee.
 - **Charts:** stacked bars by priority and by status.
 - **Heatmap:** *Total* or *Open issues only*, sortable columns, exact counts and keyboard-accessible cells.
+
+### Charts: readability rules
+
+Every chart (dashboard and builder) is laid out from its measured container width by the pure rules in `src/components/charts/chartLayout.ts`, so text does not overlap, clip or cover data:
+- **Legends wrap** onto as many rows as needed (never paged), and the plot is moved down by the legend's exact height.
+- **Category labels** fit as they are, wrap onto two lines, rotate 35° only when parallel labels stay at least 30 px apart, or the chart switches to horizontal bars. Long names are truncated with an ellipsis; the full name is in the tooltip, the accessible summary and the exports.
+- **Horizontal bars** reserve at most 38 % of the width for names, and the chart grows taller with the number of categories instead of squeezing bars.
+- **Value labels** are shown only when they fit their bar; otherwise values are in tooltips. ECharts' render-time overlap check hides any label that would still touch another.
+- **Value-axis ticks** are reduced on narrow charts and shown compactly (1.2K) or in the metric's unit (35 %, 4.5 d). The rotated axis name is placed from the widest tick label and stays inside the chart.
+- **Donut totals** are drawn once in the centre; segment values are in the legend, not as overlapping slice labels.
+- One font is used both to measure and to draw chart text, so the layout estimates match what is rendered.
+- Each chart has a toolbar above the plot (never over it): **PNG** (2× resolution) and **SVG** download with the chart title, and **full screen**. Images are produced locally from the chart's own SVG.
+- Section links scroll below the sticky header at every width (the header height is published as a CSS variable).
+
+### Custom Chart Builder
+
+One reusable panel creates any number of charts, all calculated by one engine (`src/lib/charts`) from the same in-memory dataset and the same dashboard scope (duplicate rule and global filters).
+- **A. Chart type:** vertical or horizontal bar, stacked, grouped, 100 % stacked, line, area, pie, donut, heatmap, table. A type that does not suit the data is explained (with the compatible types) instead of being silently changed.
+- **B. Analyze data by:** Assignee, Priority, State, Workflow category, Work Item Type, Project, Area, Iteration, Severity, Created month / week, or any other column with up to 200 distinct values.
+- **C. Secondary grouping:** any second dimension (one series per value), or *Compare metrics* (one series per selected metric). Up to 12 series are drawn; for more, the chart says how many were not drawn and suggests the heatmap or table, which show all.
+- **D. Metric:** issue count, % of total, % within group, closed, open, unmapped, high-priority (all / open), each configured priority level, reopened, ready for QA, unassigned, average age (days, open issues with a valid created date) and distinct issue IDs. Each metric shows how it is calculated.
+- **E. Chart filters:** status, priority, assignee and the other dashboard fields, plus a created-date range. They narrow only this chart; the dashboard totals never change.
+- **F. Sort** by value (high → low or low → high), name (A–Z or Z–A) or natural order (priority order, dates), **Top 5 / 10 / 20 / All** with an optional "Other" (only for metrics that can be added up).
+- **G. Display:** data labels, legend, gridlines, percentages, exact or compact numbers, size, title and subtitle (automatic by default: metric, records in scope, chart and dashboard filters).
+- **Ready-made views:** 29 assignee-, priority- and state-wise configurations (e.g. workload, assignee × priority heatmap, priority by state, open vs closed, % of state per assignee). Only views the dataset can support are offered.
+- **Manage:** duplicate, move up / down, remove, reset. Charts are kept for this session only and are cleared on a new dataset and on Clear Data.
+- **Drill-down:** clicking a bar, segment, point or cell lists exactly its records in the Issue Register (register only).
+- **Exports:** CSV of exactly the values drawn; Excel with *Chart Data (as drawn)*, *All Categories* (when Top-N hides some), *Chart Configuration* (type, groupings, metric definition, dashboard and chart filters, record counts) and *Chart Records* (mapped issue fields of every record behind the chart); PNG / SVG image.
 
 ### Dataset scopes
 
@@ -169,6 +199,7 @@ Both snapshots stay in memory. *Remove snapshot* or Clear Data releases them.
 - **CSV**: all issues, filtered issues, status / priority / assignee summaries, data-quality report. Values that start with `=`, `+`, `-`, `@`, tab or CR are prefixed with `'` to prevent spreadsheet formula injection; text cells in the `.xlsx` export are typed as strings, which Excel never evaluates.
 - **Printable report / PDF**: opens the report preview for the selected template (see Management reports).
 - **Executive summary** as text (also *Copy Summary*).
+- **Charts**: every chart can be downloaded as PNG or SVG; builder charts also export their exact data as CSV or Excel (see Custom Chart Builder).
 
 ## Architecture
 
@@ -177,10 +208,11 @@ Both snapshots stay in memory. *Remove snapshot* or Clear Data releases them.
 | Parsing | `src/lib/parsers/` | Content sniffing (zip / OLE / text) instead of trusting extensions; SheetJS for workbooks, Papa Parse for CSV; `ImportSession` runs inside `src/workers/parsingWorker.ts` (main-thread fallback where workers are unavailable). |
 | Normalization | `src/lib/normalization/` | Header-row and column detection, status / priority / assignee normalizers, date parser, `datasetBuilder` (rows → `IssueRecord`s, duplicate flags). |
 | Analytics | `src/lib/analytics/` | Pure functions, all fed by one pipeline (`src/hooks/useAnalytics.ts`):<br>• filter model and single-pass aggregation;<br>• `executiveMetrics` (KPIs and dataset scopes);<br>• `riskAnalytics` (risk indicators and aging);<br>• `assigneeAnalytics` (workload, sort keys, total/open matrix);<br>• `dataQuality` and `dataQualityScore`;<br>• `snapshotComparison`;<br>• the rule-based summary. |
+| Charts | `src/lib/charts/`, `src/components/charts/`, `src/components/builder/` | Chart configuration types, dimensions, metric definitions, the single-pass `buildChartData` engine, compatibility rules, presets and exports; pure layout rules (`chartLayout.ts`), the chart shell (toolbar, full screen, PNG/SVG) and the builder UI. |
 | Reports | `src/lib/reports/` | Report templates, section availability, release criteria, report workbook assembly. |
 | Export | `src/lib/export/` | Format-neutral report tables rendered to CSV and XLSX; local download helper. |
 | Privacy | `src/lib/privacy/`, `vite.config.ts`, `public/` | Session cleanup, unload warning, Content-Security-Policy (meta + HTTP headers). |
-| State | `src/hooks/` | `useDataset` (import → setup draft → active dataset, comparison snapshot), `useFilters` (global filters, created range, selection, duplicate rule and review decisions), `useAnalysisSettings` (aging buckets, score weights, required fields, workload threshold, report options), memoized `useAnalytics`. All state is in memory only and is reset on a new dataset and on Clear Data. |
+| State | `src/hooks/` | `useDataset` (import → setup draft → active dataset, comparison snapshot), `useFilters` (global filters, created range, selection, duplicate rule and review decisions), `useAnalysisSettings` (aging buckets, score weights, required fields, workload threshold, report options, custom chart configurations), memoized `useAnalytics`. All state is in memory only and is reset on a new dataset and on Clear Data. |
 | UI | `src/components/` | shadcn/ui-style components (Radix primitives + Tailwind + class-variance-authority) and Lucide icons; Apache ECharts (SVG renderer) for charts. |
 
 Stack: React 18, TypeScript 5.6, Vite 6, Tailwind CSS 3.4, Radix UI, Lucide, Apache ECharts 6.1 (with its renderer ZRender 6.1.0 pinned as a direct dependency), SheetJS 0.20.3 (installed from the SheetJS CDN tarball — the npm registry copy is an older, vulnerable release), Papa Parse 5.4, Vitest 5 + React Testing Library.
@@ -201,7 +233,27 @@ Stack: React 18, TypeScript 5.6, Vite 6, Tailwind CSS 3.4, Radix UI, Lucide, Apa
 
 These were executed for this delivery (Windows 11, Node 22.16, Chrome stable, headless).
 
-Management enhancement (latest):
+Chart visibility and Custom Chart Builder (latest):
+- `npm test`: **175 tests in 12 files passed**, including 28 for the chart engine, compatibility rules, presets, exports and layout rules, plus 2 UI integration tests of the builder (configure, filter, drill down, export, reorder, remove, Clear Data reset).
+- **Overlap probe** (production build, Chrome): every text element of every dashboard chart was measured as an oriented rectangle, with 2 datasets (one with very long names and 12 statuses) × 3 widths (1440, 1024, 390 px), 78 chart renders in total.
+  - Before: 1,585 overlapping label pairs and 105 clipped labels, and the sticky header covered section titles at every width.
+  - After: **0 overlaps and 0 clipped labels**, and section links land below the header at every width.
+  - The remaining findings are deliberate ellipsis truncations of very long names.
+- **Builder against an independent Python oracle** (420-record adversarial dataset): **42/42 checks passed**.
+  - Every cell of Assignee → Priority → Issue Count, State → Assignee → % within state, Assignee → State (stacked, via CSV and Excel), Priority → % of total, and the Open vs closed preset matched.
+  - Drill-down listed exactly the cell's records, and chart filters left the dashboard KPIs unchanged.
+  - SVG downloads are well-formed and render as images; PNG downloads are 2× resolution.
+  - Seven builder charts of different types showed 0 overlaps and 0 clipping at 1440, 1024 and 390 px.
+  - Privacy as described in [PRIVACY.md](PRIVACY.md).
+- **100,000 records × 50 columns** (Chrome, same machine as below):
+  - upload to dashboard 4.1 s;
+  - adding a builder chart 0.8 s, and 1.8–2.1 s for a second or third chart;
+  - changing secondary grouping, type, Top-N or metric 0.33–0.70 s;
+  - a dashboard filter click with three builder charts open 0.57 s;
+  - a chart's Excel export with all 100k Chart Records 19.7 s;
+  - JS heap ≈ 470 MB.
+
+Management enhancement:
 - `npm test`: **145 tests in 10 files passed**. New coverage includes:
   - executive metrics, assignee metrics, sort keys and the open-only matrix;
   - risk indicators, aging buckets and future dates;
@@ -235,6 +287,7 @@ Earlier delivery:
 ## Known limitations
 
 - **Snapshot only.** A spreadsheet of current states cannot yield time-in-status, QA turnaround, historical reopen counts or productivity; the app shows "Insufficient data" instead of estimating. Closure % is a current-state ratio, not a trend.
+- **Large exports block the page briefly.** Workbooks are written on the main thread: a chart's Excel export with 100k Chart Records took ≈ 20 s, and the dashboard's Excel export took ≈ 24 s on the test machine. CSV exports are much faster.
 - **Large Excel files are slow** to parse (SheetJS reads the whole workbook): ~48 s for 100k rows × 50 columns in Chrome on the test machine. Export very large datasets as CSV instead. Performance depends on the device and browser memory.
 - **Password-protected workbooks** cannot be opened; they are detected from the reader's error and the user is asked to remove the password. Detection could not be exercised with a real encrypted file because the library cannot create one.
 - **Numeric text dates** follow one configurable order (M/D/Y or D/M/Y) per import; mixed orders in one column are reported as invalid dates rather than guessed.
@@ -249,4 +302,11 @@ Earlier delivery:
 - **Behaviour changes in this release**:
   - The *Closed Issues* card now counts every status in the Closed workflow category, not only the literal status "Closed".
   - Source priority values such as "N/A", "TBD" or "-" now default to the explicit *Unknown* priority instead of an unconfirmed custom value.
+- **Custom Chart Builder**:
+  - At most 12 series are drawn in one chart; the heatmap and table show every series.
+  - Columns other than the mapped fields are offered as groupings only when they have at most 200 distinct values.
+  - "Other" is offered only for metrics that can be added up (counts), not for percentages within a group or averages.
+  - *Chart Records* in a chart's Excel export lists the mapped issue fields and source row, not every original column; use the Issue Register export for those.
+  - Chart configurations are not saved between visits (no browser storage is used).
+- **Very long names** are truncated in charts (full text in tooltips, the accessible summary and exports). On phone-width screens, charts with many long categories switch to horizontal bars and grow taller.
 - **Charts in tests**: jsdom cannot lay out ECharts, so automated tests use a stand-in for the chart canvas that exposes the same data and click events; real chart rendering was verified in the browser run above.

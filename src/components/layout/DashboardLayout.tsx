@@ -14,6 +14,7 @@ import { AssigneeAnalytics } from '@/components/dashboard/AssigneeAnalytics';
 import { HandoffAnalytics } from '@/components/dashboard/HandoffAnalytics';
 import { DataQualityOverview } from '@/components/dashboard/DataQualityOverview';
 import { ComparisonPanel } from '@/components/dashboard/ComparisonPanel';
+import { ChartBuilderSection } from '@/components/builder/ChartBuilderSection';
 import { IssueFilters } from '@/components/issues/IssueFilters';
 import { IssueTable } from '@/components/issues/IssueTable';
 import { IssueDetailsDrawer } from '@/components/issues/IssueDetailsDrawer';
@@ -110,6 +111,7 @@ export function DashboardLayout({ dataset, filters, settings, comparison, onRepl
           <LazyMount>
             <AssigneeAnalytics />
           </LazyMount>
+          <ChartBuilderSection />
           <LazyMount>
             <HandoffAnalytics />
           </LazyMount>

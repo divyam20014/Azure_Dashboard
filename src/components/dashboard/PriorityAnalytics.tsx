@@ -64,7 +64,8 @@ export function PriorityAnalytics() {
                 <StackedBarChart
                   categories={priorities}
                   series={statusSeries}
-                  ariaLabel="Stacked bar chart of priority by status"
+                  title="Priority by status"
+                ariaLabel="Stacked bar chart of priority by status"
                   onSelect={(priority, status) => select(`ps:${priority}:${status}`, `${priority} · ${status}`, { priority: [priority], status: [status] })}
                 />
               </Panel>
@@ -80,7 +81,8 @@ export function PriorityAnalytics() {
                   <StackedBarChart
                     categories={priorities}
                     series={backlogSeries}
-                    ariaLabel="Stacked bar chart of open and closed issues per priority"
+                    title="Priority backlog"
+                ariaLabel="Stacked bar chart of open and closed issues per priority"
                     onSelect={(priority, seriesName) => {
                       const cat = (Object.keys(CATEGORY_LABELS) as WorkflowCategory[]).find((c) => CATEGORY_LABELS[c] === seriesName);
                       if (cat) select(`pb:${priority}:${cat}`, `${priority} · ${seriesName}`, { priority: [priority], category: [cat] });

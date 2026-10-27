@@ -310,7 +310,8 @@ export function DataQualityOverview() {
                 setCategory(label as QualityCategory);
                 setPage(0);
               }}
-              ariaLabel="Bar chart of data quality findings by category"
+              title="Problems by category"
+                ariaLabel="Bar chart of data quality findings by category"
               labelWidth={140}
               valueAxisName="Findings"
             />

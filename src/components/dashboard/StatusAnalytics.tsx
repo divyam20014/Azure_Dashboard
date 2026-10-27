@@ -57,9 +57,9 @@ export function StatusAnalytics() {
             <SimpleBarChart
               items={comparison}
               total={agg.total}
-              orientation="vertical"
-              height={320}
-              ariaLabel="Bar chart comparing status counts"
+              orientation="auto"
+              title="Status comparison"
+                ariaLabel="Bar chart comparing status counts"
               onSelect={(label) => {
                 if (label === 'Other statuses') {
                   const others = otherStatuses(agg);
@@ -75,6 +75,7 @@ export function StatusAnalytics() {
               <SimpleBarChart
                 items={workflowItems}
                 total={agg.total}
+                title="Workflow distribution"
                 ariaLabel="Bar chart of issues by workflow category"
                 onSelect={(label) => {
                   const item = workflowItems.find((w) => w.label === label);

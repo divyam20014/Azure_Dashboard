@@ -50,6 +50,7 @@ export function ExecutiveDashboard() {
                 selected={selectedStatus}
                 height={300}
                 onSelect={(label) => select(`status:${label}`, `Status = ${label}`, { status: [label] })}
+                title="Issue status distribution"
                 ariaLabel="Donut chart of issues by status"
               />
             </Panel>
@@ -61,6 +62,7 @@ export function ExecutiveDashboard() {
                 total={agg.total}
                 selected={selectedPriority}
                 onSelect={(label) => select(`priority:${label}`, `Priority = ${label}`, { priority: [label] })}
+                title="Priority distribution"
                 ariaLabel="Bar chart of issues by priority"
               />
             </Panel>
@@ -74,7 +76,8 @@ export function ExecutiveDashboard() {
                   items={backlogItems}
                   total={executive.openBacklog.count}
                   onSelect={(label) => select(`backlog:${label}`, `${label} · open`, { priority: [label], category: ['open'] })}
-                  ariaLabel="Bar chart of open issues by priority"
+                  title="Open backlog by priority"
+                ariaLabel="Bar chart of open issues by priority"
                   valueAxisName="Open issues"
                 />
               )}
@@ -94,6 +97,7 @@ export function ExecutiveDashboard() {
                 total={agg.total}
                 labelWidth={120}
                 onSelect={(name) => select(`assignee:${name}`, `Assignee = ${name}`, { assignee: [name] })}
+                title="Assignee workload overview"
                 ariaLabel="Overview bar chart of top assignees by issues"
               />
             </Panel>

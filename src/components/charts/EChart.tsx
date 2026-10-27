@@ -1,17 +1,22 @@
 import { useEffect, useId, useRef } from 'react';
+import { CHART_FONT } from './chartLayout';
 import * as echarts from 'echarts/core';
-import { BarChart, PieChart } from 'echarts/charts';
-import { GridComponent, LegendComponent, TooltipComponent, AriaComponent } from 'echarts/components';
+import { LabelLayout } from 'echarts/features';
+import { BarChart, LineChart, PieChart } from 'echarts/charts';
+import { AriaComponent, GraphicComponent, GridComponent, LegendComponent, TooltipComponent } from 'echarts/components';
 import { SVGRenderer } from 'echarts/renderers';
 
-echarts.use([BarChart, PieChart, GridComponent, LegendComponent, TooltipComponent, AriaComponent, SVGRenderer]);
+// LabelLayout powers series labelLayout.hideOverlap (value labels never drawn on top of each other).
+echarts.use([BarChart, LineChart, PieChart, GridComponent, LegendComponent, TooltipComponent, AriaComponent, GraphicComponent, LabelLayout, SVGRenderer]);
 
 export type ChartOption = echarts.EChartsCoreOption;
+export type ChartInstance = echarts.ECharts;
 
 export interface ChartClick {
   name: string;
   seriesName?: string;
   dataIndex: number;
+  seriesIndex?: number;
 }
 
 interface EChartProps {
@@ -22,41 +27,60 @@ interface EChartProps {
   className?: string;
   /** Text alternative read by screen readers (exact values of the chart). */
   summary?: string;
+  /** Receives the live instance (or null on dispose), e.g. for image export. */
+  onInstance?: (chart: ChartInstance | null) => void;
 }
 
 /**
- * Thin ECharts wrapper. Uses the SVG renderer so charts stay sharp when printed.
- * All chart data stays in this page; ECharts makes no network requests.
+ * Thin ECharts wrapper (SVG renderer, sharp in print). The chart is created only once its
+ * container has a real size, so it never initialises at zero width (e.g. inside a collapsed
+ * section) and it re-measures on every container resize. All data stays in this page.
  */
-export function EChart({ option, height, ariaLabel, onClick, className, summary }: EChartProps) {
+export function EChart({ option, height, ariaLabel, onClick, className, summary, onInstance }: EChartProps) {
   const summaryId = useId();
   const ref = useRef<HTMLDivElement>(null);
   const chartRef = useRef<echarts.ECharts | null>(null);
+  const optionRef = useRef(option);
+  optionRef.current = option;
   const clickRef = useRef(onClick);
   clickRef.current = onClick;
+  const instanceRef = useRef(onInstance);
+  instanceRef.current = onInstance;
 
   useEffect(() => {
-    if (!ref.current) return;
-    const chart = echarts.init(ref.current, undefined, { renderer: 'svg' });
-    chartRef.current = chart;
-    chart.on('click', (params) => {
-      const p = params as { name: string; seriesName?: string; dataIndex: number };
-      clickRef.current?.({ name: p.name, seriesName: p.seriesName, dataIndex: p.dataIndex });
-    });
-    const observer = new ResizeObserver(() => chart.resize());
-    observer.observe(ref.current);
-    const onPrint = () => chart.resize();
-    window.addEventListener('beforeprint', onPrint);
+    const el = ref.current;
+    if (!el) return;
+    const apply = (chart: echarts.ECharts) => chart.setOption({ aria: { enabled: true }, animationDuration: 300, textStyle: { fontFamily: CHART_FONT }, ...optionRef.current }, { notMerge: true });
+    const ensure = () => {
+      if (chartRef.current) {
+        chartRef.current.resize();
+        return;
+      }
+      if (el.clientWidth === 0 || el.clientHeight === 0) return;
+      const chart = echarts.init(el, undefined, { renderer: 'svg' });
+      chartRef.current = chart;
+      chart.on('click', (params) => {
+        const p = params as { name: string; seriesName?: string; dataIndex: number; seriesIndex?: number };
+        clickRef.current?.({ name: p.name, seriesName: p.seriesName, dataIndex: p.dataIndex, seriesIndex: p.seriesIndex });
+      });
+      apply(chart);
+      instanceRef.current?.(chart);
+    };
+    ensure();
+    const observer = new ResizeObserver(ensure);
+    observer.observe(el);
+    window.addEventListener('beforeprint', ensure);
     return () => {
       observer.disconnect();
-      window.removeEventListener('beforeprint', onPrint);
-      chart.dispose();
+      window.removeEventListener('beforeprint', ensure);
+      instanceRef.current?.(null);
+      chartRef.current?.dispose();
       chartRef.current = null;
     };
   }, []);
 
   useEffect(() => {
-    chartRef.current?.setOption({ aria: { enabled: true }, animationDuration: 300, ...option }, { notMerge: true });
+    chartRef.current?.setOption({ aria: { enabled: true }, animationDuration: 300, textStyle: { fontFamily: CHART_FONT }, ...option }, { notMerge: true });
   }, [option]);
 
   useEffect(() => {

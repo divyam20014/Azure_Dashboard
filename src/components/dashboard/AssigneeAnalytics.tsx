@@ -361,7 +361,8 @@ export function AssigneeAnalytics() {
                     items={chartList.map((a) => ({ label: a.name, value: a.total, color: a.isUnassigned ? UNASSIGNED_COLOR : WORKLOAD_COLOR }))}
                     total={agg.total}
                     onSelect={selectAssignee}
-                    ariaLabel="Bar chart of issues per assignee"
+                    title="Total issues per assignee"
+                ariaLabel="Bar chart of issues per assignee"
                   />
                 </div>
               </Panel>
@@ -372,7 +373,8 @@ export function AssigneeAnalytics() {
                     <StackedBarChart
                       categories={names}
                       series={priorities.map((p) => ({ name: p, color: colors.priority[p] ?? UNMAPPED_COLOR, values: chartList.map((a) => a.byPriority[p] ?? 0) }))}
-                      ariaLabel="Stacked bar chart of assignees by priority"
+                      title="Assignee by priority"
+                ariaLabel="Stacked bar chart of assignees by priority"
                       onSelect={(name, priority) => select(`ap:${name}:${priority}`, `${name} · ${priority}`, { assignee: [name], priority: [priority] })}
                     />
                   </div>
@@ -409,7 +411,8 @@ export function AssigneeAnalytics() {
                     <StackedBarChart
                       categories={names}
                       series={visibleStatuses.map((s) => ({ name: s.label, color: colors.status[s.label] ?? UNMAPPED_COLOR, values: chartList.map((a) => a.byStatus[s.label] ?? 0) }))}
-                      ariaLabel="Stacked bar chart of assignees by status"
+                      title="Assignee by status"
+                ariaLabel="Stacked bar chart of assignees by status"
                       showTotals={hiddenStatuses.length === 0}
                       onSelect={(name, status) => select(`as:${name}:${status}`, `${name} · ${status}`, { assignee: [name], status: [status] })}
                     />
