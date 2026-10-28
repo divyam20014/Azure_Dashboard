@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: Typecheck, tests, build, privacy audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - run: npm run privacy:check
+      - name: Audit shipped dependencies
+        run: npm audit --omit=dev
+
+  e2e:
+    name: Browser verification (production build, Chrome)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm ci
+      - run: npm run build
+      # Uses the Google Chrome preinstalled on GitHub's Ubuntu runners; no browser download.
+      - run: npm run e2e
+      - name: Upload verification output
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-output
+          path: |
+            e2e/.work/**/*.json
+            e2e/.work/**/*.png
+            e2e/.work/**/*.pdf
+            e2e/.work/**/*.csv
+            e2e/.work/**/*.xlsx
+            e2e/.work/**/*.svg
+            !e2e/.work/**/profile/**
+          retention-days: 7
