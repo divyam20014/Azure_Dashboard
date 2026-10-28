@@ -72,6 +72,7 @@ describe('executive dashboard, risks and assignee workload', () => {
     expect(kpiCount('total')).toBe('9'); // the base dataset is never replaced by a selection
 
     // Risk cards list the right records and drive the register.
+    await expandSection(user, 'Risks and Attention Required');
     expect(within(screen.getByTestId('risk-high-priority')).getByTestId('risk-high-priority-count')).toHaveTextContent('3');
     expect(screen.getByTestId('risk-reopened-count')).toHaveTextContent('1');
     expect(screen.getByTestId('risk-unassigned-count')).toHaveTextContent('1');

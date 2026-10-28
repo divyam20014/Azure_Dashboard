@@ -107,6 +107,7 @@ describe('runtime: no transmission and no persistence of issue data', () => {
     await user.click(within(screen.getByRole('dialog', { name: 'Printable report' })).getByRole('button', { name: /Close/ }));
 
     // Report templates, report Excel export and a comparison snapshot — all local.
+    await expandSection(user, 'Export and Report Generation');
     await user.click(screen.getByRole('radio', { name: /Weekly Management Report/ }));
     const reportDownloads = captureDownloads();
     try {
