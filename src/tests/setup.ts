@@ -15,6 +15,8 @@ class ResizeObserverStub {
 if (!('ResizeObserver' in globalThis)) {
   (globalThis as unknown as { ResizeObserver: typeof ResizeObserverStub }).ResizeObserver = ResizeObserverStub;
 }
+// Deliberately no IntersectionObserver stub: LazyMount and the sidebar's scroll-spy both
+// fall back to immediate / no-op behavior when it is undefined, which is what jsdom is.
 if (!window.matchMedia) {
   window.matchMedia = vi.fn().mockImplementation((query: string) => ({
     matches: false,

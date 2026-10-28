@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import * as XLSX from 'xlsx';
 import App from '@/App';
 import { sampleCsv, SAMPLE_HEADERS, SAMPLE_ROWS } from '../fixtures';
-import { blobText, captureDownloads, clearData, generateDashboard, kpiCount, uploadFile } from './helpers';
+import { blobText, captureDownloads, clearData, expandSection, generateDashboard, kpiCount, uploadFile } from './helpers';
 
 vi.mock('@/components/charts/EChart', async () => {
   const mod = await import('./echartsMock');
@@ -93,6 +93,7 @@ describe('executive dashboard, risks and assignee workload', () => {
     await user.click(screen.getByRole('button', { name: 'Clear register selection' }));
 
     // Heatmap: total and open-only modes.
+    await expandSection(user, 'Assignee Workload and Priority Matrix');
     const matrix = screen.getByTestId('assignee-priority-matrix');
     expect(within(matrix).getByLabelText('Ben Ito, P2: 2 issues')).toBeInTheDocument();
     expect(within(matrix).getByLabelText('Asha Rao, P1: 1 issues')).toBeInTheDocument();
@@ -115,6 +116,7 @@ describe('executive dashboard, risks and assignee workload', () => {
     await uploadFile(user, csvFile(manyAssigneesCsv(), 'team.csv'));
     await generateDashboard(user);
     expect(kpiCount('total')).toBe('105');
+    await expandSection(user, 'Assignee Workload and Priority Matrix');
     const count = () => screen.getByTestId('assignee-display-count').textContent;
     expect(count()).toMatch(/Showing 10 of 14 assignees/);
     await user.click(screen.getByRole('radio', { name: 'Top 5' }));
@@ -136,6 +138,7 @@ describe('executive dashboard, risks and assignee workload', () => {
     await generateDashboard(user);
     await user.selectOptions(screen.getByLabelText('Counting rule'), 'review');
     expect(kpiCount('total')).toBe('9');
+    await expandSection(user, 'Data Quality Overview');
     const dupTable = screen.getByTestId('duplicate-table');
     await user.click(within(dupTable).getByLabelText(/Exclude row 10 \(ID 104\)/));
     await waitFor(() => expect(kpiCount('total')).toBe('8'));
@@ -151,6 +154,7 @@ describe('management reports', () => {
     render(<App />);
     await uploadFile(user, csvFile());
     await generateDashboard(user);
+    await expandSection(user, 'Export and Report Generation');
 
     await user.click(screen.getByRole('radio', { name: /Release Readiness Report/ }));
     expect(screen.getByTestId('header-context')).toHaveTextContent('Release Readiness Report');
@@ -213,6 +217,7 @@ describe('snapshot comparison and full cleanup', () => {
 
     // Set some state everywhere, then clear.
     await user.click(screen.getByTestId('kpi-openBacklog'));
+    await expandSection(user, 'Export and Report Generation');
     await user.click(screen.getByRole('radio', { name: /Weekly Management Report/ }));
     await clearData(user);
     expect(document.body.textContent).not.toContain('last-week.csv');

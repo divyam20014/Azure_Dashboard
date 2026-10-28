@@ -47,6 +47,7 @@ export function StatusAnalytics() {
       title="Issue Status Overview"
       description="Current-state snapshot of the uploaded data. The status distribution is in the Executive Dashboard. Click a bar to list those issues in the register."
       collapsible
+      defaultCollapsed
       collapsedSummary={`${agg.byStatus.length} status value(s) · closure ${closure.configured ? formatPercent(closure.percent) : 'not configured'}`}
     >
       {agg.total === 0 ? (

@@ -268,6 +268,7 @@ export function DataQualityOverview() {
       title="Data Quality Overview"
       description={`Validation of the imported rows (checked ${q.checkedAt.toLocaleString()}). Original values are never modified.`}
       collapsible
+      defaultCollapsed
       collapsedSummary={`Score ${score.overall === null ? 'N/A' : `${score.overall.toFixed(0)}/100`} · ${formatCount(q.issues.length)} finding(s)`}
       actions={
         <Button variant="outline" size="sm" onClick={() => downloadBlob(csvBlob(tableToCsv(dataQualityTable(q))), exportFileName(dataset, 'data-quality', 'csv'))}>

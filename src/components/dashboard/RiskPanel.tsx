@@ -151,6 +151,7 @@ export function RiskPanel() {
       title="Risks and Attention Required"
       description="Issues that may need follow-up, from explicit rules shown on each card. These are attention indicators, not evidence of missed deadlines or delivery failure."
       collapsible
+      defaultCollapsed
       collapsedSummary={`${flagged} indicator(s) with affected issues`}
       actions={
         <form

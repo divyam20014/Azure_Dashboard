@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import * as XLSX from 'xlsx';
 import App from '@/App';
 import { sampleCsv } from '../fixtures';
-import { blobText, captureDownloads, clearData, generateDashboard, kpiCount, uploadFile } from './helpers';
+import { blobText, captureDownloads, clearData, expandSection, generateDashboard, kpiCount, uploadFile } from './helpers';
 
 vi.mock('@/components/charts/EChart', async () => {
   const mod = await import('./echartsMock');
@@ -51,6 +51,7 @@ describe('end-to-end workflow with a CSV file', () => {
     // 7. Charts render real data.
     const donut = screen.getByLabelText('Donut chart of issues by status');
     expect(within(donut).getByText('New: 3')).toBeInTheDocument();
+    await expandSection(user, 'Assignee Workload and Priority Matrix');
     const workload = screen.getByLabelText('Bar chart of issues per assignee');
     expect(within(workload).getByText('Ben Ito: 3')).toBeInTheDocument();
     const matrix = screen.getByTestId('assignee-priority-matrix');

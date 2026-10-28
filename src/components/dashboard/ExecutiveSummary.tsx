@@ -28,6 +28,9 @@ export function ExecutiveSummary() {
       id="summary"
       title="Executive Summary and Key Insights"
       description="Generated in your browser from the calculated figures using fixed rules — no AI service is used."
+      collapsible
+      defaultCollapsed
+      collapsedSummary={summary.headline}
       actions={
         <>
           <Button variant="outline" size="sm" onClick={copy}>

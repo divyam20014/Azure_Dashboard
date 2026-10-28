@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, type ReactNode } from 'react';
-import { BarChart3, FileSpreadsheet, Moon, RefreshCw, SlidersHorizontal, Sun, Trash2 } from 'lucide-react';
+import { BarChart3, FileSpreadsheet, Menu, Moon, RefreshCw, SlidersHorizontal, Sun, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/components/common/ThemeContext';
 import { formatCount } from '@/lib/text';
@@ -19,25 +19,26 @@ interface Props {
   onClear?: () => void;
   exportSlot?: ReactNode;
   showNav?: boolean;
+  /** Opens the section-navigation drawer; only rendered (and only needed) on phone widths. */
+  onToggleSections?: () => void;
 }
 
-export const SECTION_NAV = [
-  { id: 'overview', label: 'Executive' },
-  { id: 'active-work', label: 'Active Work' },
-  { id: 'summary', label: 'Summary' },
-  { id: 'risks', label: 'Risks' },
-  { id: 'status', label: 'Status' },
-  { id: 'priority', label: 'Priority' },
-  { id: 'assignees', label: 'Assignees' },
-  { id: 'builder', label: 'Chart Builder' },
-  { id: 'handoff', label: 'Handoff' },
-  { id: 'register', label: 'Issues' },
-  { id: 'quality', label: 'Data Quality' },
-  { id: 'comparison', label: 'Comparison' },
-  { id: 'reports', label: 'Reports' },
-];
-
-export function DashboardHeader({ fileName, sheetName, recordCount, includedCount, activeFilterCount, reportTemplate, comparisonFile, datasetLabel, onReplace, onEditMappings, onClear, exportSlot, showNav }: Props) {
+export function DashboardHeader({
+  fileName,
+  sheetName,
+  recordCount,
+  includedCount,
+  activeFilterCount,
+  reportTemplate,
+  comparisonFile,
+  datasetLabel,
+  onReplace,
+  onEditMappings,
+  onClear,
+  exportSlot,
+  showNav,
+  onToggleSections,
+}: Props) {
   const { dark, toggle } = useTheme();
   const headerRef = useRef<HTMLElement>(null);
   // Publish the real header height so in-page anchors scroll sections below it, at any width.
@@ -57,6 +58,11 @@ export function DashboardHeader({ fileName, sheetName, recordCount, includedCoun
   return (
     <header ref={headerRef} className="no-print sticky top-0 z-30 border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/85">
       <div className="mx-auto flex max-w-[1500px] flex-wrap items-center gap-x-4 gap-y-2 px-4 py-3">
+        {showNav && onToggleSections && (
+          <Button variant="outline" size="icon" className="md:hidden" onClick={onToggleSections} aria-label="Open dashboard sections menu">
+            <Menu className="h-4 w-4" aria-hidden />
+          </Button>
+        )}
         <div className="flex min-w-0 items-center gap-2.5">
           <div className="rounded-lg bg-primary p-1.5 text-primary-foreground">
             <BarChart3 className="h-5 w-5" aria-hidden />
@@ -106,19 +112,10 @@ export function DashboardHeader({ fileName, sheetName, recordCount, includedCoun
         </div>
       </div>
       {showNav && (reportTemplate || comparisonFile) && (
-        <p className="mx-auto hidden max-w-[1500px] px-4 pb-1 text-[11px] text-muted-foreground md:block" data-testid="header-context">
+        <p className="mx-auto hidden max-w-[1500px] px-4 pb-2 text-[11px] text-muted-foreground md:block" data-testid="header-context">
           {reportTemplate && <>Report template: {reportTemplate}</>}
           {comparisonFile && <> · Comparing with: {comparisonFile}</>}
         </p>
-      )}
-      {showNav && (
-        <nav aria-label="Dashboard sections" className="mx-auto flex max-w-[1500px] gap-1 overflow-x-auto px-4 pb-2">
-          {SECTION_NAV.map((s) => (
-            <a key={s.id} href={`#${s.id}`} className="whitespace-nowrap rounded-md px-2.5 py-1 text-xs font-medium text-muted-foreground hover:bg-secondary hover:text-foreground">
-              {s.label}
-            </a>
-          ))}
-        </nav>
       )}
     </header>
   );

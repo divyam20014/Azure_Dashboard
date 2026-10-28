@@ -6,7 +6,7 @@ import { join, relative } from 'node:path';
 import App from '@/App';
 import { createParseClient } from '@/lib/parsers/parseClient';
 import { sampleCsv } from '../fixtures';
-import { captureDownloads, clearData, generateDashboard, kpiCount, uploadFile } from '../integration/helpers';
+import { captureDownloads, clearData, expandSection, generateDashboard, kpiCount, uploadFile } from '../integration/helpers';
 
 vi.mock('@/components/charts/EChart', async () => {
   const mod = await import('../integration/echartsMock');
@@ -83,6 +83,7 @@ describe('runtime: no transmission and no persistence of issue data', () => {
 
     // Filtering and chart interaction.
     await user.click(screen.getByTestId('kpi-reopened'));
+    await expandSection(user, 'Assignee Workload and Priority Matrix');
     await user.selectOptions(screen.getByLabelText('Drill down into an assignee'), 'Ben Ito');
     await user.type(screen.getByLabelText('Search issues'), 'crash');
 

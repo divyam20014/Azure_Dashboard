@@ -52,6 +52,7 @@ export function PriorityAnalytics() {
       title="Priority Analysis"
       description={`Priority order: ${values.priorityOrder.join(' › ') || '—'}. The priority distribution and open backlog by priority are in the Executive Dashboard.`}
       collapsible
+      defaultCollapsed
       collapsedSummary={`${agg.byPriority.length} priority level(s) · ${highPriority.length} high-priority issue(s)`}
     >
       {agg.total === 0 ? (

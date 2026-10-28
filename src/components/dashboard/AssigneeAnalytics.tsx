@@ -120,6 +120,7 @@ export function AssigneeAnalytics() {
       title="Assignee Workload and Priority Matrix"
       description="Workload distribution for resource planning. Issue counts are not a measure of individual performance."
       collapsible
+      defaultCollapsed
       collapsedSummary={`${formatCount(people.length)} assignee(s)${unassignedAgg ? ` · ${formatCount(unassignedAgg.total)} unassigned issue(s)` : ''}`}
     >
       {agg.total === 0 ? (

@@ -36,6 +36,8 @@ export function ExecutiveDashboard() {
           ? `Figures reflect the ${formatCount(executive.scopes.inScope)} records matching the global filters (of ${formatCount(executive.scopes.included)} in analytics). Click a card or chart element to list the matching issues.`
           : `Figures reflect all ${formatCount(executive.scopes.included)} records in analytics. Click a card or chart element to list the matching issues.`
       }
+      collapsible
+      collapsedSummary={`${formatCount(executive.scopes.inScope)} issue(s) in scope`}
     >
       <KpiCards />
       {agg.total === 0 ? (

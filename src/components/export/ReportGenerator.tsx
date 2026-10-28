@@ -51,6 +51,9 @@ export function ReportGenerator() {
       id="reports"
       title="Export and Report Generation"
       description="Management reports built in this browser from the current dashboard scope. Nothing is uploaded; files are saved only when you click a download button."
+      collapsible
+      defaultCollapsed
+      collapsedSummary={template.title}
     >
       <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4" role="radiogroup" aria-label="Report template">
         {Object.values(REPORT_TEMPLATES).map((t) => (

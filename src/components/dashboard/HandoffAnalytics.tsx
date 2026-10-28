@@ -35,7 +35,14 @@ export function HandoffAnalytics() {
   };
 
   return (
-    <Section id="handoff" title="Development and QA Handoff" description="Volume of work currently at each configured workflow stage.">
+    <Section
+      id="handoff"
+      title="Development and QA Handoff"
+      description="Volume of work currently at each configured workflow stage."
+      collapsible
+      defaultCollapsed
+      collapsedSummary={`${formatCount(stages[1]?.count ?? 0)} in development · ${formatCount(stages[2]?.count ?? 0)} ready for QA`}
+    >
       <div className="grid gap-4 lg:grid-cols-[3fr_2fr]">
         <Panel title="Issues by workflow stage" description="Click a stage to list its issues.">
           <div className="mb-4 flex flex-wrap items-center gap-1.5" aria-label="Workflow pipeline">

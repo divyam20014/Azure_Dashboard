@@ -136,6 +136,8 @@ export function IssueTable() {
       id="register"
       title="Detailed Issue Register"
       description="The source of truth for every figure above: the records in the current scope, narrowed by any chart selection and search."
+      collapsible
+      collapsedSummary={`${formatCount(sorted.length)} record(s)`}
       actions={
         <Button variant="outline" size="sm" onClick={exportFiltered}>
           <Download /> Export filtered (CSV)

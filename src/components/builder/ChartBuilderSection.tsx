@@ -42,6 +42,7 @@ export function ChartBuilderSection() {
       title="Custom Chart Builder"
       description="Build your own charts: choose a chart type, what to analyze (e.g. Assignee → Priority), a metric, chart-only filters and display options. Every chart uses the same calculations as the dashboard."
       collapsible
+      defaultCollapsed
       collapsedSummary={`${charts.length} custom chart(s)`}
       actions={
         <div className="flex flex-wrap items-center gap-2">

@@ -26,6 +26,7 @@ import { Notice } from '@/components/common/Common';
 import { ScrubOnUnmount } from '@/components/common/ScrubOnUnmount';
 import { REPORT_TEMPLATES } from '@/lib/reports/reportTemplates';
 import { DashboardHeader } from './DashboardHeader';
+import { DashboardSidebar, DASHBOARD_SECTIONS } from './DashboardSidebar';
 import { LazyMount } from './LazyMount';
 
 interface Props {
@@ -42,6 +43,8 @@ export function DashboardLayout({ dataset, filters, settings, comparison, onRepl
   const analytics = useAnalytics(dataset, filters.state, settings.settings, comparison.snapshot?.dataset ?? null);
   const [record, setRecord] = useState<IssueRecord | null>(null);
   const [previewing, setPreviewing] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const { toggleSelection, state } = filters;
 
   const select = useCallback((source: string, label: string, criteria: Criteria) => toggleSelection({ source, label, criteria }), [toggleSelection]);
@@ -92,39 +95,49 @@ export function DashboardLayout({ dataset, filters, settings, comparison, onRepl
           onClear={onClear}
           exportSlot={<ExportMenu />}
           showNav
+          onToggleSections={() => setMobileNavOpen(true)}
         />
-        <main className="mx-auto max-w-[1500px] space-y-8 px-4 py-5">
-          <div className="space-y-3">
-            <h2 className="sr-only">Filters</h2>
-            {q.duplicateIdRecords > 0 && filters.state.countingRule === 'all' && (
-              <Notice tone="warning">
-                {q.duplicateIdRecords.toLocaleString()} records share an issue ID with another record ({q.duplicateIdValues.toLocaleString()} distinct IDs). They are all counted. Choose another duplicate-ID rule in the filter bar to
-                exclude or review them.
-              </Notice>
-            )}
-            <IssueFilters />
-          </div>
-          <ExecutiveDashboard />
-          <ActiveWorkByAssignee />
-          <ExecutiveSummary />
-          <RiskPanel />
-          <StatusAnalytics />
-          <PriorityAnalytics />
-          <LazyMount>
-            <AssigneeAnalytics />
-          </LazyMount>
-          <ChartBuilderSection />
-          <LazyMount>
-            <HandoffAnalytics />
-          </LazyMount>
-          <IssueTable />
-          <LazyMount>
-            <DataQualityOverview />
-          </LazyMount>
-          <ComparisonPanel />
-          <ReportGenerator />
-          <footer className="border-t pt-4 text-center text-xs text-muted-foreground">All processing happens in this browser tab. No data is uploaded, stored or sent anywhere.</footer>
-        </main>
+        <div className="mx-auto flex max-w-[1500px] items-start">
+          <DashboardSidebar
+            sections={DASHBOARD_SECTIONS}
+            collapsed={sidebarCollapsed}
+            onToggleCollapse={() => setSidebarCollapsed((c) => !c)}
+            mobileOpen={mobileNavOpen}
+            onCloseMobile={() => setMobileNavOpen(false)}
+          />
+          <main className="min-w-0 flex-1 space-y-8 px-4 py-5">
+            <div className="space-y-3">
+              <h2 className="sr-only">Filters</h2>
+              {q.duplicateIdRecords > 0 && filters.state.countingRule === 'all' && (
+                <Notice tone="warning">
+                  {q.duplicateIdRecords.toLocaleString()} records share an issue ID with another record ({q.duplicateIdValues.toLocaleString()} distinct IDs). They are all counted. Choose another duplicate-ID rule in the filter bar to
+                  exclude or review them.
+                </Notice>
+              )}
+              <IssueFilters />
+            </div>
+            <ExecutiveDashboard />
+            <ActiveWorkByAssignee />
+            <ExecutiveSummary />
+            <RiskPanel />
+            <StatusAnalytics />
+            <PriorityAnalytics />
+            <LazyMount>
+              <AssigneeAnalytics />
+            </LazyMount>
+            <ChartBuilderSection />
+            <LazyMount>
+              <HandoffAnalytics />
+            </LazyMount>
+            <IssueTable />
+            <LazyMount>
+              <DataQualityOverview />
+            </LazyMount>
+            <ComparisonPanel />
+            <ReportGenerator />
+            <footer className="border-t pt-4 text-center text-xs text-muted-foreground">All processing happens in this browser tab. No data is uploaded, stored or sent anywhere.</footer>
+          </main>
+        </div>
       </ScrubOnUnmount>
       <IssueDetailsDrawer dataset={dataset} record={record} onClose={() => setRecord(null)} />
       {previewing && <ReportPreview onClose={() => setPreviewing(false)} />}

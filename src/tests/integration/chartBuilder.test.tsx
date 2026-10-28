@@ -3,7 +3,7 @@ import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '@/App';
 import { sampleCsv } from '../fixtures';
-import { blobText, captureDownloads, clearData, generateDashboard, kpiCount, uploadFile } from './helpers';
+import { blobText, captureDownloads, clearData, expandSection, generateDashboard, kpiCount, uploadFile } from './helpers';
 
 vi.mock('@/components/charts/EChart', async () => {
   const mod = await import('./echartsMock');
@@ -18,6 +18,7 @@ async function setup() {
   render(<App />);
   await uploadFile(user, csvFile());
   await generateDashboard(user);
+  await expandSection(user, 'Custom Chart Builder');
   return user;
 }
 

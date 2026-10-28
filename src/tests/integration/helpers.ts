@@ -52,6 +52,12 @@ export function blobText(blob: Blob): Promise<string> {
   });
 }
 
+/** Expands a collapsible dashboard section by title, if it is currently collapsed. */
+export async function expandSection(user: User, title: string) {
+  const btn = screen.queryByRole('button', { name: `Expand ${title}` });
+  if (btn) await user.click(btn);
+}
+
 export async function clearData(user: User) {
   await user.click(screen.getByRole('button', { name: /Clear Data/ }));
   const dialog = await screen.findByRole('dialog');
