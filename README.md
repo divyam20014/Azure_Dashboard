@@ -13,6 +13,8 @@ A single-page web app that turns an issue-tracking spreadsheet (Azure DevOps, Ji
 
 **Everything runs in the browser.** The uploaded file is parsed in memory, never sent to a server, never written to browser storage, and released when you click **Clear Data**. See [PRIVACY.md](PRIVACY.md) for how this is enforced and how to verify it.
 
+**Documentation:** [Business Requirements (BRD)](docs/BRD.md) · [Technical Specification (TSD)](docs/TSD.md) · [User Guide](docs/USER_GUIDE.md)
+
 ## Requirements
 
 - Node.js 22.12+ (required by the test runner; developed and verified with Node 22.16 / npm 10.9)
