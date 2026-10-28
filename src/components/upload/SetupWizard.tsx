@@ -1,12 +1,15 @@
-import { useMemo, useState } from 'react';
-import { ArrowLeft, ArrowRight, FileSpreadsheet, LayoutDashboard, X } from 'lucide-react';
+import { useMemo, useRef, useState } from 'react';
+import { ArrowLeft, ArrowRight, Download, FileSpreadsheet, LayoutDashboard, Upload, X } from 'lucide-react';
 import type { LogicalField } from '@/types/mappings';
 import { LOGICAL_FIELDS } from '@/types/mappings';
 import { Button } from '@/components/ui/button';
 import { ScrubOnUnmount } from '@/components/common/ScrubOnUnmount';
 import { Card } from '@/components/ui/card';
 import { ErrorMessage, LoadingIndicator, Notice } from '@/components/common/Common';
-import { buildValueMappings, hasRecognizableFields, initialSetup, sliceSource } from '@/lib/normalization/datasetBuilder';
+import { applyMappingTemplate, buildValueMappings, hasRecognizableFields, initialSetup, sliceSource } from '@/lib/normalization/datasetBuilder';
+import { buildMappingTemplate, parseMappingTemplate } from '@/lib/normalization/mappingTemplate';
+import { downloadBlob } from '@/lib/export/download';
+import { useToast } from '@/components/common/Toast';
 import { formatBytes } from '@/lib/text';
 import { cn } from '@/lib/utils';
 import type { DatasetController } from '@/hooks/useDataset';
@@ -34,6 +37,29 @@ export function SetupWizard({ controller }: { controller: DatasetController }) {
   const noDataRows = !empty && table.dataRows.length === 0;
   const canGenerate = !busy && !empty && !noDataRows && recognizable;
   const stepIndex = STEPS.findIndex((s) => s.key === step);
+  const notify = useToast();
+  const [mappingError, setMappingError] = useState<string | null>(null);
+  const mappingFileInput = useRef<HTMLInputElement>(null);
+
+  const saveMappingTemplate = () => {
+    const template = buildMappingTemplate(table.headers, config);
+    const blob = new Blob([JSON.stringify(template, null, 2)], { type: 'application/json;charset=utf-8' });
+    downloadBlob(blob, `${parsed.fileName.replace(/\.[^./]+$/, '')}-mapping.json`);
+    notify('Mapping template saved. Load it the next time you upload a similar export.');
+  };
+
+  const loadMappingTemplate = async (file: File) => {
+    setMappingError(null);
+    const text = await file.text();
+    const template = parseMappingTemplate(text);
+    if (!template) {
+      setMappingError(`"${file.name}" is not a recognizable mapping template.`);
+      return;
+    }
+    const applied = applyMappingTemplate(table, template);
+    controller.updateDraftConfig({ ...config, ...applied });
+    notify('Mapping template applied. Columns and statuses were matched by name — review Column mapping and Value mapping before generating the dashboard.');
+  };
 
   const setColumn = (field: LogicalField, column: number | null) => {
     const mapping = { ...config.columnMapping };
@@ -57,9 +83,28 @@ export function SetupWizard({ controller }: { controller: DatasetController }) {
             </p>
           </div>
         </div>
-        <Button variant="outline" size="sm" onClick={controller.cancelDraft}>
-          <X /> {draft.isEdit ? 'Discard changes' : 'Cancel import'}
-        </Button>
+        <div className="flex flex-wrap items-center gap-2">
+          <Button variant="outline" size="sm" disabled={empty} onClick={saveMappingTemplate} title="Save the column and value mapping as a local JSON file, to reuse on the next export">
+            <Download /> Save mapping
+          </Button>
+          <Button variant="outline" size="sm" disabled={empty} onClick={() => mappingFileInput.current?.click()} title="Apply a mapping template saved earlier, matched to this file by column name">
+            <Upload /> Load mapping
+          </Button>
+          <input
+            ref={mappingFileInput}
+            type="file"
+            accept="application/json,.json"
+            className="hidden"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              e.target.value = '';
+              if (file) void loadMappingTemplate(file);
+            }}
+          />
+          <Button variant="outline" size="sm" onClick={controller.cancelDraft}>
+            <X /> {draft.isEdit ? 'Discard changes' : 'Cancel import'}
+          </Button>
+        </div>
       </div>
 
       <nav aria-label="Setup steps" className="grid grid-cols-3 gap-2">
@@ -83,6 +128,11 @@ export function SetupWizard({ controller }: { controller: DatasetController }) {
       {controller.failure && (
         <ErrorMessage title={controller.failure.error.title}>
           <p>{controller.failure.error.message}</p>
+        </ErrorMessage>
+      )}
+      {mappingError && (
+        <ErrorMessage title="Could not load mapping template">
+          <p>{mappingError}</p>
         </ErrorMessage>
       )}
       {parsed.warnings.map((w) => (

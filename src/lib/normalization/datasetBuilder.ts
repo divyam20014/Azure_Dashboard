@@ -126,6 +126,36 @@ export function comparisonSetup(file: ParsedFile, reference: { headers: string[]
   };
 }
 
+/**
+ * Apply a previously saved mapping (column mapping + value mapping, matched by header
+ * name) to the current source table. Used to reuse a mapping across repeated exports of
+ * the same tracker without persisting anything — the template is a local JSON file the
+ * user saves and re-loads themselves.
+ */
+export function applyMappingTemplate(
+  table: SourceTable,
+  reference: { headers: string[]; columnMapping: ColumnMapping; values: ValueMappings; dateOrder: DateOrder },
+): { columnMapping: ColumnMapping; values: ValueMappings; dateOrder: DateOrder } {
+  const detected = detectColumns(table.headers);
+  const byName = new Map(table.headers.map((h, i) => [h.trim().toLowerCase(), i]));
+  const columnMapping = { ...detected };
+  const used = new Set<number>();
+  for (const field of Object.keys(columnMapping) as LogicalField[]) {
+    const refCol = reference.columnMapping[field];
+    const name = refCol === null || refCol === undefined ? undefined : reference.headers[refCol]?.trim().toLowerCase();
+    const match = name !== undefined ? byName.get(name) : undefined;
+    columnMapping[field] = match ?? null;
+    if (match !== undefined) used.add(match);
+  }
+  for (const field of Object.keys(columnMapping) as LogicalField[]) {
+    if (columnMapping[field] === null && reference.columnMapping[field] !== null && detected[field] !== null && !used.has(detected[field]!)) {
+      columnMapping[field] = detected[field];
+      used.add(detected[field]!);
+    }
+  }
+  return { columnMapping, values: buildValueMappings(table, columnMapping, reference.values), dateOrder: reference.dateOrder };
+}
+
 /** True when at least one issue-identifying column is mapped. */
 export function hasRecognizableFields(mapping: ColumnMapping): boolean {
   const keyFields: LogicalField[] = ['id', 'title', 'status', 'assignee', 'priority'];

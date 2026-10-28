@@ -6,6 +6,7 @@ import type { FiltersApi } from '@/hooks/useFilters';
 import type { SettingsApi } from '@/hooks/useAnalysisSettings';
 import { DashboardContext, type ComparisonApi, type DashboardContextValue } from '@/components/dashboard/DashboardContext';
 import { ExecutiveDashboard } from '@/components/dashboard/ExecutiveDashboard';
+import { ActiveWorkByAssignee } from '@/components/dashboard/ActiveWorkByAssignee';
 import { ExecutiveSummary } from '@/components/dashboard/ExecutiveSummary';
 import { RiskPanel } from '@/components/dashboard/RiskPanel';
 import { StatusAnalytics } from '@/components/dashboard/StatusAnalytics';
@@ -104,6 +105,7 @@ export function DashboardLayout({ dataset, filters, settings, comparison, onRepl
             <IssueFilters />
           </div>
           <ExecutiveDashboard />
+          <ActiveWorkByAssignee />
           <ExecutiveSummary />
           <RiskPanel />
           <StatusAnalytics />

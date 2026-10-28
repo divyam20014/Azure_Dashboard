@@ -23,6 +23,7 @@ interface Props {
 
 export const SECTION_NAV = [
   { id: 'overview', label: 'Executive' },
+  { id: 'active-work', label: 'Active Work' },
   { id: 'summary', label: 'Summary' },
   { id: 'risks', label: 'Risks' },
   { id: 'status', label: 'Status' },

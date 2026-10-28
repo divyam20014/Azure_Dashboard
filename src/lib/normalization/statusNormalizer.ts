@@ -7,6 +7,9 @@ import { cleanText, compactKey } from '@/lib/text';
 export const CORE_STATUSES = ['Closed', 'New', 'Reopened', 'Ready for QA', 'Development in Progress'] as const;
 export type CoreStatus = (typeof CORE_STATUSES)[number];
 
+/** The statuses that need active owner attention right now (Active Work by Assignee). */
+export const ACTIVE_FOCUS_STATUSES = ['New', 'Reopened', 'Development in Progress'] as const;
+
 interface KnownStatus {
   label: string;
   /** Compact keys (lower-case alphanumerics) that map to this label. */
@@ -36,13 +39,17 @@ const KNOWN_STATUSES: KnownStatus[] = [
   { label: 'In Progress', aliases: ['inprogress', 'wip', 'workinprogress'], suggested: 'open' },
   { label: 'To Do', aliases: ['todo'], suggested: 'open' },
   { label: 'Ready for Development', aliases: ['readyfordevelopment', 'readyfordev'], suggested: 'open' },
-  { label: 'Testing', aliases: ['testing', 'intesting', 'inqa', 'qainprogress', 'undertesting'], suggested: 'open' },
+  { label: 'Testing', aliases: ['testing', 'intesting', 'undertesting'], suggested: 'open' },
+  { label: 'QA in Progress', aliases: ['qainprogress', 'inqa'], suggested: 'open' },
   { label: 'Blocked', aliases: ['blocked'], suggested: 'open' },
   { label: 'On Hold', aliases: ['onhold', 'hold'], suggested: 'open' },
   { label: 'Pending', aliases: ['pending'], suggested: 'open' },
   { label: 'Done', aliases: ['done', 'completed', 'complete'], suggested: 'closed' },
   // Deliberately no suggestion: whether these count as closed is a team decision.
   { label: 'Resolved', aliases: ['resolved'] },
+  { label: 'Resolved in UAT', aliases: ['resolvedinuat', 'resolveduat', 'uatresolved'] },
+  { label: 'Closed in UAT', aliases: ['closedinuat', 'closeduat', 'uatclosed'] },
+  { label: 'Ignore', aliases: ['ignore', 'ignored', 'nottoprocess', 'notapplicable'] },
   { label: 'Removed', aliases: ['removed'] },
   { label: 'Cancelled', aliases: ['cancelled', 'canceled'] },
   { label: 'Rejected', aliases: ['rejected'] },
@@ -112,8 +119,12 @@ export const DEFAULT_STATUS_COLORS: Record<string, string> = {
   Resolved: '#65a30d',
   Done: '#15803d',
   Testing: '#c026d3',
+  'QA in Progress': '#9d174d',
   'On Hold': '#a16207',
   Pending: '#0284c7',
+  'Resolved in UAT': '#4d7c0f',
+  'Closed in UAT': '#166534',
+  Ignore: '#78716c',
   [NO_STATUS_LABEL]: '#64748b',
 };
 

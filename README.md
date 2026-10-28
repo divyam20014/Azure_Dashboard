@@ -40,27 +40,30 @@ Sample files with fictional data are in [samples/](samples/): `sample-issues.csv
 2. **Source & preview** — pick the worksheet (sheets are never combined), the header row (auto-detected, can be below row 1), the CSV delimiter (auto-detected) and the date order (M/D/Y or D/M/Y) for text dates. The preview shows the actual imported values.
 3. **Column mapping** — detected columns are shown and can be corrected. Status, Assignee and Priority are marked essential; if one is missing you can continue and the app explains which analytics are unavailable.
 4. **Value mapping**
-   - *Statuses*: each source value gets a normalized label and a workflow category (Open / Closed / Unmapped). Only the five core statuses (Closed, New, Reopened, Ready for QA, Development in Progress) are categorized automatically; everything else stays **Unmapped** until you decide. Suggestions (e.g. Active → Open, Done → Closed) are applied only when you click *Apply suggested categories*. Resolved / Removed / Cancelled never get a suggestion.
+   - *Statuses*: each source value gets a normalized label and a workflow category (Open / Closed / Unmapped). Only the five core statuses (Closed, New, Reopened, Ready for QA, Development in Progress) are categorized automatically; everything else stays **Unmapped** until you decide. Suggestions (e.g. Active → Open, Done → Closed) are applied only when you click *Apply suggested categories*. Resolved / Removed / Cancelled never get a suggestion. Common Azure DevOps / UAT-cycle states (QA in Progress, On Hold, Resolved in UAT, Closed in UAT, Ignore) are recognized by name so they don't need re-mapping on every export, but their workflow category is still your decision.
    - *Priorities*: P1/Priority 1/Critical/High… are recognized; bare numbers are labelled P1, P2… with a notice asking you to confirm the convention. Custom values are kept and reported as unmapped until confirmed. Priority order and the high-priority group are configurable. Severity is never treated as priority.
    - *Assignees*: trimmed and grouped case-insensitively only; blank and placeholder values (e.g. "Unassigned", "N/A") count as Unassigned. You can rename entries (giving two entries the same name merges them) or mark any value as unassigned.
    - Status colors are configurable and used consistently in cards, charts and tables.
    - *Unknown priorities*: values such as "TBD", "N/A" or "Unknown" are treated by default as an explicit **Unknown** priority. This is kept separate from blank cells and never part of the high-priority group. Untick **Unknown** to treat a value as a custom priority instead.
 5. **Generate dashboard.** Use **Edit Mappings** at any time to change these choices, **Replace File** to load another file (the current analysis stays until the new one is confirmed), and **Clear Data** to release everything.
 
+**Reusing a mapping across exports.** On the Column mapping / Value mapping steps, **Save mapping** downloads the current column and value mapping as a small local JSON file; **Load mapping** applies a previously saved one to the file you're currently setting up, matching columns by header name (not position) and value rules by the exact source text. This is a user-initiated file round-trip, like the other exports — nothing is written to browser storage, so it does not change the privacy guarantees in [PRIVACY.md](PRIVACY.md). Review Column mapping and Value mapping afterwards; columns whose header name changed are not matched automatically.
+
 ### Dashboard layout
 
 Header (file, imported vs. in-analytics records, active filters, report template, comparison file), then:
 1. **Executive Dashboard**: KPI cards, plus four overview charts (status distribution, priority distribution, open backlog by priority, top-10 assignee workload).
-2. **Executive Summary**
-3. **Risks and Attention Required**
-4. **Status** and **Priority** analytics
-5. **Assignee Workload and Priority Matrix**
-6. **Custom Chart Builder**
-7. **Development and QA Handoff**
-8. **Issue Register**
-9. **Data Quality**
-10. **Snapshot Comparison**
-11. **Export and Report Generation**
+2. **Active Work by Assignee**: who currently holds New, Reopened and Development-in-Progress issues — the three states that need an owner's action right now.
+3. **Executive Summary**
+4. **Risks and Attention Required**
+5. **Status** and **Priority** analytics
+6. **Assignee Workload and Priority Matrix**
+7. **Custom Chart Builder**
+8. **Development and QA Handoff**
+9. **Issue Register**
+10. **Data Quality**
+11. **Snapshot Comparison**
+12. **Export and Report Generation**
 
 Lower-priority sections can be collapsed: they show a one-line summary, and their content stays loaded, so no filters or settings are lost.
 
